@@ -5,12 +5,12 @@ import { createRoot } from "react-dom/client";
 import ReactQueryProvider from "./utils/ReactQueryProvider";
 import App from "./App";
 
-import "./index.css";
+import "@/styles/globals.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ReactQueryProvider>
       <App />
     </ReactQueryProvider>
-  </StrictMode>,
+  </StrictMode>
 );
