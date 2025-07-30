@@ -4,6 +4,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SplashPage from "@/pages/splash/SplashPage";
 import Design from "@/components/common/Design";
 
+import AvatarPage from "./pages/registration/AvatarPage";
+
 const App = () => {
   return (
     <BrowserRouter>
@@ -11,6 +13,7 @@ const App = () => {
         {/* <Route path="/" element={<HomePage />} /> */}
         <Route path="/" element={<SplashPage />} />
         <Route path="/design" element={<Design />} />
+        <Route path="/registration/avatar" element={<AvatarPage />} />
       </Routes>
     </BrowserRouter>
   );
