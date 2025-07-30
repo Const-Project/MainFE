@@ -17,7 +17,7 @@ const AvatarSelectionOption = () => {
         </div>
         <div className="pb-10.25">
           <button className=" bg-primary w-34.5 h-11.25 text-white rounded-lg">
-            선택하러 가기
+            만들러 가기
           </button>
         </div>
       </div>
