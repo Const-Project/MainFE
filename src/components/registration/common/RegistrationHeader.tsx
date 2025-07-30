@@ -8,16 +8,26 @@ import React from "react";
 
 import Left from "@/assets/icons/left.svg";
 
-const RegistrationHeader = () => {
+interface RegistrationHeaderProps {
+  showBackButton?: boolean;
+}
+
+const RegistrationHeader = ({
+  showBackButton = true,
+}: RegistrationHeaderProps) => {
   const handleBack = () => {
     window.history.back();
   };
 
   return (
     <header className="h-14 flex items-center justify-between p-3.5 bg-white border-b-gray-200">
-      <button onClick={handleBack}>
-        <img src={Left} alt="뒤로가기" className="w-6 h-6" />
-      </button>
+      {showBackButton ? (
+        <button onClick={handleBack}>
+          <img src={Left} alt="뒤로가기" className="w-6 h-6" />
+        </button>
+      ) : (
+        <div className="w-6"></div>
+      )}
       <h1 className="text-lg font-bold">식물 데려오기</h1>
       <div className="w-6"></div>
     </header>
