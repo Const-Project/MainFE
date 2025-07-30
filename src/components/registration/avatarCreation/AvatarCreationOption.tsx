@@ -1,11 +1,19 @@
 /**
- * @file AvatarSelectionOption.tsx
- * @description 아바타 선택 페이지의 옵션 컴포넌트
+ * @file AvatarCreationOption.tsx
+ * @description 아바타 생성 페이지의 옵션 컴포넌트
  */
 
 import React from "react";
 
-const AvatarSelectionOption = () => {
+import { useNavigate } from "react-router-dom";
+
+const AvatarCreationOption = () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate("/registration/creation-detail");
+  };
+
   return (
     <div className="flex items-center justify-between h-full">
       <div className="flex flex-col justify-between pl-6.25 h-full">
@@ -16,7 +24,10 @@ const AvatarSelectionOption = () => {
           </p>
         </div>
         <div className="pb-10.25">
-          <button className=" bg-primary w-34.5 h-11.25 text-white rounded-lg">
+          <button
+            onClick={handleNavigate}
+            className=" bg-primary w-34.5 h-11.25 text-white rounded-lg"
+          >
             만들러 가기
           </button>
         </div>
@@ -26,4 +37,4 @@ const AvatarSelectionOption = () => {
   );
 };
 
-export default AvatarSelectionOption;
+export default AvatarCreationOption;
