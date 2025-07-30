@@ -5,10 +5,10 @@
 
 import React from "react";
 
-import AvatarCreationOption from "../../components/registration/AvatarCreationOption";
-import AvatarSelectionOption from "../../components/registration/AvatarSelectionOption";
-import ButtonFooter from "../../components/registration/common/ButtonFooter";
-import RegistrationHeader from "../../components/registration/common/RegistrationHeader";
+import AvatarCreationOption from "@/components/registration/avatarCreation/AvatarCreationOption";
+import AvatarSelectionOption from "@/components/registration/avatarCreation/AvatarSelectionOption";
+import ButtonFooter from "@/components/registration/common/ButtonFooter";
+import RegistrationHeader from "@/components/registration/common/RegistrationHeader";
 
 const AvatarPage = () => {
   return (
