@@ -26,7 +26,8 @@ const Button: React.FC<ButtonProps> = ({
   className,
   ...props
 }) => {
-  const baseStyles = "flex items-center justify-center text-center rounded "; // 공통 스타일
+  const baseStyles =
+    "flex items-center justify-center text-center rounded-[8px] "; // 공통 스타일
 
   const sizeStyles = {
     xsSelect: "w-34.5 h-11.25 text-[18px] px-5 py-2",
