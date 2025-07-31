@@ -8,9 +8,11 @@ import Button from "@/components/common/Button";
 
 const ButtonFooter = () => {
   return (
-    <footer className="flex justify-evenly bg-white h-14.25">
-      <Button variant="gray200">나중에하기</Button>
-      <Button variant="gray600">다음</Button>
+    <footer className="pb-5.25">
+      <div className="flex justify-evenly bg-white h-14.25">
+        <Button variant="gray200">나중에하기</Button>
+        <Button variant="gray600">다음</Button>
+      </div>
     </footer>
   );
 };
