@@ -21,7 +21,7 @@ const AvatarCreationOption = () => {
   return (
     <div className="flex items-center justify-between h-full">
       <div className="flex flex-col justify-between pl-6.25 h-full">
-        <div className="flex flex-col gap-3 w-41.25">
+        <div className="flex flex-col gap-3 w-41.25 text-left">
           <h2 className="text-2xl font-semibold pt-8">나만의 아바타</h2>
           <p className="text-lg ">
             내 식물의 생김새를 반영한 나만의 아바타를 만들 수 있어요

@@ -15,13 +15,13 @@ const AvatarPage = () => {
     <div className="flex flex-col h-screen">
       <RegistrationHeader />
       <main className="flex-grow flex flex-col min-h-0">
-        <div className="flex-1">
+        <button className="flex-1">
           <AvatarSelectionOption />
-        </div>
+        </button>
 
-        <div className="flex-1">
+        <button className="flex-1">
           <AvatarCreationOption />
-        </div>
+        </button>
       </main>
 
       <ButtonFooter />
