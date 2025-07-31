@@ -8,9 +8,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/common/Button";
+import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
 const AvatarCreationOption = () => {
   const navigate = useNavigate();
+  const { buttonVariant, buttonText } = useAvatarCreationStore();
 
   const handleNavigate = () => {
     navigate("/registration/creation-detail");
@@ -26,8 +28,12 @@ const AvatarCreationOption = () => {
           </p>
         </div>
         <div className="pb-10.25">
-          <Button variant="primary" size="xsCreation" onClick={handleNavigate}>
-            만들러 가기
+          <Button
+            variant={buttonVariant}
+            size="xsCreation"
+            onClick={handleNavigate}
+          >
+            {buttonText}
           </Button>
         </div>
       </div>
