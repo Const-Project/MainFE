@@ -5,6 +5,8 @@
 
 import React from "react";
 
+import Button from "@/components/common/Button";
+
 const AvatarCreationOption = () => {
   return (
     <div className="flex items-center justify-between h-full">
@@ -14,9 +16,9 @@ const AvatarCreationOption = () => {
           <p className="text-lg ">00종의 아바타 중에서 선택할 수 있어요</p>
         </div>
         <div className="pb-10.25">
-          <button className=" bg-primary w-34.5 h-11.25 text-white rounded-lg">
+          <Button variant="primary" size="xsSelect">
             선택하러 가기
-          </button>
+          </Button>
         </div>
       </div>
       <div className="w-1/2 h-full "></div>

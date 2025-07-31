@@ -7,6 +7,8 @@ import React from "react";
 
 import { useNavigate } from "react-router-dom";
 
+import Button from "@/components/common/Button";
+
 const AvatarCreationOption = () => {
   const navigate = useNavigate();
 
@@ -24,12 +26,9 @@ const AvatarCreationOption = () => {
           </p>
         </div>
         <div className="pb-10.25">
-          <button
-            onClick={handleNavigate}
-            className=" bg-primary w-34.5 h-11.25 text-white rounded-lg"
-          >
+          <Button variant="primary" size="xsCreation" onClick={handleNavigate}>
             만들러 가기
-          </button>
+          </Button>
         </div>
       </div>
       <div className="w-1/2 h-full "></div>

@@ -9,8 +9,8 @@ import Button from "@/components/common/Button";
 const ButtonFooter = () => {
   return (
     <footer className="flex justify-evenly bg-white h-14.25">
-      <Button variant="secondary">나중에하기</Button>
-      <Button variant="primary">다음</Button>
+      <Button variant="gray200">나중에하기</Button>
+      <Button variant="gray600">다음</Button>
     </footer>
   );
 };
