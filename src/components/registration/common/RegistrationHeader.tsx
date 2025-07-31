@@ -20,7 +20,7 @@ const RegistrationHeader = ({
   };
 
   return (
-    <header className="h-14 flex items-center justify-between p-3.5 bg-white border-b-gray-200">
+    <header className="h-14 flex items-center justify-between p-3.5 bg-white border-b-1 border-[var(--color-gray-200)]">
       {showBackButton ? (
         <button onClick={handleBack}>
           <img src={Left} alt="뒤로가기" className="w-6 h-6" />

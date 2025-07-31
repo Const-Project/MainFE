@@ -23,6 +23,7 @@ const AvatarPage = () => {
           <AvatarCreationOption />
         </div>
       </main>
+
       <ButtonFooter />
     </div>
   );
