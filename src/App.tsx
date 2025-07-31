@@ -6,6 +6,7 @@ import Design from "@/components/common/Design";
 
 import AvatarPage from "./pages/registration/AvatarCreationPage";
 import CreationDetailPage from "./pages/registration/CreationDetailPage";
+import PlantNicknamePage from "./pages/registration/PlantNicknamePage";
 
 const App = () => {
   return (
@@ -18,6 +19,10 @@ const App = () => {
         <Route
           path="/registration/creation-detail"
           element={<CreationDetailPage />}
+        />
+        <Route
+          path="/registration/plant-nickname"
+          element={<PlantNicknamePage />}
         />
       </Routes>
     </BrowserRouter>
