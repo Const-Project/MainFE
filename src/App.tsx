@@ -9,6 +9,7 @@ import Design from "@/components/common/Design";
 import Layout from "@/components/layout/Layout";
 import Navbar from "@/components/layout/Navbar";
 
+
 const App = () => {
   const location = useLocation();
 
