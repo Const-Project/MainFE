@@ -38,6 +38,15 @@ body {
     -ms-user-select: text;
     user-select: text;
   }
+  
+  /* Safe area 지원 */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
 }
 
 @theme {
