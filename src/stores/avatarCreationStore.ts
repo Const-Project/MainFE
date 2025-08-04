@@ -1,38 +1,54 @@
+/**
+ * @file avatarCreationStore.ts
+ * @description AvatarCreation 컴포넌트의 상태를 관리하는 Zustand 스토어입니다.
+ *              새로운 기능추가 시 이 파일을 수정.
+ * @version 1.0.0
+ * @data 2023-08-04
+ */
+
 import { create } from "zustand";
 
 /**
- * @interface AvatarCreationState
- * @description AvatarCreation 컴포넌트의 상태를 관리하는 인터페이스.
- * @property {string} buttonVariant - 버튼의 변형 스타일 ("primary", "gray200", "gray600")
- * @property {string} buttonText - 버튼에 표시될 텍스트
- * @property {function} setButtonState - 버튼 상태를 설정하는 함수 (variant: "primary" | "gray200" | "gray600", text: string)
- * @property {boolean} isAvatarOptionSelected - 아바타 옵션이 선택되었는지 여부 (true: 선택됨, false: 선택되지 않음)
- * @property {function} setIsAvatarOptionSelected - 아바타 옵션 선택 상태를 설정하는 함수 (setIsAvatarOptionSelected(true | false))
- * @example - const { buttonVariant, buttonText, setButtonState, isAvatarOptionSelected, setIsAvatarOptionSelected } = useAvatarCreationStore();
+ * @description 아바타 생성 플로우의 전체 상태
+ * @property {'initial' | 'remake'} mode - 'initial': 최초 생성, 'remake': 다시 만들기
+ * @property {string | null} selectedOptionId - 선택된 아바타 옵션의 ID.
+ * @property {object} actions - 상태를 변경하는 함수들의 네임스페이스
  */
 interface AvatarCreationState {
-  buttonVariant: "primary" | "gray200" | "gray600";
-  buttonText: string;
-  setButtonState: (
-    variant: "primary" | "gray200" | "gray600",
-    text: string
-  ) => void;
-  isAvatarOptionSelected: boolean;
-  setIsAvatarOptionSelected: (isSelected: boolean) => void;
+  mode: "initial" | "remake";
+  selectedOptionId: string | null;
+  actions: {
+    completeInitialCreation: () => void;
+    selectOption: (optionId: string) => void;
+    reset: () => void;
+  };
 }
 
 /**
- * @function useAvatarCreationStore
- * @description AvatarCreation 컴포넌트의 상태를 관리하는 Zustand 스토어 훅.
- * @returns {AvatarCreationState} AvatarCreation 컴포넌트의 상태와 상태를 변경하는 함수들을 포함하는 객체.
- * @example - const { buttonVariant, buttonText, setButtonState, isAvatarOptionSelected, setIsAvatarOptionSelected } = useAvatarCreationStore();
+ * @description 아바타 생성 플로우의 상태를 관리하는 Zustand 스토어.
+ *
+ * @example
+ * const { mode, selectedOptionId, actions } = useAvatarCreationStore();
+ * actions.selectOption('some-option-id');
+ *
+ * @mode {'initial' | 'remake'} - 현재 모드. 'initial'은 최초 생성, 'remake'는 다시 만들기 모드입니다.
+ * @selectedOptionId {string | null} - 현재 선택된 아바타 옵션의 ID. 선택되지 않은 경우 null입니다.
+ * @action completeInitialCreation - set({ mode: 'remake', selectedOptionId: null }) => '다시 만들기' 모드로 전환합니다.
+ * @action selectOption - set({ selectedOptionId: optionId }) => 사용자가 아바타 옵션을 선택합니다.
+ * @action reset - set({ mode: 'initial', selectedOptionId: null }) => 모든 상태를 초기값으로 리셋합니다.
  */
 export const useAvatarCreationStore = create<AvatarCreationState>(set => ({
-  buttonVariant: "primary",
-  buttonText: "만들러 가기",
-  setButtonState: (variant, text) =>
-    set({ buttonVariant: variant, buttonText: text }),
-  isAvatarOptionSelected: false,
-  setIsAvatarOptionSelected: (isSelected: boolean) =>
-    set({ isAvatarOptionSelected: isSelected }),
+  mode: "initial",
+  selectedOptionId: null,
+  actions: {
+    /** 최초 생성 플로우를 완료하고 '다시 만들기' 모드로 전환합니다. */
+    completeInitialCreation: () =>
+      set({ mode: "remake", selectedOptionId: null }),
+
+    /** 사용자가 아바타 옵션을 선택합니다. */
+    selectOption: (optionId: string) => set({ selectedOptionId: optionId }),
+
+    /** 모든 상태를 초기값으로 리셋합니다. */
+    reset: () => set({ mode: "initial", selectedOptionId: null }),
+  },
 }));
