@@ -5,12 +5,24 @@
 
 import React from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import AvatarCreationOption from "@/components/registration/avatarCreation/AvatarCreationOption";
 import AvatarSelectionOption from "@/components/registration/avatarCreation/AvatarSelectionOption";
 import ButtonFooter from "@/components/registration/common/ButtonFooter";
 import RegistrationHeader from "@/components/registration/common/RegistrationHeader";
+import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
-const AvatarPage = () => {
+const AvatarCreationPage = () => {
+  const { selectedOptionId } = useAvatarCreationStore();
+  const navigate = useNavigate();
+
+  const handleNextClick = () => {
+    if (selectedOptionId) {
+      navigate("/registration/plant-nickname");
+    }
+  };
+
   return (
     <div className="flex flex-col h-screen">
       <RegistrationHeader />
@@ -19,14 +31,17 @@ const AvatarPage = () => {
           <AvatarSelectionOption />
         </button>
 
-        <button className="flex-1">
-          <AvatarCreationOption />
-        </button>
+        <div className="flex-1">
+          <AvatarCreationOption optionId="creation" />
+        </div>
       </main>
 
-      <ButtonFooter />
+      <ButtonFooter
+        nextButtonVariant={selectedOptionId ? "primary" : "gray600"}
+        onNextClick={handleNextClick}
+      />
     </div>
   );
 };
 
-export default AvatarPage;
+export default AvatarCreationPage;
