@@ -9,12 +9,10 @@ import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
 const CreationDetailPage = () => {
   const navigate = useNavigate();
-  const { setButtonState, setIsAvatarOptionSelected } =
-    useAvatarCreationStore();
+  const { actions } = useAvatarCreationStore();
 
   const handleNextClick = () => {
-    setButtonState("gray200", "다시 만들기");
-    setIsAvatarOptionSelected(true);
+    actions.completeInitialCreation();
     navigate("/registration/avatar");
   };
 
