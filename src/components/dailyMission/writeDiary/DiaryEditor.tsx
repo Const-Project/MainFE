@@ -1,4 +1,4 @@
-import ImageUploader from "./ImageUploader";
+import ImageUploader from "@/components/dailyMission/share/ImageUploader";
 
 interface DiaryEditorProps {
   title: string;
