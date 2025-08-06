@@ -37,7 +37,7 @@ const WriteDiaryPage = () => {
   return (
     <div className="flex flex-col h-screen">
       <DiaryHeader onSubmit={handleSubmit} />
-      <main className="flex pt-8 pb-12.5 flex-1 overflow-y-auto">
+      <main className="flex  pb-12.5 flex-1 overflow-y-auto">
         <DiaryEditor
           title={title}
           content={content}
