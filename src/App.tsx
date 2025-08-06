@@ -1,5 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 
+import TakePhotoPage from "@/pages/dailyMission/TakePhotoPage";
 import WriteDiaryPage from "@/pages/dailyMission/WriteDiaryPage";
 import HomePage from "@/pages/home/Homepage";
 import LogPage from "@/pages/log/LogPage";
@@ -27,7 +28,8 @@ const App = () => {
         <Route path="/splash" element={<SplashPage />} />
         <Route path="/design" element={<Design />} />
       </Route>
-      <Route path="/diary/write" element={<WriteDiaryPage />} />
+      <Route path="/diaryMission/writeDiary" element={<WriteDiaryPage />} />
+      <Route path="/dailyMission/takePhoto" element={<TakePhotoPage />} />
     </Routes>
   );
 };
