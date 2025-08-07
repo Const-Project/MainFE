@@ -1,16 +1,20 @@
-import { StrictMode } from "react";
+import React from "react";
 
-import { createRoot } from "react-dom/client";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 
-import ReactQueryProvider from "./utils/ReactQueryProvider";
-import App from "./App";
+import ReactQueryProvider from "@/utils/ReactQueryProvider";
 
 import "@/styles/globals.css";
+import "@/styles/fonts.css";
+import App from "@/App";
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
     <ReactQueryProvider>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </ReactQueryProvider>
-  </StrictMode>
+  </React.StrictMode>
 );
