@@ -12,7 +12,7 @@ const CreationDetailPage = () => {
   const { actions } = useAvatarCreationStore();
 
   const handleNextClick = () => {
-    actions.completeInitialCreation();
+    actions.completeCreation();
     navigate("/registration/avatar");
   };
 

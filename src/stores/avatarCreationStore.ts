@@ -15,40 +15,51 @@ import { create } from "zustand";
  * @property {object} actions - 상태를 변경하는 함수들의 네임스페이스
  */
 interface AvatarCreationState {
-  mode: "initial" | "remake";
+  creationMode: "initial" | "remake";
+  selectionMode: "initial" | "remake";
   selectedOptionId: string | null;
   actions: {
-    completeInitialCreation: () => void;
+    completeCreation: () => void;
+    completeSelection: () => void;
     selectOption: (optionId: string) => void;
     reset: () => void;
   };
 }
 
 /**
- * @description 아바타 생성 플로우의 상태를 관리하는 Zustand 스토어.
+ * @description 아바타 생성 및 선택 플로우의 상태를 관리하는 Zustand 스토어.
  *
  * @example
- * const { mode, selectedOptionId, actions } = useAvatarCreationStore();
+ * const { creationMode, selectionMode, selectedOptionId, actions } = useAvatarCreationStore();
  * actions.selectOption('some-option-id');
  *
- * @mode {'initial' | 'remake'} - 현재 모드. 'initial'은 최초 생성, 'remake'는 다시 만들기 모드입니다.
- * @selectedOptionId {string | null} - 현재 선택된 아바타 옵션의 ID. 선택되지 않은 경우 null입니다.
- * @action completeInitialCreation - set({ mode: 'remake', selectedOptionId: null }) => '다시 만들기' 모드로 전환합니다.
- * @action selectOption - set({ selectedOptionId: optionId }) => 사용자가 아바타 옵션을 선택합니다.
- * @action reset - set({ mode: 'initial', selectedOptionId: null }) => 모든 상태를 초기값으로 리셋합니다.
+ * @creationMode {'initial' | 'remake'} - 아바타 생성 플로우의 현재 모드.
+ * @selectionMode {'initial' | 'remake'} - 아바타 선택 플로우의 현재 모드.
+ * @selectedOptionId {string | null} - 현재 선택된 아바타 옵션의 ID.
+ * @action completeCreation - 생성 플로우를 완료하고 '다시 만들기' 모드로 전환합니다.
+ * @action completeSelection - 선택 플로우를 완료하고 '다시 선택하기' 모드로 전환합니다.
+ * @action selectOption - 사용자가 아바타 옵션을 선택합니다.
+ * @action reset - 모든 상태를 초기값으로 리셋합니다.
  */
 export const useAvatarCreationStore = create<AvatarCreationState>(set => ({
-  mode: "initial",
+  creationMode: "initial",
+  selectionMode: "initial",
   selectedOptionId: null,
-  actions: {
-    /** 최초 생성 플로우를 완료하고 '다시 만들기' 모드로 전환합니다. */
-    completeInitialCreation: () =>
-      set({ mode: "remake", selectedOptionId: null }),
 
-    /** 사용자가 아바타 옵션을 선택합니다. */
+  actions: {
+    completeCreation: () =>
+      set({ creationMode: "remake", selectedOptionId: null }),
+
+    completeSelection: () =>
+      set({ selectionMode: "remake", selectedOptionId: null }),
+
     selectOption: (optionId: string) => set({ selectedOptionId: optionId }),
 
-    /** 모든 상태를 초기값으로 리셋합니다. */
-    reset: () => set({ mode: "initial", selectedOptionId: null }),
+    reset: () =>
+      set({
+        creationMode: "initial",
+        selectionMode: "initial",
+        selectedOptionId: null,
+      }),
   },
 }));
