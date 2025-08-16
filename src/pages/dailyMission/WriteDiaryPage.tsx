@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
+import DiaryHeader from "@/components/dailyMission/common/DiaryHeader";
 import DiaryEditor from "@/components/dailyMission/writeDiary/DiaryEditor";
 import DiaryFooter from "@/components/dailyMission/writeDiary/DiaryFooter";
-import DiaryHeader from "@/components/dailyMission/writeDiary/DiaryHeader";
 
 const WriteDiaryPage = () => {
   const [title, setTitle] = useState("");
@@ -35,7 +35,7 @@ const WriteDiaryPage = () => {
 
   return (
     <div className="flex flex-col h-screen">
-      <DiaryHeader onSubmit={handleSubmit} />
+      <DiaryHeader onSubmit={handleSubmit} showSubmit={true} />
       <main className="flex  pb-12.5 flex-1 overflow-y-auto">
         <DiaryEditor
           title={title}

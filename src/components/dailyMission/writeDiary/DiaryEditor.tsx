@@ -1,4 +1,4 @@
-import ImageUploader from "./ImageUploader";
+import ImageUploader from "../common/ImageUploader";
 
 interface DiaryEditorProps {
   title: string;
