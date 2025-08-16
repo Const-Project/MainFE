@@ -17,13 +17,13 @@ const AvatarCreationOption: React.FC<AvatarCreationOptionProps> = ({
   optionId,
 }) => {
   const navigate = useNavigate();
-  const { mode, selectedOptionId, actions } = useAvatarCreationStore();
+  const { creationMode, selectedOptionId, actions } = useAvatarCreationStore();
 
   const isSelected = selectedOptionId === optionId;
 
   // 컨테이너 클릭 핸들러: 'remake' 모드일 때만 클릭 이벤트를 처리함.
   const handleContainerClick = () => {
-    if (mode === "remake") {
+    if (creationMode === "remake") {
       actions.selectOption(optionId);
     }
   };
@@ -40,7 +40,7 @@ const AvatarCreationOption: React.FC<AvatarCreationOptionProps> = ({
         isSelected
           ? "bg-[var(--color-primary-varient)] border-none"
           : "border-transparent"
-      } ${mode === "remake" ? "cursor-pointer" : "cursor-default"}`}
+      } ${creationMode === "remake" ? "cursor-pointer" : "cursor-default"}`}
       onClick={handleContainerClick}
     >
       <div className="flex flex-col justify-between pl-6.25 h-full">
@@ -50,13 +50,13 @@ const AvatarCreationOption: React.FC<AvatarCreationOptionProps> = ({
             내 식물의 생김새를 반영한 나만의 아바타를 만들 수 있어요
           </p>
         </div>
-        <div className="pb-10.25">
+        <div className="pb-10.25 font-semibold">
           <Button
-            variant={mode === "initial" ? "primary" : "gray200"}
+            variant={creationMode === "initial" ? "primary" : "gray200"}
             size="xsCreation"
             onClick={handleButtonClick}
           >
-            {mode === "initial" ? "만들러 가기" : "다시 만들기"}
+            {creationMode === "initial" ? "만들러 가기" : "다시 만들기"}
           </Button>
         </div>
       </div>

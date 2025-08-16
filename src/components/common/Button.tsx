@@ -15,7 +15,7 @@ import React from "react";
  */
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "gray200" | "gray600";
-  size?: "xsSelect" | "xsCreation" | "sm" | "lg"; // 'sm'은 기존 버튼, 'lg'는 새로운 큰 버튼
+  size?: "xsSelect" | "xsCreation" | "sm" | "lg";
   children: React.ReactNode;
 }
 
