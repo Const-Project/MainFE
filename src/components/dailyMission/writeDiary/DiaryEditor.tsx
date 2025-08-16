@@ -1,4 +1,4 @@
-import ImageUploader from "./ImageUploader";
+import ImageUploader from "../common/ImageUploader";
 
 interface DiaryEditorProps {
   title: string;
@@ -36,7 +36,7 @@ const DiaryEditor = ({
           onChange={onTitleChange}
         />
       </div>
-      <ImageUploader image={image} onImageChange={handleImageChange} />
+      <ImageUploader image={image} handleImageChange={handleImageChange} />
       <textarea
         placeholder="내 식물의 겨울나기에 대해서 이야기해보는건 어때요?"
         className={`p-2 focus:outline-none placeholder:text-[var(--color-gray-400)] resize-none ${
