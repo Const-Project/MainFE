@@ -1,4 +1,4 @@
-import XIcon from "@/assets/icons/common/Xmack.svg";
+import XIcon from "@/assets/icons/common/Xmack.svg?url";
 
 interface DiaryHeaderProps {
   onSubmit: () => void;

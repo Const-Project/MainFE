@@ -8,7 +8,6 @@ const WriteDiaryPage = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [image, setImage] = useState<File | null>(null);
-
   const [isPublic, setIsPublic] = useState(false);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +43,7 @@ const WriteDiaryPage = () => {
           onTitleChange={handleTitleChange}
           onContentChange={handleContentChange}
           image={image}
-          onImageChange={handleImageChange}
+          handleImageChange={handleImageChange}
         />
       </main>
       <footer className="sticky bottom-0 w-full bg-white pt-3.75 pb-[21px] border-t border-[var(--color-gray-200)]">
