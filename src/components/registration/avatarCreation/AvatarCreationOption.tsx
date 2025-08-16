@@ -50,7 +50,7 @@ const AvatarCreationOption: React.FC<AvatarCreationOptionProps> = ({
             내 식물의 생김새를 반영한 나만의 아바타를 만들 수 있어요
           </p>
         </div>
-        <div className="pb-10.25">
+        <div className="pb-10.25 font-semibold">
           <Button
             variant={creationMode === "initial" ? "primary" : "gray200"}
             size="xsCreation"

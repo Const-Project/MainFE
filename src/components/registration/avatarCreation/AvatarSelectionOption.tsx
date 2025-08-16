@@ -34,7 +34,7 @@ const AvatarCreationOption: React.FC<AvatarCreationOptionProps> = ({
 
   return (
     <div
-      className={`flex items-center justify-between h-full border-b-2  border-[var(--color-gray-200)] ${
+      className={`flex items-center justify-between h-full border-b-5  border-[var(--color-gray-200)] ${
         isSelected
           ? "bg-[var(--color-primary-varient)] border-none"
           : "border-transparent"
@@ -46,7 +46,7 @@ const AvatarCreationOption: React.FC<AvatarCreationOptionProps> = ({
           <h2 className="text-2xl font-semibold pt-8">아바타 선택</h2>
           <p className="text-lg ">00종의 아바타 중에서 선택할 수 있어요</p>
         </div>
-        <div className="pb-10.25">
+        <div className="pb-10.25 font-semibold">
           <Button
             variant={selectionMode === "initial" ? "primary" : "gray200"}
             size="xsSelect"

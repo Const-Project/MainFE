@@ -7,9 +7,9 @@ import React from "react";
 
 import { useNavigate } from "react-router-dom";
 
+import Button from "@/components/common/Button";
 import AvatarCreationOption from "@/components/registration/avatarCreation/AvatarCreationOption";
 import AvatarSelectionOption from "@/components/registration/avatarCreation/AvatarSelectionOption";
-import ButtonFooter from "@/components/registration/common/ButtonFooter";
 import RegistrationHeader from "@/components/registration/common/RegistrationHeader";
 import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
@@ -27,7 +27,7 @@ const AvatarCreationPage = () => {
     <div className="flex flex-col h-screen">
       <RegistrationHeader />
       <main className="flex-grow flex flex-col min-h-0">
-        <div className="flex-1">
+        <div className="flex-1  ">
           <AvatarSelectionOption optionId="selection" />
         </div>
 
@@ -36,10 +36,11 @@ const AvatarCreationPage = () => {
         </div>
       </main>
 
-      <ButtonFooter
-        nextButtonVariant={selectedOptionId ? "primary" : "gray600"}
-        onNextClick={handleNextClick}
-      />
+      <footer className="flex items-center justify-center pb-5.25 font-semibold ">
+        <Button variant="gray200" size="lg" onClick={handleNextClick}>
+          나중에 만들기
+        </Button>
+      </footer>
     </div>
   );
 };
