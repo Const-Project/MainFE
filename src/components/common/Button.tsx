@@ -15,7 +15,7 @@ import React from "react";
  */
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "gray200" | "gray600";
-  size?: "xsSelect" | "xsCreation" | "sm" | "lg"; // 'sm'은 기존 버튼, 'lg'는 새로운 큰 버튼
+  size?: "xsSelect" | "xsCreation" | "sm" | "lg" | "max"; // 'sm'은 기존 버튼, 'lg'는 새로운 큰 버튼
   children: React.ReactNode;
 }
 
@@ -34,6 +34,7 @@ const Button: React.FC<ButtonProps> = ({
     xsCreation: "w-30.75 h-11.25 text-[18px] px-5 py-2 ",
     sm: "w-42.5 h-full py-3.5 text-[20px]",
     lg: "w-[353px] h-[57px] text-[20px]",
+    max: "w-full h-18 text-[20px]",
   };
 
   const variantStyles = {
