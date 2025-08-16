@@ -1,15 +1,15 @@
 import React from "react";
 
-import ImageUploader from "@/components/dailyMission/share/ImageUploader";
+import ImageUploader from "@/components/dailyMission/common/ImageUploader";
 
 interface TakePhotoMainProps {
   image: File | null;
-  onImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const TakePhotoMain: React.FC<TakePhotoMainProps> = ({
+const TakePhotoEditor: React.FC<TakePhotoMainProps> = ({
   image,
-  onImageChange,
+  handleImageChange,
 }) => {
   return (
     <main className="flex-1 flex flex-col px-5.25 pt-8">
@@ -18,9 +18,9 @@ const TakePhotoMain: React.FC<TakePhotoMainProps> = ({
           식물의 사진을 찍어주세요!
         </p>
       </div>
-      <ImageUploader image={image} onImageChange={onImageChange} />
+      <ImageUploader image={image} handleImageChange={handleImageChange} />
     </main>
   );
 };
 
-export default TakePhotoMain;
+export default TakePhotoEditor;
