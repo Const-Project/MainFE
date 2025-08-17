@@ -7,11 +7,12 @@ import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
 const SelectionDetailPage = () => {
   const navigate = useNavigate();
-  const { actions } = useAvatarCreationStore();
+  const { selectedAvatar, actions } = useAvatarCreationStore();
 
   const handleNextClick = () => {
     actions.completeSelection();
-    navigate("/registration/avatar");
+    console.log(selectedAvatar);
+    navigate("/registration/plant-nickname");
   };
 
   return (
