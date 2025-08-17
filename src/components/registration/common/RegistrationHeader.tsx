@@ -6,7 +6,7 @@
 
 import React from "react";
 
-import Left from "@/assets/icons/left.svg";
+import Left from "@/assets/icons/left.svg?url";
 
 interface RegistrationHeaderProps {
   showBackButton?: boolean;
