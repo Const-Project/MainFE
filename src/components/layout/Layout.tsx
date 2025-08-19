@@ -1,0 +1,22 @@
+import { ReactNode } from "react";
+
+import { Outlet } from "react-router-dom";
+
+interface LayoutProps {
+  children?: ReactNode;
+}
+
+const Layout = ({ children }: LayoutProps) => {
+  return (
+    <div className="flex h-screen w-full items-center justify-center bg-gray-200">
+      <div className="relative flex h-[var(--app-height)] w-[393px] max-w-full flex-col overflow-hidden bg-white sm:h-[852px]">
+        <main className="flex-grow overflow-y-auto">
+          <Outlet />
+        </main>
+        {children}
+      </div>
+    </div>
+  );
+};
+
+export default Layout;
