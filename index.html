@@ -8,6 +8,15 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      const setAppHeight = () => {
+        const doc = document.documentElement;
+        // 실제 내부 화면 높이를 css 변수 '--app-height'에 저장합니다.
+        doc.style.setProperty('--app-height', `${window.innerHeight}px`);
+      };
+      window.addEventListener('resize', setAppHeight);
+      setAppHeight(); // 초기 로드 시 실행
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
