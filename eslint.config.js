@@ -1,6 +1,6 @@
 import js from "@eslint/js";
 import typescriptParser from "@typescript-eslint/parser";
-// import prettierPlugin from "eslint-plugin-prettier";
+import prettierPlugin from "eslint-plugin-prettier";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import importSort from "eslint-plugin-simple-import-sort";
@@ -33,10 +33,10 @@ export default tseslint.config([
     },
     plugins: {
       "simple-import-sort": importSort,
-      // prettier: prettierPlugin,
+      prettier: prettierPlugin,
     },
     rules: {
-      // "prettier/prettier": "error",
+      "prettier/prettier": "error",
       "react-hooks/exhaustive-deps": "warn",
       "simple-import-sort/imports": [
         "error",

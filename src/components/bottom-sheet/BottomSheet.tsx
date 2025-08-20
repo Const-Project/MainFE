@@ -188,7 +188,7 @@ const BottomSheet: React.FC = () => {
               </div>
             </div>
 
-            <div className="mt-6 flex flex-col gap-2">
+            <div className="mt-6 flex flex-col gap-3">
               {[
                 { label: "일기 쓰기", on: isChecked },
                 { label: "식물 사진 찍기", on: isChecked2 },
