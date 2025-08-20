@@ -30,18 +30,22 @@ const navItems = [
 
 const Navbar = () => {
   return (
-    <nav className="flex h-16 w-full items-center justify-around border-t border-gray-200 bg-white">
+    <nav className="flex h-24 px-4 w-full items-center justify-around border-t border-gray-200 bg-white pb-safe gap-[13px]">
       {navItems.map(({ path, icon: Icon, activeIcon: ActiveIcon, label }) => (
         <NavLink
           key={path}
           to={path}
-          className="flex flex-col items-center justify-center"
+          className="flex flex-1 flex-col items-center justify-center"
         >
           {({ isActive }) => (
             <div className="flex flex-col items-center gap-1">
-              {isActive ? <ActiveIcon /> : <Icon />}
+              {isActive ? (
+                <ActiveIcon className="h-6 w-6" />
+              ) : (
+                <Icon className="h-6 w-6" />
+              )}
               <span
-                className={`text-xs ${isActive ? "text-black" : "text-gray-400"}`}
+                className={`text-body-sb ${isActive ? "text-black" : "text-gray-400"}`}
               >
                 {label}
               </span>
