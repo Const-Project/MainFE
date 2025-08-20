@@ -13,7 +13,7 @@ const BottomSheet: React.FC = () => {
   const [potatoCount] = useState(7);
 
   // ===== 스냅/드래그 파라미터 =====
-  const snapPoints = [200, 560]; // 펼쳐진 "높이" 값 (peek, full)
+  const snapPoints = [140, 560]; // 펼쳐진 "높이" 값 (peek, full)
   const maxSnap = Math.max(...snapPoints);
   const minTranslate = maxSnap - snapPoints[0]; // peek 위치의 translateY
 
@@ -188,9 +188,9 @@ const BottomSheet: React.FC = () => {
               </div>
             </div>
 
-            <div className="mt-4 flex flex-col gap-2">
+            <div className="mt-6 flex flex-col gap-2">
               {[
-                { label: "오늘의 일기 쓰기", on: isChecked },
+                { label: "일기 쓰기", on: isChecked },
                 { label: "식물 사진 찍기", on: isChecked2 },
                 { label: "퀴즈 풀기", on: isChecked3 },
               ].map(({ label, on }, i) => (
@@ -213,11 +213,11 @@ const BottomSheet: React.FC = () => {
               ))}
             </div>
 
-            <div className="my-4 w-full border-t border-gray-200" />
+            <div className="my-10 w-full border-t border-gray-200" />
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-4">
               <div className="text-body-sb text-black">
-                <div className="text-heading2 flex items-center gap-2">
+                <div className="text-heading2 flex items-center gap-1">
                   <Plant className="h-8 w-8" />
                   나의 감자
                 </div>
