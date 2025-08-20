@@ -9,16 +9,19 @@ import "@/styles/globals.css";
 import "@/styles/fonts.css";
 import App from "@/App";
 
-// 모바일 뷰포트 높이 동적 계산
-function setAppHeight() {
-  const vh = window.innerHeight * 0.01;
-  document.documentElement.style.setProperty('--app-height', `${vh}px`);
-}
+// 모바일 주소창 변화 감지 및 --app-height 업데이트
+const setAppHeight = () => {
+  const doc = document.documentElement;
+  doc.style.setProperty('--app-height', `${window.innerHeight}px`);
+};
 
-// 초기 설정 및 리사이즈 이벤트 리스너
+// 초기 설정
 setAppHeight();
+
+// 리사이즈 및 오리엔테이션 변경 시 업데이트
 window.addEventListener('resize', setAppHeight);
 window.addEventListener('orientationchange', setAppHeight);
+
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
