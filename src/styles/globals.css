@@ -28,7 +28,6 @@ body {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
   /* 모바일에서 텍스트 선택 허용 (필요한 경우) */
   .select-text {
     -webkit-user-select: text;
@@ -48,6 +47,14 @@ body {
   .log-calendar .react-calendar__tile:enabled:focus { background: transparent !important; }
   /* 주말(토/일) 텍스트 색상 통일 (기본 테마의 red 제거) */
   .log-calendar .react-calendar__month-view__days__day--weekend { color: var(--color-gray-600) !important; }
+  /* Safe area 지원 */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
 }
 
 @theme {
