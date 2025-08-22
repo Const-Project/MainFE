@@ -20,14 +20,6 @@ body {
   font-family: "Pretendard", ui-sans-serif, system-ui, sans-serif;
 }
 
-.swiper-pagination-bullet {
-  background-color: var(--color-gray-600); /* 기본 회색 */
-  opacity: 1;
-}
-.swiper-pagination-bullet-active {
-  background-color: var(--color-gray-200); /* 활성화된 점 → 보라색 */
-}
-
 @layer utilities {
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
@@ -35,6 +27,10 @@ body {
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  .button-primary {
+    @apply w-96 py-3 bg-primary text-heading2 text-white cursor-pointer disabled:text-gray-400 disabled:cursor-not-allowed rounded-lg disabled:bg-gray-200;
   }
 
   /* 모바일에서 텍스트 선택 허용 (필요한 경우) */

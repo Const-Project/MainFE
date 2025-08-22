@@ -5,9 +5,9 @@ import HomePage from "@/pages/home/Homepage";
 import LogPage from "@/pages/log/LogPage";
 import OptionPage from "@/pages/option/OptionPage";
 import SearchPage from "@/pages/search/SearchPage";
+import RegisterPage from "@/pages/register/RegisterPage";
 
 //시작화면 전
-import SplashPage from "@/pages/splash/SplashPage";
 import OnBoardingPage from "@/pages/splash/OnBoardingPage";
 
 //네비게이션
@@ -33,9 +33,9 @@ const App = () => {
         <Route path="/log" element={<LogPage />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/option" element={<OptionPage />} />
-        <Route path="/splash" element={<SplashPage />} />
         <Route path="/onboarding" element={<OnBoardingPage />} />
         <Route path="/design" element={<Design />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Route>
     </Routes>
   );

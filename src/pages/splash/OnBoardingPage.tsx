@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -14,8 +15,10 @@ import OnBoarding4 from "@/assets/images/onboarding/onboarding4.png";
 export default function OnBoardingPage() {
   const [isLastSlide, setIsLastSlide] = useState(false);
 
+  const navigate = useNavigate();
+
   return (
-    <div className=" h-full flex flex-col items-center justify-center max-w-md mx-auto gap-20 p-5">
+    <div className=" h-full flex flex-col items-center justify-center max-w-md mx-auto gap-20 p-8">
       <Swiper
         modules={[Pagination]} // Pagination 모듈 추가
         spaceBetween={30} // 슬라이드 간격
@@ -83,8 +86,11 @@ export default function OnBoardingPage() {
         </SwiperSlide>
       </Swiper>
       <button
-        className="w-96 py-3 bg-primary text-heading2 text-white cursor-pointer disabled:text-gray-400 disabled:cursor-not-allowed rounded-sm disabled:bg-gray-200"
+        className="button-primary"
         disabled={!isLastSlide}
+        onClick={() => {
+          navigate("/register");
+        }}
       >
         나만의 화단 만들러 가기
       </button>
