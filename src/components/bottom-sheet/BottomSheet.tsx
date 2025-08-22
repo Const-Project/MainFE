@@ -1,19 +1,27 @@
 import React, { useEffect, useRef, useState } from "react";
 
 import Plant from "@/assets/icons/bottom-sheet/plant.svg?react";
-import Potato from "@/assets/icons/bottom-sheet/potato.svg?react";
 import Check from "@/assets/icons/common/check.svg?react";
 import UnCheck from "@/assets/icons/common/uncheck.svg?react";
+
+import One from "@/assets/images/bottom-sheet/one.svg?react";
+import Two from "@/assets/images/bottom-sheet/two.svg?react";
+import Three from "@/assets/images/bottom-sheet/three.svg?react";
+import Four from "@/assets/images/bottom-sheet/four.svg?react";
+import ClearOne from "@/assets/images/bottom-sheet/clearOne.svg?react";
+import ClearTwo from "@/assets/images/bottom-sheet/clearTwo.svg?react";
+import ClearThree from "@/assets/images/bottom-sheet/clearThree.svg?react";
+import ClearFour from "@/assets/images/bottom-sheet/clearFour.svg?react";
 
 const BottomSheet: React.FC = () => {
   // ===== 표시용 상태 =====
   const [isChecked] = useState(true);
   const [isChecked2] = useState(false);
   const [isChecked3] = useState(false);
-  const [level] = useState(3);
+  const [level] = useState(2);
 
   // ===== 스냅/드래그 파라미터 =====
-  const snapPoints = [130, 560]; // 펼쳐진 "높이" 값 (peek, full)
+  const snapPoints = [90, 560]; // 펼쳐진 "높이" 값 (peek, full)
   const maxSnap = Math.max(...snapPoints);
   const minTranslate = maxSnap - snapPoints[0]; // peek 위치의 translateY
 
@@ -221,12 +229,88 @@ const BottomSheet: React.FC = () => {
                 소망 나무
               </div>
               <p>
-                다음 텃밭을 열기까지
-                <span className="text-primary-font"> {level}레벨</span>이
-                남았어요!
+                {level > 3 ? (
+                  <span>
+                    지금 바로{" "}
+                    <span className="text-primary-font">새로운 텃밭</span>을 열
+                    수 있어요!
+                  </span>
+                ) : (
+                  <span>
+                    다음 텃밭을 열기까지{" "}
+                    <span className="text-primary-font"> {4 - level}레벨</span>
+                    이 남았어요!
+                  </span>
+                )}
               </p>
 
-              <div className="flex items-center gap-3"></div>
+              <div
+                className={`flex items-center justify-between text-body-sb text-gray-400`}
+              >
+                <div
+                  className={`flex items-center flex-col ${
+                    level > 0 && "text-gray-600"
+                  }`}
+                >
+                  {level > 0 ? (
+                    <ClearOne className="w-12 h-12" />
+                  ) : (
+                    <One className="w-12 h-12" />
+                  )}
+                  새싹
+                </div>
+                <div
+                  className={`w-6 h-0.5 rounded-full ${
+                    level > 1 && "bg-primary"
+                  } bg-gray-200 mb-4`}
+                />
+                <div
+                  className={`flex items-center flex-col ${
+                    level > 1 && "text-gray-600"
+                  }`}
+                >
+                  {level > 1 ? (
+                    <ClearTwo className="w-12 h-12" />
+                  ) : (
+                    <Two className="w-12 h-12" />
+                  )}
+                  꽃
+                </div>
+                <div
+                  className={`w-6 h-0.5 rounded-full ${
+                    level > 2 && "bg-primary"
+                  } bg-gray-200 mb-4`}
+                />
+                <div
+                  className={`flex items-center flex-col ${
+                    level > 2 && "text-gray-600"
+                  }`}
+                >
+                  {level > 2 ? (
+                    <ClearThree className="w-12 h-12 " />
+                  ) : (
+                    <Three className="w-12 h-12" />
+                  )}
+                  열매
+                </div>
+                <div
+                  className={`w-6 h-0.5 rounded-full ${
+                    level > 3 && "bg-primary"
+                  } bg-gray-200 mb-4`}
+                />
+                <div
+                  className={`flex items-center flex-col ${
+                    level > 3 && "text-gray-600"
+                  }`}
+                >
+                  {level > 3 ? (
+                    <ClearFour className="w-12 h-12" />
+                  ) : (
+                    <Four className="w-12 h-12" />
+                  )}
+                  나무
+                </div>
+              </div>
             </div>
           </div>
           {/* ==================== */}
