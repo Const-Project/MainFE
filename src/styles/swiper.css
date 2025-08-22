@@ -1,0 +1,7 @@
+.swiper-pagination-bullet {
+  background-color: var(--color-gray-200); /* 기본 회색 */
+  opacity: 1;
+}
+.swiper-pagination-bullet-active {
+  background-color: var(--color-gray-600); /* 활성화된 점 → 보라색 */
+}

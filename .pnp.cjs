@@ -56,6 +56,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:19.1.0"],\
           ["react-dom", "virtual:a26df681d8f5cb886104bc63845e90f74ff917ae53e0ae4622b7df50bf61ef86383bf875b5dd214089733dd74f1e7aa37ddc1b4f7c3a8adab11cd2d56ad5a4b3#npm:19.1.0"],\
           ["react-router-dom", "virtual:a26df681d8f5cb886104bc63845e90f74ff917ae53e0ae4622b7df50bf61ef86383bf875b5dd214089733dd74f1e7aa37ddc1b4f7c3a8adab11cd2d56ad5a4b3#npm:7.6.3"],\
+          ["swiper", "npm:11.2.10"],\
           ["tailwindcss", "npm:4.1.11"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
           ["typescript-eslint", "virtual:a26df681d8f5cb886104bc63845e90f74ff917ae53e0ae4622b7df50bf61ef86383bf875b5dd214089733dd74f1e7aa37ddc1b4f7c3a8adab11cd2d56ad5a4b3#npm:8.35.1"],\
@@ -3391,6 +3392,7 @@ const RAW_RUNTIME_STATE =
           ["react", "npm:19.1.0"],\
           ["react-dom", "virtual:a26df681d8f5cb886104bc63845e90f74ff917ae53e0ae4622b7df50bf61ef86383bf875b5dd214089733dd74f1e7aa37ddc1b4f7c3a8adab11cd2d56ad5a4b3#npm:19.1.0"],\
           ["react-router-dom", "virtual:a26df681d8f5cb886104bc63845e90f74ff917ae53e0ae4622b7df50bf61ef86383bf875b5dd214089733dd74f1e7aa37ddc1b4f7c3a8adab11cd2d56ad5a4b3#npm:7.6.3"],\
+          ["swiper", "npm:11.2.10"],\
           ["tailwindcss", "npm:4.1.11"],\
           ["typescript", "patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"],\
           ["typescript-eslint", "virtual:a26df681d8f5cb886104bc63845e90f74ff917ae53e0ae4622b7df50bf61ef86383bf875b5dd214089733dd74f1e7aa37ddc1b4f7c3a8adab11cd2d56ad5a4b3#npm:8.35.1"],\
@@ -4938,6 +4940,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/svg-parser-npm-2.0.4-1b0b6afbe9-02f6cb155d.zip/node_modules/svg-parser/",\
         "packageDependencies": [\
           ["svg-parser", "npm:2.0.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["swiper", [\
+      ["npm:11.2.10", {\
+        "packageLocation": "./.yarn/cache/swiper-npm-11.2.10-2bf88a66cf-b7e3a7c79d.zip/node_modules/swiper/",\
+        "packageDependencies": [\
+          ["swiper", "npm:11.2.10"]\
         ],\
         "linkType": "HARD"\
       }]\
