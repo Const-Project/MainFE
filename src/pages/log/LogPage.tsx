@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 
 import LogCalender from "@/components/log/LogCalender";
+import MyDiary from "@/components/log/MyDiary";
 
 import { createMockMonthlyCalendar } from "@/mocks/log/monthlyCalendar";
 
@@ -22,7 +23,7 @@ const LogPage = () => {
       <h1 className="mb-6 text-center text-heading2">키움 일지</h1>
 
       {/* 토글: 감자 / 일기 */}
-      <div className="mb-4 flex w-full justify-center">
+      <div className="mb-6 flex w-full justify-center">
         <div className="flex w-full px-1">
           <button
             className={`flex-1 pb-2 text-center text-body1 ${
@@ -58,9 +59,9 @@ const LogPage = () => {
           onSelectDate={() => {}}
         />
       ) : (
-        <div className="px-4 py-8 text-center text-body2 text-gray-600">
-          일기 컴포넌트 준비 중입니다.
-        </div>
+        <MyDiary
+          onSelectDiary={diaryId => console.log("Selected diary:", diaryId)}
+        />
       )}
     </section>
   );

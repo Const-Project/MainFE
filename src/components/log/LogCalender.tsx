@@ -67,7 +67,7 @@ export default function LogCalender({
     const Icon = IconByCount(count);
     return (
       <div className="mt-1 flex justify-center">
-        <Icon width={24} height={24} />
+        <Icon width={32} height={32} />
       </div>
     );
   };
@@ -84,21 +84,21 @@ export default function LogCalender({
   };
 
   return (
-    <section className="px-4 pt-2">
-      <div className="mb-3 flex w-full justify-center">
-        <div className="inline-flex items-center gap-2">
+    <section className="px-4">
+      <div className="mb-7 flex w-full justify-center">
+        <div className="inline-flex items-center gap-12">
           <button
-            className="grid h-6 w-6 place-items-center"
+            className="grid h-6 w-6 place-items-center cursor-pointer"
             onClick={() => goMonth(-1)}
             aria-label="prev"
           >
             <Left />
           </button>
-          <span className="w-[97px] text-center text-body2">
+          <span className="w-auto max-w-26 text-center text-body2">
             {activeStartDate.getFullYear()}년 {activeStartDate.getMonth() + 1}월
           </span>
           <button
-            className="grid h-6 w-6 place-items-center"
+            className="grid h-6 w-6 place-items-center cursor-pointer"
             onClick={() => goMonth(1)}
             aria-label="next"
           >
@@ -107,34 +107,41 @@ export default function LogCalender({
         </div>
       </div>
 
-      <Calendar
-        locale="en-US"
-        showNavigation={false}
-        activeStartDate={activeStartDate}
-        onActiveStartDateChange={({ activeStartDate }) => {
-          if (activeStartDate) setActiveStartDate(activeStartDate);
-        }}
-        onClickDay={d => onSelectDate?.(toISODateString(d))}
-        selectRange={false}
-        allowPartialRange={false}
-        showNeighboringMonth={false}
-        showFixedNumberOfWeeks={false}
-        tileClassName={({ date, view }) => {
-          if (view !== "month") return undefined;
-          const classes: string[] = ["text-gray-600", "!w-12", "!h-16", "!p-0"];
-          const sameMonth = date.getMonth() === activeStartDate.getMonth();
-          if (!sameMonth) classes.push("text-gray-400");
-          if (isFutureDate(date)) classes.push("text-gray-400", "is-future");
-          // 오늘은 배경변경 없이 텍스트만 primary (기본 CSS에서도 처리하지만 안전하게 한 번 더)
-          const iso = toISODateString(date);
-          if (iso === toISODateString(today)) classes.push("text-primary");
-          return classes.join(" ");
-        }}
-        tileContent={tileContent}
-        formatShortWeekday={formatWeekday}
-        formatDay={(_locale, date) => String(date.getDate())}
-        className="log-calendar w-full"
-      />
+      <div className="w-full h-full flex justify-center">
+        <Calendar
+          locale="en-US"
+          showNavigation={false}
+          activeStartDate={activeStartDate}
+          onActiveStartDateChange={({ activeStartDate }) => {
+            if (activeStartDate) setActiveStartDate(activeStartDate);
+          }}
+          onClickDay={d => onSelectDate?.(toISODateString(d))}
+          selectRange={false}
+          allowPartialRange={false}
+          showNeighboringMonth={false}
+          showFixedNumberOfWeeks={false}
+          tileClassName={({ date, view }) => {
+            if (view !== "month") return undefined;
+            const classes: string[] = [
+              "text-gray-600",
+              "!w-12",
+              "!h-16",
+              "!p-0",
+            ];
+            const sameMonth = date.getMonth() === activeStartDate.getMonth();
+            if (!sameMonth) classes.push("text-gray-400");
+            if (isFutureDate(date)) classes.push("text-gray-400", "is-future");
+            // 오늘은 배경변경 없이 텍스트만 primary (기본 CSS에서도 처리하지만 안전하게 한 번 더)
+            const iso = toISODateString(date);
+            if (iso === toISODateString(today)) classes.push("text-primary");
+            return classes.join(" ");
+          }}
+          tileContent={tileContent}
+          formatShortWeekday={formatWeekday}
+          formatDay={(_locale, date) => String(date.getDate())}
+          className="log-calendar w-full"
+        />
+      </div>
     </section>
   );
 }
