@@ -10,10 +10,10 @@ const BottomSheet: React.FC = () => {
   const [isChecked] = useState(true);
   const [isChecked2] = useState(false);
   const [isChecked3] = useState(false);
-  const [potatoCount] = useState(7);
+  const [level] = useState(3);
 
   // ===== 스냅/드래그 파라미터 =====
-  const snapPoints = [140, 560]; // 펼쳐진 "높이" 값 (peek, full)
+  const snapPoints = [130, 560]; // 펼쳐진 "높이" 값 (peek, full)
   const maxSnap = Math.max(...snapPoints);
   const minTranslate = maxSnap - snapPoints[0]; // peek 위치의 translateY
 
@@ -142,20 +142,20 @@ const BottomSheet: React.FC = () => {
 
   return (
     <div
-      className="absolute inset-0 z-50 overflow-hidden"
+      className="absolute inset-0 z-50 overflow-hidden w-full"
       style={{ touchAction: "none" }}
     >
       {/* 백드롭: 클릭 시 peek으로 내려가기 (완전 닫힘 X) */}
       <div
-        className="absolute inset-0 bg-transparent"
+        className="absolute inset-0 bg-transparent "
         onClick={() => snapTo(0)}
       />
 
       {/* 패널 */}
-      <div className="absolute inset-x-0 bottom-0 flex justify-center">
+      <div className="absolute inset-x-0 bottom-0 flex justify-center ">
         <div
           ref={sheetRef}
-          className="pointer-events-auto w-full max-w-[393px] rounded-t-2xl border-t border-gray-200 bg-white p-2"
+          className="pointer-events-auto w-full rounded-t-2xl border-t border-gray-200 bg-white p-2"
           // 스냅 완료 상태 동기화 전용(드래그 중엔 applyStyle이 직접 반영)
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
@@ -215,26 +215,18 @@ const BottomSheet: React.FC = () => {
 
             <div className="my-10 w-full border-t border-gray-200" />
 
-            <div className="flex flex-col gap-4">
-              <div className="text-body-sb text-black">
-                <div className="text-heading2 flex items-center gap-1">
-                  <Plant className="h-8 w-8" />
-                  나의 감자
-                </div>
-                다음 텃밭을 열기까지{" "}
-                <span className="text-primary-font">감자 {potatoCount}개</span>
-                가 남았어요!
+            <div className="flex flex-col gap-1 text-body-sb text-black">
+              <div className="text-heading2 flex items-center gap-1 ">
+                <Plant className="h-8 w-8" />
+                소망 나무
               </div>
+              <p>
+                다음 텃밭을 열기까지
+                <span className="text-primary-font"> {level}레벨</span>이
+                남았어요!
+              </p>
 
-              <div className="flex items-center gap-3">
-                {Array.from({ length: 10 }).map((_, index) => (
-                  <Potato
-                    key={index}
-                    className="h-6 w-6 transition-opacity"
-                    style={{ opacity: index < 10 - potatoCount ? 1 : 0.3 }}
-                  />
-                ))}
-              </div>
+              <div className="flex items-center gap-3"></div>
             </div>
           </div>
           {/* ==================== */}
