@@ -10,21 +10,15 @@ import { useNavigate } from "react-router-dom";
 import Button from "@/components/common/Button";
 import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
-interface AvatarCreationOptionProps {
-  optionId: string;
-}
-
-const AvatarCreationOption: React.FC<AvatarCreationOptionProps> = ({
-  optionId,
-}) => {
+const AvatarSelectionOption: React.FC = () => {
   const navigate = useNavigate();
-  const { selectionMode, selectedOptionId, actions } = useAvatarCreationStore();
-  const isSelected = selectedOptionId === optionId;
+  const { pickSelectionAvatar, pickAvatar, pickSelection } =
+    useAvatarCreationStore();
 
   const handleContainerClick = () => {
-    if (selectionMode === "remake") {
-      actions.selectOption(optionId);
-    }
+    pickAvatar.description = pickSelectionAvatar.description;
+    pickAvatar.img = pickSelectionAvatar.img;
+    pickAvatar.activeIndex = pickSelectionAvatar.activeIndex;
   };
 
   const handleButtonClick = (e: React.MouseEvent) => {
@@ -34,25 +28,25 @@ const AvatarCreationOption: React.FC<AvatarCreationOptionProps> = ({
 
   return (
     <div
-      className={`flex items-center justify-between h-full border-b-5  border-[var(--color-gray-200)] ${
-        isSelected
-          ? "bg-[var(--color-primary-varient)] border-none"
-          : "border-transparent"
-      } ${selectionMode === "remake" ? "cursor-pointer" : "cursor-default"}`}
+      className={`flex items-center justify-between h-full border-b-1  border-[var(--color-gray-200)] ${
+        pickSelection
+          ? "bg-primary-varient border-none cuusor-pointer"
+          : "border-1 border-gray-200 pointer-none"
+      } `}
       onClick={handleContainerClick}
     >
-      <div className="flex flex-col justify-between pl-6.25 h-full">
-        <div className="flex flex-col gap-3 w-38.75 text-left">
-          <h2 className="text-2xl font-semibold pt-8">아바타 선택</h2>
-          <p className="text-lg ">00종의 아바타 중에서 선택할 수 있어요</p>
+      <div className="flex flex-col justify-between pl-5 h-full">
+        <div className="flex flex-col gap-3 w-38.75 text-left pt-8">
+          <h2 className="text-heading2 ">아바타 선택</h2>
+          <p className="text-body2 ">00종의 아바타 중에서 선택할 수 있어요</p>
         </div>
-        <div className="pb-10.25 font-semibold">
+        <div className="pb-8 text-body1">
           <Button
-            variant={selectionMode === "initial" ? "primary" : "gray200"}
+            variant={pickSelection ? "gray200" : "primary"}
             size="xsSelect"
             onClick={handleButtonClick}
           >
-            {selectionMode === "initial" ? "선택하러 가기" : "다시 선택하기"}
+            {pickSelection ? "다시 선택하기" : "선택하러 가기"}
           </Button>
         </div>
       </div>
@@ -61,4 +55,4 @@ const AvatarCreationOption: React.FC<AvatarCreationOptionProps> = ({
   );
 };
 
-export default AvatarCreationOption;
+export default AvatarSelectionOption;

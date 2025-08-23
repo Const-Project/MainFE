@@ -10,19 +10,25 @@ import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 const CreationDetailPage = () => {
   const navigate = useNavigate();
   const { actions } = useAvatarCreationStore();
+  const userName = "000";
 
   const handleNextClick = () => {
     actions.completeCreation();
-    navigate("/registration/avatar");
+    navigate("/registration/plant-nickname");
   };
 
   return (
     <div className="flex flex-col h-screen">
-      <RegistrationHeader showBackButton={false} />
+      <RegistrationHeader showBackButton={true} />
+      <h1 className="text-heading1 pt-8 pl-6.25">
+        {`${userName}님만의`}
+        <br />
+        아바타가 완성되었어요!
+      </h1>
       <main className="flex-1 ">
         <CreationDetail />
       </main>
-      <footer className="flex items-center justify-center pb-5.25">
+      <footer className="flex items-center justify-center pb-8.75 px-5 text-heading2">
         <Button variant="primary" size="lg" onClick={handleNextClick}>
           다음
         </Button>

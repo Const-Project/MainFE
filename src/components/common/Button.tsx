@@ -14,13 +14,13 @@ import React from "react";
  * @property {React.ButtonHTMLAttributes<HTMLButtonElement>} [className] - 추가적인 CSS 클래스를 지정할 수 있습니다.
  */
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "gray200" | "gray600";
+  variant?: "default" | "primary" | "gray200" | "gray600";
   size?: "xsSelect" | "xsCreation" | "sm" | "lg";
   children: React.ReactNode;
 }
 
 const Button: React.FC<ButtonProps> = ({
-  variant = "primary",
+  variant = "default",
   size = "sm",
   children,
   className,
@@ -33,13 +33,15 @@ const Button: React.FC<ButtonProps> = ({
     xsSelect: "w-34.5 h-11.25 text-[18px] px-5 py-2",
     xsCreation: "w-30.75 h-11.25 text-[18px] px-5 py-2 ",
     sm: "w-42.5 h-full py-3.5 text-[20px]",
-    lg: "w-[353px] h-[57px] text-[20px]",
+    lg: "w-full h-[57px] text-[20px] ",
   };
 
   const variantStyles = {
-    primary: "bg-[var(--color-primary)] text-white",
-    gray200: "bg-[var(--color-gray-200)] text-black",
-    gray600: "bg-[var(--color-gray-600)] text-[var(--color-gray-400)]",
+    default:
+      "bg-[var(--color-white)] text-[var(--color-primary)] border-1 border-[var(--color-primary)] rounded-s-lg",
+    primary: "bg-primary text-white",
+    gray200: "bg-gray-200 text-gray-400",
+    gray600: "bg-gray-600 text-gray-400",
   };
 
   return (

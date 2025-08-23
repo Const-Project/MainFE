@@ -9,6 +9,8 @@ import Design from "@/components/common/Design";
 import Layout from "@/components/layout/Layout";
 import Navbar from "@/components/layout/Navbar";
 
+import "swiper/css";
+import "swiper/css/pagination";
 import RegistrationRoutes from "@/routes/registrationRoutes";
 
 const App = () => {

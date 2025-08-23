@@ -6,7 +6,7 @@
 
 import React from "react";
 
-import Left from "@/assets/icons/left.svg?url";
+import Left from "@/assets/icons/common/left.svg?url";
 
 interface RegistrationHeaderProps {
   showBackButton?: boolean;
@@ -20,7 +20,7 @@ const RegistrationHeader = ({
   };
 
   return (
-    <header className="h-14 flex items-center justify-between p-3.5 bg-white border-b-1 border-[var(--color-gray-200)]">
+    <header className="h-14 flex items-center justify-between p-3.25 bg-white border-b-1 border-gray-200">
       {showBackButton ? (
         <button onClick={handleBack}>
           <img src={Left} alt="뒤로가기" className="w-6 h-6" />
@@ -28,7 +28,7 @@ const RegistrationHeader = ({
       ) : (
         <div className="w-6"></div>
       )}
-      <h1 className="text-lg font-bold">식물 데려오기</h1>
+      <h1 className="text-heading2">식물 데려오기</h1>
       <div className="w-6"></div>
     </header>
   );

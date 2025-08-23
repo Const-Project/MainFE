@@ -1,37 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/common/Button";
 import AvatarDisplayArea from "@/components/registration/common/AvatarDisplayArea";
 import RegistrationHeader from "@/components/registration/common/RegistrationHeader";
+import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
 const PlantNicknamePage = () => {
+  const [avatarNameTemp, setAvatarNameTemp] = useState("");
+  const { actions } = useAvatarCreationStore();
+  const navigate = useNavigate();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+    if (value.startsWith(" ")) {
+      value = value.trimStart();
+    }
+    setAvatarNameTemp(value);
+  };
+
+  const handleNext = () => {
+    navigate("/registration/avatar");
+    actions.setAvatarName(avatarNameTemp);
+    actions.completeSelection();
+  };
+
+  const isInvalid = avatarNameTemp.length > 6;
+
   return (
     <div className="flex flex-col h-screen">
       <RegistrationHeader />
       <main className="flex-1 flex flex-col">
-        <h1 className="text-[28px] font-semibold py-8 pl-5">
-          식물의 별명을 지어주세요
-        </h1>
+        <h1 className="text-heading1 py-8 pl-6.25">식물의 별명을 지어주세요</h1>
 
-        <div className="flex flex-col px-5 gap-4">
+        <div className="flex flex-col px-5 pt-14 justify-center items-center">
           <AvatarDisplayArea />
-          <div className="relative w-88.25 h-15">
+          <div className="relative w-88.25 h-15 mt-4 mb-1.75">
             <input
               type="text"
-              placeholder="별명을 입력해주세요"
-              className="border border-[var(--color-gray-400)] rounded-md w-full h-full pl-4 pr-16 placeholder:text-[var(--color-gray-400)] focus:outline-none "
+              value={avatarNameTemp}
+              placeholder="별명을 지어주세요"
+              className={`border rounded-md w-full h-full pl-4 pr-16 placeholder:text-body2 placeholder:text-gray-400 focus:outline-none
+                ${isInvalid ? "border-danger" : "border-gray-400"}`}
+              onChange={handleChange}
             />
-            <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[var(--color-gray-600)] text-[14px]">
-              최대 6자
-            </span>
+            {avatarNameTemp === "" && (
+              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600 text-[16px]">
+                최대 6자
+              </span>
+            )}
           </div>
+          {/* 에러 문구 */}
+          {isInvalid && (
+            <p className="text-gray-600 text-[16px] w-88.25 text-left pl-4.25">
+              최대 6자 입력해주세요
+            </p>
+          )}
         </div>
       </main>
-      <footer>
-        <Button variant="gray600" size="max" className="rounded-b-none mb-5.25">
-          다음
+
+      <footer className="flex items-center justify-center pb-8.75 px-5 text-heading2">
+        <Button
+          variant={avatarNameTemp === "" || isInvalid ? "gray200" : "primary"}
+          size="lg"
+          onClick={handleNext}
+          disabled={!avatarNameTemp.trim() || isInvalid}
+        >
+          내 텃밭으로 가기
         </Button>
-        {/* <div className="bg-[var(--color-gray-600)] h-5.25"></div> */}
       </footer>
     </div>
   );
