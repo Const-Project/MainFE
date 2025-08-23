@@ -1,6 +1,7 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 
 import HomePage from "@/pages/home/Homepage";
+import LogDetailPage from "@/pages/log/LogDetailPage";
 import LogPage from "@/pages/log/LogPage";
 import OptionPage from "@/pages/option/OptionPage";
 import SearchPage from "@/pages/search/SearchPage";
@@ -13,7 +14,7 @@ const App = () => {
   const location = useLocation();
 
   // Navbar가 있는 페이지들
-  const navbarPaths = ["/", "/log", "/search", "/option"];
+  const navbarPaths = ["/", "/log", "/search", "/option", "/log/:id"];
   const showNavbar = navbarPaths.includes(location.pathname);
 
   return (
@@ -25,6 +26,7 @@ const App = () => {
         <Route path="/option" element={<OptionPage />} />
         <Route path="/splash" element={<SplashPage />} />
         <Route path="/design" element={<Design />} />
+        <Route path="/log/:id" element={<LogDetailPage />} />
       </Route>
     </Routes>
   );
