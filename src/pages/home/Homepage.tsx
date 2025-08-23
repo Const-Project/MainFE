@@ -6,6 +6,7 @@ import Lock from "@/components/lock/Lock";
 import UnLock from "@/components/lock/UnLock";
 
 import Splash from "@/components/common/Splash";
+import LoadingDots from "@/components/loading/loading";
 
 import Background from "@/assets/images/background/background1.png";
 
@@ -21,7 +22,7 @@ const HomePage = () => {
     const token = localStorage.getItem("token");
 
     const timer = setTimeout(() => {
-      if (token) {
+      if (!token) {
         // 온보딩으로 보낼 때는 스플래시 유지 (isLoading을 false로 하지 않음)
         navigate("/onboarding", { replace: true });
         return; // 아래 코드 실행 안 함
@@ -35,7 +36,7 @@ const HomePage = () => {
     return () => clearTimeout(timer);
   }, [navigate]);
 
-  if (isLoading) return <Splash />;
+  if (isLoading) return <LoadingDots />;
   // 온보딩 분기면 어차피 navigate 중이므로 아무것도 렌더하지 않기
   if (isOnboarding) return null;
 

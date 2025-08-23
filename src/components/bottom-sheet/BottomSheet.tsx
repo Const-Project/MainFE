@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import Plant from "@/assets/icons/bottom-sheet/plant.svg?react";
 import Check from "@/assets/icons/common/check.svg?react";
@@ -21,20 +21,14 @@ const BottomSheet: React.FC = () => {
   const [level] = useState(2);
 
   // ===== 스냅/드래그 파라미터 =====
-  const snapPoints = [90, 560]; // 펼쳐진 "높이" 값 (peek, full)
-  const maxSnap = Math.max(...snapPoints);
-  const minTranslate = maxSnap - snapPoints[0]; // peek 위치의 translateY
 
   // 스냅 완료 상태를 보관(초기엔 닫힘 위치로 시작)
-  const [y, setY] = useState<number>(maxSnap);
 
   // ===== DOM/드래그 제어용 ref =====
-  const sheetRef = useRef<HTMLDivElement>(null);
   const rafId = useRef<number | null>(null);
   const dragging = useRef(false);
   const startY = useRef(0);
   const startTranslate = useRef(0);
-  const liveTranslate = useRef(0);
   const lastMoveT = useRef(0);
   const lastMoveY = useRef(0);
   const velocity = useRef(0);
@@ -42,6 +36,28 @@ const BottomSheet: React.FC = () => {
   // 드래그 끝단 저항감(러버밴드)
   const OVERDRAG = 40;
   const RESISTANCE = 0.35;
+
+  const snapPoints = [90, 560]; // [초기 90, 풀오픈 560]
+  const maxSnap = Math.max(...snapPoints);
+
+  // 2) 초기 높이를 '90px'로 고정
+  const INITIAL_HEIGHT = 90;
+  const INITIAL_TY = maxSnap - INITIAL_HEIGHT; // translateY = 560 - 90 = 470
+
+  // 3) 상태/레퍼런스 초기값을 초기 위치로 세팅
+  const [y, setY] = useState<number>(INITIAL_TY);
+  const sheetRef = useRef<HTMLDivElement>(null);
+  const liveTranslate = useRef<number>(INITIAL_TY);
+
+  const minTranslate = maxSnap - snapPoints[0]; // peek 위치의 translateY
+
+  // 4) 첫 페인트 전에 바로 위치 고정(애니메이션 없이)
+  useLayoutEffect(() => {
+    const el = sheetRef.current;
+    if (!el) return;
+    el.style.transition = "none";
+    el.style.transform = `translateY(${INITIAL_TY}px) translateZ(0)`;
+  }, [INITIAL_TY]);
 
   // ===== 유틸 =====
   const applyStyle = (ty: number, animate = false) => {

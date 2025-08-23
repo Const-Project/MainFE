@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
@@ -11,11 +11,21 @@ import OnBoarding1 from "@/assets/images/onboarding/onboarding1.png";
 import OnBoarding2 from "@/assets/images/onboarding/onboarding2.png";
 import OnBoarding3 from "@/assets/images/onboarding/onboarding3.png";
 import OnBoarding4 from "@/assets/images/onboarding/onboarding4.png";
+import Splash from "@/components/common/Splash";
 
 export default function OnBoardingPage() {
   const [isLastSlide, setIsLastSlide] = useState(false);
-
+  const [isSplash, setIsSplash] = useState(true);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsSplash(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isSplash) return <Splash />;
 
   return (
     <div className=" h-full flex flex-col items-center justify-center max-w-md mx-auto gap-20 p-8">
