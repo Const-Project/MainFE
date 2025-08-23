@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Edit from "@/assets/icons/common/edit.svg?react";
+import { registerApi } from "@/apis/register/registerApi";
 
 const RegisterPage = () => {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -12,6 +13,13 @@ const RegisterPage = () => {
   const handleWrapperClick = () => {
     // div 클릭 시 input에 포커스
     inputRef.current?.focus();
+  };
+
+  const handleRegister = async () => {
+    const result = await registerApi(nickname);
+    if (result) {
+      navigate("/");
+    }
   };
 
   return (
@@ -46,9 +54,7 @@ const RegisterPage = () => {
       <button
         className="button-primary"
         disabled={nickname.length === 0}
-        onClick={() => {
-          navigate("/");
-        }}
+        onClick={handleRegister}
       >
         확인
       </button>

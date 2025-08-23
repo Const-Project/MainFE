@@ -39,7 +39,7 @@ export default function OnBoardingPage() {
           // 현재 슬라이드 인덱스가 마지막인지 확인
           setIsLastSlide(swiper.activeIndex === swiper.slides.length - 1);
         }}
-        className=" w-full flex-1" // 아래 여백을 조금 주기 (점 안 잘리게)
+        className="onboarding-swiper w-full flex-1" // 아래 여백을 조금 주기 (점 안 잘리게)
       >
         <SwiperSlide>
           <div className="w-full h-full flex items-center justify-center flex-col gap-12">

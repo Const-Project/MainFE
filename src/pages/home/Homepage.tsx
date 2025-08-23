@@ -1,28 +1,27 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination } from "swiper/modules";
 
-import BottomSheet from "@/components/bottom-sheet/BottomSheet";
-import Lock from "@/components/lock/Lock";
-import UnLock from "@/components/lock/UnLock";
-
-import Splash from "@/components/common/Splash";
 import LoadingDots from "@/components/loading/loading";
 
-import Background from "@/assets/images/background/background1.png";
+import FirstPlant from "@/components/home/FirstPlant";
+import SecondPlant from "@/components/home/SecondPlant";
+import ThirdPlant from "@/components/home/ThirdPlant";
+import FourthPlant from "@/components/home/FourthPlant";
 
-type BottomSheetType = "lock" | "unlock" | "clear";
+import "@/styles/home/swiper.css";
 
 const HomePage = () => {
-  const [isUnlocked, setIsUnlocked] = useState<BottomSheetType>("lock");
   const navigate = useNavigate();
   const [isOnboarding, setIsOnboarding] = useState(true);
   const [isLoading, setIsLoading] = useState(true); // 스플래시 표시용
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("NapulNapul-accessToken");
 
     const timer = setTimeout(() => {
-      if (!token) {
+      if (token) {
         // 온보딩으로 보낼 때는 스플래시 유지 (isLoading을 false로 하지 않음)
         navigate("/onboarding", { replace: true });
         return; // 아래 코드 실행 안 함
@@ -41,29 +40,27 @@ const HomePage = () => {
   if (isOnboarding) return null;
 
   return (
-    <div
-      className="relative flex flex-col h-full items-center justify-between w-full bg-cover bg-center bg-no-repeat "
-      style={{ backgroundImage: `url(${Background})` }}
-    >
-      {isUnlocked !== "clear" && (
-        <>
-          <div className="flex-1 flex items-center justify-center w-full">
-            {isUnlocked === "unlock" ? <UnLock /> : <Lock />}
-          </div>
-
-          <button
-            onClick={() =>
-              setIsUnlocked(isUnlocked === "lock" ? "unlock" : "clear")
-            }
-            className={`w-full ${isUnlocked === "unlock" ? "bg-primary text-white" : "bg-gray-200 text-gray-400"} h-16 text-heading2`}
-          >
-            {isUnlocked === "lock"
-              ? "아직 감자가 충분히 모이지 않았어요"
-              : "씨앗 받고 해금하기!"}
-          </button>
-        </>
-      )}
-      {isUnlocked === "clear" && <BottomSheet />}
+    <div className="relative flex flex-col h-full items-center justify-between w-full bg-transparent">
+      <Swiper
+        modules={[Pagination]} // Pagination 모듈 추가
+        slidesPerView={1} // 한 번에 보이는 슬라이드 개수
+        pagination={{ clickable: false }} // 동그라미 활성화 + 클릭 이동 가능
+        loop={true} // 마지막 슬라이드에서 종료되는 것 방지
+        className="home-swiper w-full flex-1 relative" // 아래 여백을 조금 주기 (점 안 잘리게)
+      >
+        <SwiperSlide>
+          <FirstPlant />
+        </SwiperSlide>
+        <SwiperSlide>
+          <SecondPlant />
+        </SwiperSlide>
+        <SwiperSlide>
+          <ThirdPlant />
+        </SwiperSlide>
+        <SwiperSlide>
+          <FourthPlant />
+        </SwiperSlide>
+      </Swiper>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Background from "@/assets/images/background/background1.png";
+import Background from "@/assets/images/background/background2.png";
 
 import Lock from "@/components/lock/Lock";
 import UnLock from "@/components/lock/UnLock";
@@ -8,7 +8,7 @@ import BottomSheet from "@/components/bottom-sheet/BottomSheet";
 
 type BottomSheetType = "lock" | "unlock" | "clear";
 
-const FirstPlant = () => {
+const SecondPlant = () => {
   const [isUnlocked, setIsUnlocked] = useState<BottomSheetType>("lock");
 
   return (
@@ -41,4 +41,4 @@ const FirstPlant = () => {
   );
 };
 
-export default FirstPlant;
+export default SecondPlant;

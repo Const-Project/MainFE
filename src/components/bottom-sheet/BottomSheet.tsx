@@ -166,17 +166,17 @@ const BottomSheet: React.FC = () => {
 
   return (
     <div
-      className="absolute inset-0 z-50 overflow-hidden w-full"
+      className="fixed inset-0 z-[9999] overflow-hidden w-full"
       style={{ touchAction: "none" }}
     >
       {/* 백드롭: 클릭 시 peek으로 내려가기 (완전 닫힘 X) */}
       <div
-        className="absolute inset-0 bg-transparent "
+        className="fixed inset-0 bg-transparent z-[9999] "
         onClick={() => snapTo(0)}
       />
 
       {/* 패널 */}
-      <div className="absolute inset-x-0 bottom-0 flex justify-center ">
+      <div className="fixed inset-x-0 bottom-0 flex justify-center z-[9999] ">
         <div
           ref={sheetRef}
           className="pointer-events-auto w-full rounded-t-2xl border-t border-gray-200 bg-white p-2"
