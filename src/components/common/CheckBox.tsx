@@ -1,5 +1,5 @@
 /**
- * @file CheckoutCheckbox.tsx
+ * @file  CheckBox.tsx
  * @description 원형 체크박스 (항상 체크 아이콘 노출, input 기반)
  */
 
@@ -16,11 +16,11 @@ const Checkbox: React.FC<CheckoutCheckboxProps> = ({
   ...props
 }) => {
   return (
-    <label className="flex items-center gap-2 cursor-pointer select-none">
+    <label className="relative flex items-center gap-2 cursor-pointer select-none">
       <input
         type="checkbox"
         className={`
-          peer w-4 h-4 rounded-full border-2 appearance-none flex items-center justify-center
+          peer w-4 h-4 rounded-full border-2 appearance-none
           checked:bg-[var(--color-primary)] checked:border-none
           bg-white border-gray-400
           ${className}

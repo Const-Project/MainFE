@@ -11,9 +11,9 @@ const DiaryHeader = ({ onSubmit, showSubmit }: DiaryHeaderProps) => {
       <button>
         <img src={XIcon} alt="Close" className="w-4 h-4" />
       </button>
-      <h1 className="text-xl font-semibold">일기쓰기</h1>
+      <h1 className="text-heading2">일기쓰기</h1>
       {showSubmit ? (
-        <button className="text-lg text-black" onClick={onSubmit}>
+        <button className="text-body2" onClick={onSubmit}>
           완료
         </button>
       ) : (

@@ -18,7 +18,7 @@ const TakePhotoPage = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-full">
       <DiaryHeader showSubmit={false} />
       <TakePhotoEditor image={image} handleImageChange={handleImageChange} />
       <TakePhotoFooter image={image} onSubmit={handleSubmit} />

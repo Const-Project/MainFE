@@ -13,10 +13,8 @@ const TakePhotoEditor: React.FC<TakePhotoMainProps> = ({
 }) => {
   return (
     <main className="flex-1 flex flex-col px-5.25 pt-8">
-      <div className="">
-        <p className="text-[24px] font-bold mb-18.5">
-          식물의 사진을 찍어주세요!
-        </p>
+      <div>
+        <p className="text-heading1 mb-18.5">식물의 사진을 찍어주세요!</p>
       </div>
       <ImageUploader image={image} handleImageChange={handleImageChange} />
     </main>

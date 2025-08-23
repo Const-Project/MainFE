@@ -1,12 +1,14 @@
+import type { ChangeEvent } from "react";
+
 import ImageUploader from "../common/ImageUploader";
 
 interface DiaryEditorProps {
   title: string;
   content: string;
-  onTitleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onContentChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onTitleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onContentChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
   image: File | null;
-  handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleImageChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
 const DiaryEditor = ({
@@ -25,26 +27,50 @@ const DiaryEditor = ({
   return (
     <div className="flex-grow px-5 pt-8 pb-12.5">
       <div className="border-b-1 border-[var(--color-gray-200)] mb-8">
-        <div className="text-[#282828] w-full h-7.25 mb-2">
+        <div className="text-body2 w-full h-7.25 mb-2">
           {`${year}년 ${month}월 ${day}일`}
         </div>
         <input
           type="text"
           placeholder="제목을 입력하세요"
-          className="w-full h-9.5 mb-6 text-[28px] placeholder:text-[var(--color-gray-400)] focus:outline-none"
+          className="w-full h-9.5 mb-6 text-title1 font-semibold placeholder:text-title1 placeholder:font-semibold placeholder:text-[var] focus:outline-none"
           value={title}
           onChange={onTitleChange}
         />
       </div>
       <ImageUploader image={image} handleImageChange={handleImageChange} />
-      <textarea
+      {
+        /* <textarea
         placeholder="내 식물의 겨울나기에 대해서 이야기해보는건 어때요?"
-        className={`p-2 focus:outline-none placeholder:text-[var(--color-gray-400)] resize-none ${
+        className={`focus:outline-none placeholder:text-[var(--color-gray-400)] resize-none ${
           content ? "w-full" : "w-50 h-16"
         }`}
         value={content}
         onChange={onContentChange}
-      ></textarea>
+      /> */
+        <div className="relative w-full">
+          {content === "" && (
+            <div className="absolute text-body2 pointer-events-none">
+              <span className=" text-body1 font-semibold text-[#9B9B9B]">
+                내 식물의 겨울나기
+              </span>
+              <span className=" text-body2 font-normal text-[#9B9B9B]">
+                에 대해서
+              </span>
+              <br />
+              <span className="block text-body2 font-normal text-[#9B9B9B]">
+                이야기해보는건 어때요?
+              </span>
+            </div>
+          )}
+
+          <textarea
+            className={`w-full h-30 text-body2 font-[--color-black] resize-none focus:outline-none`}
+            value={content}
+            onChange={onContentChange}
+          />
+        </div>
+      }
     </div>
   );
 };

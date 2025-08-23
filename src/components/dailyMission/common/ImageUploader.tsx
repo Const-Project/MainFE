@@ -38,7 +38,9 @@ const ImageUploader = ({ image, handleImageChange }: ImageUploaderProps) => {
         ) : (
           <div className="flex flex-col gap-2.5 items-center justify-center">
             <img src={Camera} alt="Camera" className="w-6 h-5" />
-            <div className="text-gray-500">식물의 사진을 선택하세요</div>
+            <div className="text-[var(--color-gray-600)]">
+              식물의 사진을 선택하세요
+            </div>
           </div>
         )}
       </label>

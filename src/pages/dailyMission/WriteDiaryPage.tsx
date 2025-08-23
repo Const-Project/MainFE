@@ -29,14 +29,13 @@ const WriteDiaryPage = () => {
   };
 
   const handleSubmit = () => {
-    // API 호출 로직
     console.log({ title, content, image, isPublic });
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-full">
       <DiaryHeader onSubmit={handleSubmit} showSubmit={true} />
-      <main className="flex  pb-12.5 flex-1 overflow-y-auto">
+      <main className="flex pb-12.5 flex-1 overflow-y-auto">
         <DiaryEditor
           title={title}
           content={content}

@@ -9,7 +9,8 @@ const TakePhotoFooter: React.FC<TakePhotoFooterProps> = ({
   image,
   onSubmit,
 }) => {
-  const buttonEnabledClasses = "bg-[#7DC960] text-white";
+  const buttonEnabledClasses =
+    "bg-[var(--color-primary)] text-[var(--color-white)]";
   const buttonDisabledClasses =
     "bg-[var(--color-gray-200)] text-[var(--color-gray-400)]";
 
@@ -18,7 +19,7 @@ const TakePhotoFooter: React.FC<TakePhotoFooterProps> = ({
       <button
         onClick={onSubmit}
         disabled={!image}
-        className={`w-full h-23.25 text-lg font-bold flex items-center justify-center ${
+        className={`w-full h-23.25 text-heading2 flex items-center justify-center ${
           image ? buttonEnabledClasses : buttonDisabledClasses
         }`}
       >

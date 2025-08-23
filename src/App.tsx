@@ -27,9 +27,9 @@ const App = () => {
         <Route path="/option" element={<OptionPage />} />
         <Route path="/splash" element={<SplashPage />} />
         <Route path="/design" element={<Design />} />
+        <Route path="/dailyMission/writeDiary" element={<WriteDiaryPage />} />
+        <Route path="/dailyMission/takePhoto" element={<TakePhotoPage />} />
       </Route>
-      <Route path="/diaryMission/writeDiary" element={<WriteDiaryPage />} />
-      <Route path="/dailyMission/takePhoto" element={<TakePhotoPage />} />
     </Routes>
   );
 };
