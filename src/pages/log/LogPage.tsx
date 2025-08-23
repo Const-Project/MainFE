@@ -1,4 +1,6 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import LogCalender from "@/components/log/LogCalender";
 import MyDiary from "@/components/log/MyDiary";
@@ -8,7 +10,17 @@ import { createMockMonthlyCalendar } from "@/mocks/log/monthlyCalendar";
 type Tab = "potato" | "diary"; // 감자 / 일기
 
 const LogPage = () => {
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState<Tab>("potato");
+
+  // URL 파라미터에서 탭 정보 읽기
+  useEffect(() => {
+    const tabParam = searchParams.get("tab");
+    if (tabParam === "diary") {
+      setActiveTab("diary");
+    }
+  }, [searchParams]);
 
   const initialData = useMemo(() => {
     const now = new Date();
@@ -16,6 +28,10 @@ const LogPage = () => {
   }, []);
 
   const [calendarData, setCalendarData] = useState(initialData);
+
+  const handleDiarySelect = (diaryId: number) => {
+    navigate(`/log/${diaryId}`);
+  };
 
   return (
     <section className="w-full py-5">
@@ -59,9 +75,7 @@ const LogPage = () => {
           onSelectDate={() => {}}
         />
       ) : (
-        <MyDiary
-          onSelectDiary={diaryId => console.log("Selected diary:", diaryId)}
-        />
+        <MyDiary onSelectDiary={handleDiarySelect} />
       )}
     </section>
   );

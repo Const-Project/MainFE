@@ -14,7 +14,7 @@ const App = () => {
   const location = useLocation();
 
   // Navbar가 있는 페이지들
-  const navbarPaths = ["/", "/log", "/search", "/option", "/log/:id"];
+  const navbarPaths = ["/", "/log", "/search", "/option"];
   const showNavbar = navbarPaths.includes(location.pathname);
 
   return (

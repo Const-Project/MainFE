@@ -1,7 +1,8 @@
-import type { DiaryResponse } from "@/types/log/diary";
+import type { DiaryDetailResponse, DiaryResponse } from "@/types/log/diary";
 
 // Mock 데이터 캐시
 const mockDataCache = new Map<string, DiaryResponse>();
+const mockDetailCache = new Map<number, DiaryDetailResponse>();
 
 export function createMockDiaryResponse(
   year: number,
@@ -58,6 +59,92 @@ export function createMockDiaryResponse(
 
   // 캐시에 저장
   mockDataCache.set(cacheKey, result);
+
+  return result;
+}
+
+// 일기 상세 조회 목데이터 생성
+export function createMockDiaryDetailResponse(
+  diaryId: number
+): DiaryDetailResponse {
+  // 캐시된 데이터가 있으면 반환
+  if (mockDetailCache.has(diaryId)) {
+    return mockDetailCache.get(diaryId)!;
+  }
+
+  const mockImages = [
+    "/log/log1.svg",
+    "/log/log2.svg",
+    "/log/log3.svg",
+    "/log/log4.svg",
+    "/log/log5.svg",
+    "/log/log6.svg",
+    "/log/log7.svg",
+    "/log/log8.svg",
+    "/log/log9.svg",
+    "/log/log10.svg",
+    "/log/log11.svg",
+    "/log/log12.svg",
+    "/log/log13.svg",
+    "/log/log14.svg",
+    "/log/log15.svg",
+    "/log/log16.svg",
+    "/log/log17.svg",
+    "/log/log18.svg",
+  ];
+
+  const imageIndex = (diaryId - 1) % mockImages.length;
+  const now = new Date();
+
+  // 댓글 목데이터 생성
+  const mockComments = [
+    {
+      id: 1,
+      profileImageUrl: null,
+      writer: "홍길동",
+      content:
+        "댓글 더미텍스트 입니다. 댓글 더미텍스트 입니다. 니다. 댓글 더미텍스트 입니다.",
+    },
+    {
+      id: 2,
+      profileImageUrl: null,
+      writer: "김철수",
+      content: "정말 예쁜 식물이네요! 저도 키워보고 싶어요.",
+    },
+    {
+      id: 3,
+      profileImageUrl: null,
+      writer: "이영희",
+      content: "오늘 날씨가 좋아서 식물이 더 예뻐 보여요.",
+    },
+  ];
+
+  const result: DiaryDetailResponse = {
+    data: {
+      id: diaryId,
+      title: `오늘의 일기에옹`,
+      content:
+        "일기 내용 더미 텍스트입니다. 일기 내용 더미 텍스트입니다.일기 내용 더미 텍스트입니다.일기 내용 더미 텍스트입니다. 내용이길어지면더보기가생겨야되거등요",
+      imageUrl: mockImages[imageIndex],
+      likeCount: Math.floor(Math.random() * 10) + 1,
+      commentCount: mockComments.length,
+      comment: mockComments,
+      createdAt: new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        Math.floor(Math.random() * 28) + 1
+      ).toISOString(),
+      updatedAt: new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        Math.floor(Math.random() * 28) + 1
+      ).toISOString(),
+      public: true,
+    },
+  };
+
+  // 캐시에 저장
+  mockDetailCache.set(diaryId, result);
 
   return result;
 }
