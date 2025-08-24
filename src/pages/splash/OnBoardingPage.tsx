@@ -13,6 +13,13 @@ import OnBoarding3 from "@/assets/images/onboarding/onboarding3.png";
 import OnBoarding4 from "@/assets/images/onboarding/onboarding4.png";
 import Splash from "@/components/common/Splash";
 
+/**
+ * Renders the onboarding flow: a 2-second splash screen followed by a 4-slide carousel and a final action button.
+ *
+ * The component shows the Splash for 2 seconds, then reveals a Swiper carousel (looping, with pagination) containing four onboarding slides. The bottom "나만의 화단 만들러 가기" button is enabled only when the user reaches the last slide and navigates to "/register" when clicked.
+ *
+ * @returns The onboarding page UI as a React element.
+ */
 export default function OnBoardingPage() {
   const [isLastSlide, setIsLastSlide] = useState(false);
   const [isSplash, setIsSplash] = useState(true);
