@@ -29,7 +29,7 @@ const PlantNicknamePage = () => {
   const isInvalid = avatarNameTemp.length > 6;
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen  md:h-[852px]">
       <RegistrationHeader />
       <main className="flex-1 flex flex-col">
         <h1 className="text-heading1 py-8 pl-6.25">식물의 별명을 지어주세요</h1>
@@ -41,12 +41,16 @@ const PlantNicknamePage = () => {
               type="text"
               value={avatarNameTemp}
               placeholder="별명을 지어주세요"
-              className={`border rounded-md w-full h-full pl-4 pr-16 placeholder:text-body2 placeholder:text-gray-400 focus:outline-none
+              className={`border rounded-md w-full h-full pl-4 pr-16 placeholder:text-body2 placeholder:text-gray-400
                 ${isInvalid ? "border-danger" : "border-gray-400"}`}
               onChange={handleChange}
             />
             {avatarNameTemp === "" && (
-              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600 text-[16px]">
+              <span
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600 text-body-sb
+
+"
+              >
                 최대 6자
               </span>
             )}

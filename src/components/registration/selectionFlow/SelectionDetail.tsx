@@ -40,32 +40,6 @@ const SelectionDetail = () => {
           className="w-full h-75.75"
           initialSlide={pickSelectionAvatar?.activeIndex}
           onSlideChange={swiper => handleSlideClick(swiper.activeIndex)}
-          // 여기 기기별로 정리해야 하는건가요 ..? ㅠ_ㅠ
-          breakpoints={{
-            320: {
-              slidesPerView: 1.1,
-              spaceBetween: 12,
-            },
-            // Samsung Galaxy S8+
-            360: {
-              slidesPerView: 1.4,
-              spaceBetween: 13,
-            },
-            // iphone 12 pro
-            390: {
-              slidesPerView: 1.5,
-              spaceBetween: 13,
-            },
-            // iphone XR
-            414: {
-              slidesPerView: 1.6,
-              spaceBetween: 15,
-            },
-            1024: {
-              slidesPerView: 1.4,
-              spaceBetween: 16,
-            },
-          }}
         >
           {[...Array(10)].map((_, index) => (
             <SwiperSlide
@@ -82,7 +56,7 @@ const SelectionDetail = () => {
                       : "white",
                 }}
               >
-                <div className="w-full h-full px-12 py-5 border-2 border-[var(--color-primary)] rounded-[12px] bg-gray-100 flex items-center justify-center ">
+                <div className="w-full h-full px-12 py-5 border-2 border-primary rounded-[12px] bg-gray-100 flex items-center justify-center ">
                   <span className="text-xl text-gray-400">
                     이미지 {index + 1}
                   </span>

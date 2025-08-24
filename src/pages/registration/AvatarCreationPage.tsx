@@ -20,7 +20,7 @@ const AvatarCreationPage = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen md:h-[852px]">
       <RegistrationHeader />
       <main className="flex-grow flex flex-col min-h-0">
         <div className="flex-1">

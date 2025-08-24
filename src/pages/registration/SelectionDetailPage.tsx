@@ -15,7 +15,7 @@ const SelectionDetailPage = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen md:h-[852px]">
       <RegistrationHeader showBackButton={true} />
       <div className="text-heading1 pt-8 pl-6.25">
         원하는 아바타를 선택해주세요.

@@ -31,7 +31,7 @@ const AvatarSelectionOption: React.FC = () => {
 
   return (
     <div
-      className={`flex items-center justify-between h-full border-b-1  border-[var(--color-gray-200)] ${
+      className={`flex items-center justify-between h-full border-b-1  border-gray-200 ${
         pickSelection
           ? "bg-primary-varient border-none cuusor-pointer"
           : "border-1 border-gray-200 pointer-none"

@@ -18,7 +18,7 @@ const CreationDetailPage = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen md:h-[852px]">
       <RegistrationHeader showBackButton={true} />
       <h1 className="text-heading1 pt-8 pl-6.25">
         {`${userName}님만의`}
