@@ -1,5 +1,27 @@
 import type { DiaryDetailResponse, DiaryResponse } from "@/types/log/diary";
 
+// 공통 Mock 이미지 배열
+const mockImages = [
+  "/log/log1.svg",
+  "/log/log2.svg",
+  "/log/log3.svg",
+  "/log/log4.svg",
+  "/log/log5.svg",
+  "/log/log6.svg",
+  "/log/log7.svg",
+  "/log/log8.svg",
+  "/log/log9.svg",
+  "/log/log10.svg",
+  "/log/log11.svg",
+  "/log/log12.svg",
+  "/log/log13.svg",
+  "/log/log14.svg",
+  "/log/log15.svg",
+  "/log/log16.svg",
+  "/log/log17.svg",
+  "/log/log18.svg",
+];
+
 // Mock 데이터 캐시
 const mockDataCache = new Map<string, DiaryResponse>();
 const mockDetailCache = new Map<number, DiaryDetailResponse>();
@@ -14,27 +36,6 @@ export function createMockDiaryResponse(
   if (mockDataCache.has(cacheKey)) {
     return mockDataCache.get(cacheKey)!;
   }
-
-  const mockImages = [
-    "/log/log1.svg",
-    "/log/log2.svg",
-    "/log/log3.svg",
-    "/log/log4.svg",
-    "/log/log5.svg",
-    "/log/log6.svg",
-    "/log/log7.svg",
-    "/log/log8.svg",
-    "/log/log9.svg",
-    "/log/log10.svg",
-    "/log/log11.svg",
-    "/log/log12.svg",
-    "/log/log13.svg",
-    "/log/log14.svg",
-    "/log/log15.svg",
-    "/log/log16.svg",
-    "/log/log17.svg",
-    "/log/log18.svg",
-  ];
 
   const data = mockImages.map((imageUrl, index) => ({
     id: index + 1,
@@ -71,27 +72,6 @@ export function createMockDiaryDetailResponse(
   if (mockDetailCache.has(diaryId)) {
     return mockDetailCache.get(diaryId)!;
   }
-
-  const mockImages = [
-    "/log/log1.svg",
-    "/log/log2.svg",
-    "/log/log3.svg",
-    "/log/log4.svg",
-    "/log/log5.svg",
-    "/log/log6.svg",
-    "/log/log7.svg",
-    "/log/log8.svg",
-    "/log/log9.svg",
-    "/log/log10.svg",
-    "/log/log11.svg",
-    "/log/log12.svg",
-    "/log/log13.svg",
-    "/log/log14.svg",
-    "/log/log15.svg",
-    "/log/log16.svg",
-    "/log/log17.svg",
-    "/log/log18.svg",
-  ];
 
   const imageIndex = (diaryId - 1) % mockImages.length;
   const now = new Date();

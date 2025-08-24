@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import LogCalender from "@/components/log/LogCalender";
+import LogCalendar from "@/components/log/LogCalendar";
 import MyDiary from "@/components/log/MyDiary";
 
 import { createMockMonthlyCalendar } from "@/mocks/log/monthlyCalendar";
@@ -67,7 +67,7 @@ const LogPage = () => {
 
       {/* 콘텐츠 */}
       {activeTab === "potato" ? (
-        <LogCalender
+        <LogCalendar
           data={calendarData}
           onMonthChange={(y, m) =>
             setCalendarData(createMockMonthlyCalendar(y, m))
