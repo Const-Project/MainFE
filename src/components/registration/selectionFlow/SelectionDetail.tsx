@@ -74,7 +74,7 @@ const SelectionDetail = () => {
               className="flex items-center justify-center"
             >
               <div
-                className="w-64 max-w-75  h-75.75 border-2 border-[var(--color-primary)] rounded-[12px] flex items-center justify-center"
+                className="w-auto h-75.75  flex items-center justify-center"
                 style={{
                   backgroundColor:
                     pickSelectionAvatar?.activeIndex === index
@@ -82,7 +82,7 @@ const SelectionDetail = () => {
                       : "white",
                 }}
               >
-                <div className="w-50 h-62.5 bg-gray-100 flex items-center justify-center rounded">
+                <div className="w-full h-full px-12 py-5 border-2 border-[var(--color-primary)] rounded-[12px] bg-gray-100 flex items-center justify-center ">
                   <span className="text-xl text-gray-400">
                     이미지 {index + 1}
                   </span>
