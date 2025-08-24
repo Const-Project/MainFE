@@ -19,4 +19,5 @@ export { default as Search } from "./search2.svg?react";
 export { default as Send } from "./send.svg?react";
 export { default as ActiveUser } from "./user1.svg?react";
 export { default as User } from "./user2.svg?react";
+export { default as UserPlus } from "./userPlus.svg?react";
 export { default as Xmark } from "./Xmack.svg?react";
