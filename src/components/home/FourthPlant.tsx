@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import Background from "@/assets/images/background/background4.png";
-// import BottomSheet from "@/components/bottom-sheet/BottomSheet";
 import Map from "@/components/common/Map";
 import Avatar from "@/components/home/Avatar";
 import Lock from "@/components/lock/Lock";
