@@ -51,6 +51,9 @@ const BottomSheet: React.FC = () => {
 
   const minTranslate = maxSnap - snapPoints[0]; // peek 위치의 translateY
 
+  const MAX_OPEN_HEIGHT = snapPoints[1]; // ← 원하는 최대 열림 높이
+  const TOP_TRANSLATE = Math.max(0, maxSnap - MAX_OPEN_HEIGHT);
+
   // 4) 첫 페인트 전에 바로 위치 고정(애니메이션 없이)
   useLayoutEffect(() => {
     const el = sheetRef.current;
@@ -85,7 +88,8 @@ const BottomSheet: React.FC = () => {
   const snapTo = (idx: number) => {
     setSnapIdx(idx); // ← 현재 스냅 기록
     const h = snapPoints[idx];
-    const ty = maxSnap - h;
+    let ty = maxSnap - h;
+    ty = Math.max(ty, TOP_TRANSLATE); // ⬅️ 한계 보정
     applyStyle(ty, true);
     setTimeout(() => setY(ty), 300);
     liveTranslate.current = ty;
@@ -126,13 +130,15 @@ const BottomSheet: React.FC = () => {
     const rawNext = startTranslate.current + dy;
     const next = clampWithRubber(rawNext);
 
+    const capped = Math.max(next, TOP_TRANSLATE);
+
     // 속도(px/ms)
     const dt = Math.max(1, now - lastMoveT.current);
     velocity.current = (e.clientY - lastMoveY.current) / dt;
     lastMoveT.current = now;
     lastMoveY.current = e.clientY;
 
-    liveTranslate.current = next;
+    liveTranslate.current = capped;
 
     if (rafId.current == null) {
       rafId.current = requestAnimationFrame(() => {
