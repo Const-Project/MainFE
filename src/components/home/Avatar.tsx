@@ -6,6 +6,7 @@ import Modal from "./Modal";
 
 const Avatar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isChecked, setIsChecked] = useState<number>(0);
   return (
     <div className="flex-1 flex items-center justify-center relative w-full">
       {/* Plant + Bird 묶음 */}
@@ -14,24 +15,45 @@ const Avatar = () => {
         <img
           src={Bird}
           alt="bird"
-          className="absolute top-48 right-25 w-24 h-auto"
+          className="absolute bottom-0 right-20 w-24 h-auto"
         />
-        <div className="flex gap-4 flex-col absolute top-20 left-8 bg-white px-6 py-5 text-body-sb text-black rounded-lg">
-          오늘도 만나서 정말 반가워요!
-          <br />
-          괜찮으시다면 오늘 하루는 어떠셨는지
-          <br />
-          살짝 알려주시겠어요?
-          <button
-            className="bg-primary text-white px-4 py-2 rounded-lg z-30 cursor-pointer"
-            onClick={() => setIsOpen(true)}
-          >
-            마음 건강 체크
-          </button>
-          {isOpen && <Modal setIsOpen={setIsOpen} />}
-          <div className="w-0 h-10 border-l-20 border-l-transparent border-r-20 border-r-transparent border-t-20 border-t-white absolute top-43 left-30 -translate-x-1/2 " />
-        </div>
-
+        {isChecked === 0 && (
+          <div className="flex gap-4 flex-col absolute top-20 left-8 bg-white px-6 py-5 text-body-sb text-black rounded-lg">
+            오늘도 만나서 정말 반가워요!
+            <br />
+            괜찮으시다면 오늘 하루는 어떠셨는지
+            <br />
+            살짝 알려주시겠어요?
+            <button
+              className="bg-primary text-white px-4 py-2 rounded-lg z-30 cursor-pointer"
+              onClick={() => setIsOpen(true)}
+            >
+              마음 건강 체크
+            </button>
+            {isOpen && (
+              <Modal setIsOpen={setIsOpen} setIsChecked={setIsChecked} />
+            )}
+            <div className="w-0 h-10 border-l-20 border-l-transparent border-r-20 border-r-transparent border-t-20 border-t-white absolute top-43 left-30 -translate-x-1/2 " />
+          </div>
+        )}
+        {isChecked === 1 && (
+          <div className="absolute top-50 left-8 flex gap-4 flex-col bg-white px-6 py-5 text-body-sb text-black rounded-lg">
+            좋은 기분으로 오늘 하루 계속 이어가요!
+            <div className="w-0 h-10 border-l-20 border-l-transparent border-r-20 border-r-transparent border-t-20 border-t-white absolute top-15 left-30 -translate-x-1/2 " />
+          </div>
+        )}
+        {isChecked === 2 && (
+          <div className="absolute top-50 left-8 flex gap-4 flex-col bg-white px-6 py-5 text-body-sb text-black rounded-lg">
+            제가 푸른 활력을 선물해 드릴게요.
+            <div className="w-0 h-10 border-l-20 border-l-transparent border-r-20 border-r-transparent border-t-20 border-t-white absolute top-15 left-30 -translate-x-1/2 " />
+          </div>
+        )}
+        {isChecked === 3 && (
+          <div className="absolute top-50 left-8 flex gap-4 flex-col bg-white px-6 py-5 text-body-sb text-black rounded-lg">
+            기운을 내볼까요? 제가 곁에 있을게요.
+            <div className="w-0 h-10 border-l-20 border-l-transparent border-r-20 border-r-transparent border-t-20 border-t-white absolute top-15 left-30 -translate-x-1/2 " />
+          </div>
+        )}
         <img
           src={Char2}
           alt="char2"
