@@ -2,6 +2,7 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 
 import HomePage from "@/pages/home/Homepage";
+import LogDetailPage from "@/pages/log/LogDetailPage";
 import LogPage from "@/pages/log/LogPage";
 import OptionPage from "@/pages/option/OptionPage";
 import SearchPage from "@/pages/search/SearchPage";
@@ -36,6 +37,8 @@ const App = () => {
         <Route path="/onboarding" element={<OnBoardingPage />} />
         <Route path="/design" element={<Design />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/log/:id" element={<LogDetailPage />} />
+
       </Route>
     </Routes>
   );

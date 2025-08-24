@@ -16,9 +16,9 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/api": {
-        target: "http://juhoec2ddns.ddns.net:8080",
+        target: 'http://juhoec2ddns.ddns.net:8080',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, ""),
+        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },
