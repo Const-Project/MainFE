@@ -1,12 +1,24 @@
 import Plant from "@/assets/images/plant.png";
 import Bird from "@/assets/images/bird.png";
 import Char2 from "@/assets/images/char2.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Modal from "./Modal";
 
 const Avatar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isChecked, setIsChecked] = useState<number>(0);
+
+  useEffect(() => {
+    if (isChecked === 1 || isChecked === 2 || isChecked === 3) {
+      const timer = setTimeout(() => {
+        setIsChecked(4);
+      }, 3000); // 3초
+
+      // cleanup: 상태가 바뀌거나 컴포넌트 언마운트 시 타이머 해제
+      return () => clearTimeout(timer);
+    }
+  }, [isChecked]);
+
   return (
     <div className="flex-1 flex items-center justify-center relative w-full">
       {/* Plant + Bird 묶음 */}
