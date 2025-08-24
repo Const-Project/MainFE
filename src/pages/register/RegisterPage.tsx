@@ -23,7 +23,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="h-full flex flex-col items-center py-8 px-5 w-ful gap-6">
+    <div className="h-full flex flex-col items-center py-8 px-5 gap-6">
       <header>회원가입 헤더 수정 예정</header>
       <div className="w-full flex flex-col flex-1 gap-6">
         <div className="text-heading1 font-bold text-left w-full">
@@ -39,7 +39,7 @@ const RegisterPage = () => {
             ref={inputRef}
             type="text"
             placeholder="닉네임을 입력해주세요"
-            className="text-body-sb text-black placeholder:text-gray-400 active:outline-none focus:outline-none"
+            className="text-body-sb text-black placeholder:text-gray-400 active:outline-none focus:outline-none w-full"
             value={nickname}
             onChange={e => setNickname(e.target.value)}
             maxLength={10}
@@ -47,7 +47,9 @@ const RegisterPage = () => {
           {nickname.length > 0 ? (
             <Edit className="w-6 h-6" />
           ) : (
-            <p className="text-body-sb text-gray-600">최대 10자</p>
+            <p className="text-body-sb text-gray-600 whitespace-nowrap">
+              최대 10자
+            </p>
           )}
         </div>
       </div>

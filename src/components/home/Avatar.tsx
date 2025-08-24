@@ -12,7 +12,7 @@ const Avatar = () => {
     if (isChecked === 1 || isChecked === 2 || isChecked === 3) {
       const timer = setTimeout(() => {
         setIsChecked(4);
-      }, 3000); // 3초
+      }, 2000); // 3초
 
       // cleanup: 상태가 바뀌거나 컴포넌트 언마운트 시 타이머 해제
       return () => clearTimeout(timer);

@@ -36,8 +36,7 @@ export default function OnBoardingPage() {
         pagination={{ clickable: false }} // 동그라미 활성화 + 클릭 이동 가능
         loop={true} // 마지막 슬라이드에서 종료되는 것 방지
         onSlideChange={swiper => {
-          // 현재 슬라이드 인덱스가 마지막인지 확인
-          setIsLastSlide(swiper.activeIndex === swiper.slides.length - 1);
+          setIsLastSlide(swiper.isEnd);
         }}
         className="onboarding-swiper w-full flex-1" // 아래 여백을 조금 주기 (점 안 잘리게)
       >

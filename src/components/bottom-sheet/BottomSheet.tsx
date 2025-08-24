@@ -180,7 +180,7 @@ const BottomSheet: React.FC = () => {
       {/* ✅ 풀 오픈일 때만 백드롭 렌더 */}
       {snapIdx > 0 && (
         <button
-          className="fixed inset-0 bg-black/0"
+          className="fixed inset-0 pointer-events-auto"
           onClick={() => snapTo(0)}
         />
       )}
