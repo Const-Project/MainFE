@@ -2,6 +2,9 @@ import { useState } from "react";
 
 import Background from "@/assets/images/background/background1.png";
 
+import Map from "@/components/common/Map";
+import Avatar from "@/components/home/Avatar";
+
 import Lock from "@/components/lock/Lock";
 import UnLock from "@/components/lock/UnLock";
 import BottomSheet from "@/components/bottom-sheet/BottomSheet";
@@ -36,7 +39,19 @@ const FirstPlant = () => {
           </button>
         </>
       )}
-      {isUnlocked === "clear" && <BottomSheet />}
+      {isUnlocked === "clear" && (
+        <>
+          <div className="w-full h-full flex flex-col relative items-center justify-center">
+            <header className="relative flex items-center justify-between w-full text-heading1 text-white p-4">
+              <Map isNumber={3} />
+              몽순몽순
+              <div className="justify-self-end w-12 h-12" />
+            </header>
+            <Avatar />
+          </div>
+          <BottomSheet />
+        </>
+      )}
     </div>
   );
 };

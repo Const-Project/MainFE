@@ -5,6 +5,8 @@ import Background from "@/assets/images/background/background2.png";
 import Lock from "@/components/lock/Lock";
 import UnLock from "@/components/lock/UnLock";
 import BottomSheet from "@/components/bottom-sheet/BottomSheet";
+import Map from "@/components/common/Map";
+import Avatar from "@/components/home/Avatar";
 
 type BottomSheetType = "lock" | "unlock" | "clear";
 
@@ -36,7 +38,19 @@ const SecondPlant = () => {
           </button>
         </>
       )}
-      {isUnlocked === "clear" && <BottomSheet />}
+      {isUnlocked === "clear" && (
+        <>
+          <div className="w-full h-full flex flex-col relative items-center justify-center">
+            <header className="relative flex items-center justify-between w-full text-heading1 text-white p-4">
+              <Map isNumber={4} />
+              몽순몽순
+              <div className="justify-self-end w-12 h-12" />
+            </header>
+            <Avatar />
+          </div>
+          <BottomSheet />
+        </>
+      )}
     </div>
   );
 };

@@ -79,11 +79,14 @@ const BottomSheet: React.FC = () => {
     return raw;
   };
 
+  const [snapIdx, setSnapIdx] = useState(0); // 0=peek(90), 1=full(560)
+
+  // snapTo 수정
   const snapTo = (idx: number) => {
+    setSnapIdx(idx); // ← 현재 스냅 기록
     const h = snapPoints[idx];
-    const ty = maxSnap - h; // 목표 translateY
+    const ty = maxSnap - h;
     applyStyle(ty, true);
-    // 애니 끝나면 상태 동기화
     setTimeout(() => setY(ty), 300);
     liveTranslate.current = ty;
   };
@@ -163,20 +166,21 @@ const BottomSheet: React.FC = () => {
 
     snapTo(bestIdx);
   };
-
   return (
     <div
-      className="fixed inset-0 z-[9999] overflow-hidden w-full"
+      className="fixed inset-0 z-50 overflow-hidden w-full pointer-events-none"
       style={{ touchAction: "none" }}
     >
-      {/* 백드롭: 클릭 시 peek으로 내려가기 (완전 닫힘 X) */}
-      <div
-        className="fixed inset-0 bg-transparent z-[9999] "
-        onClick={() => snapTo(0)}
-      />
+      {/* ✅ 풀 오픈일 때만 백드롭 렌더 */}
+      {snapIdx > 0 && (
+        <button
+          className="fixed inset-0 bg-black/0"
+          onClick={() => snapTo(0)}
+        />
+      )}
 
       {/* 패널 */}
-      <div className="fixed inset-x-0 bottom-0 flex justify-center z-[9999] ">
+      <div className="fixed inset-x-0 bottom-0 flex justify-center z-10 ">
         <div
           ref={sheetRef}
           className="pointer-events-auto w-full rounded-t-2xl border-t border-gray-200 bg-white p-2"

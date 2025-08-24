@@ -1,6 +1,6 @@
 /* styles/home/swiper.css */
 .home-swiper .swiper-pagination {
-  bottom: 120px !important;
+  bottom: 110px !important;
   z-index: 10 !important;
 }
 .home-swiper .swiper-pagination-bullet {
