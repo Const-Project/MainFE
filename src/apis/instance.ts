@@ -98,7 +98,7 @@ api.interceptors.response.use(
       original.headers = original.headers ?? {};
       original.headers.Authorization = `Bearer ${newAccessToken}`;
       return api(original);
-    } catch (e) {
+    } catch (e: unknown) {
       flushQueue(null);
       useTokenStore.getState().clearTokens();
       return Promise.reject(e);
