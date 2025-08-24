@@ -30,16 +30,42 @@ const SelectionDetail = () => {
 
   return (
     <div className="flex flex-col h-full items-center justify-center">
-      <div className="w-full px-3">
+      <div className="w-full ">
         <Swiper
           modules={[Pagination]}
-          slidesPerView={1.4}
+          slidesPerView={1.5}
           centeredSlides={true}
-          spaceBetween={9}
+          spaceBetween={16}
           pagination={{ el: ".custom-pagination", clickable: true }}
           className="w-full h-75.75"
           initialSlide={pickSelectionAvatar?.activeIndex}
           onSlideChange={swiper => handleSlideClick(swiper.activeIndex)}
+          // 여기 기기별로 정리해야 하는건가요 ..? ㅠ_ㅠ
+          breakpoints={{
+            320: {
+              slidesPerView: 1.1,
+              spaceBetween: 12,
+            },
+            // Samsung Galaxy S8+
+            360: {
+              slidesPerView: 1.4,
+              spaceBetween: 13,
+            },
+            // iphone 12 pro
+            390: {
+              slidesPerView: 1.5,
+              spaceBetween: 13,
+            },
+            // iphone XR
+            414: {
+              slidesPerView: 1.6,
+              spaceBetween: 15,
+            },
+            1024: {
+              slidesPerView: 1.4,
+              spaceBetween: 16,
+            },
+          }}
         >
           {[...Array(10)].map((_, index) => (
             <SwiperSlide

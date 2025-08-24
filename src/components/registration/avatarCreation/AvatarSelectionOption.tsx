@@ -12,13 +12,16 @@ import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
 const AvatarSelectionOption: React.FC = () => {
   const navigate = useNavigate();
-  const { pickSelectionAvatar, pickAvatar, pickSelection } =
+  const { pickSelectionAvatar, pickSelection, actions } =
     useAvatarCreationStore();
 
   const handleContainerClick = () => {
-    pickAvatar.description = pickSelectionAvatar.description;
-    pickAvatar.img = pickSelectionAvatar.img;
-    pickAvatar.activeIndex = pickSelectionAvatar.activeIndex;
+    if (!pickSelection) return;
+    actions.setPickAvatar({
+      description: pickSelectionAvatar.description,
+      img: pickSelectionAvatar.img,
+      activeIndex: pickSelectionAvatar.activeIndex,
+    });
   };
 
   const handleButtonClick = (e: React.MouseEvent) => {

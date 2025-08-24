@@ -11,7 +11,7 @@ import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
 const AvatarCreationOption: React.FC = () => {
   const navigate = useNavigate();
-  const { pickCreationAvatar, pickAvatar, pickCreation } =
+  const { pickCreationAvatar, pickAvatar, pickCreation, actions } =
     useAvatarCreationStore();
   console.log(
     "pickCreationAvatar",
@@ -23,9 +23,12 @@ const AvatarCreationOption: React.FC = () => {
   );
 
   const handleContainerClick = () => {
-    pickAvatar.description = pickCreationAvatar.description;
-    pickAvatar.img = pickCreationAvatar.img;
-    pickAvatar.activeIndex = pickCreationAvatar.activeIndex;
+    if (!pickCreation) return;
+    actions.setPickAvatar({
+      description: pickCreationAvatar.description,
+      img: pickCreationAvatar.img,
+      activeIndex: pickCreationAvatar.activeIndex,
+    });
   };
 
   const handleButtonClick = (e: React.MouseEvent) => {
@@ -35,7 +38,7 @@ const AvatarCreationOption: React.FC = () => {
 
   return (
     <div
-      className={`flex items-center  h-full border-b-1  border-[var(--color-gray-200)] ${
+      className={`flex items-center h-full border-b border-gray-200 ${
         pickCreation
           ? "bg-primary-varient border-none cuusor-pointer"
           : "border-1 border-gray-200 pointer-none"

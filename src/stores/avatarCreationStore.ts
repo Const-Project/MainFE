@@ -35,6 +35,7 @@ interface AvatarCreationState {
     completeSelection: () => void;
     setPickSelectionAvatar: (avatar: Avatar) => void;
     setPickCreationAvatar: (avatar: Avatar) => void;
+    setPickAvatar: (avatar: Avatar) => void;
     setAvatarName: (avatar: string) => void;
   };
 }
@@ -73,6 +74,8 @@ export const useAvatarCreationStore = create<AvatarCreationState>(set => ({
 
     setPickCreationAvatar: (avatar: Avatar) =>
       set({ pickCreationAvatar: avatar }),
+
+    setPickAvatar: (avatar: Avatar) => set({ pickAvatar: avatar }),
 
     setAvatarName: (avatar: string) => set({ avatarName: avatar }),
   },
