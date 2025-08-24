@@ -27,7 +27,7 @@ function toISODateString(date: Date): string {
   return `${y}-${m}-${d}`;
 }
 
-export default function LogCalender({
+export default function LogCalendar({
   data,
   onSelectDate,
   onMonthChange,
