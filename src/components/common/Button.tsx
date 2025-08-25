@@ -37,7 +37,7 @@ const Button: React.FC<ButtonProps> = ({
   };
 
   const variantStyles = {
-    default: "bg-white text--primar border-[1px] border-primary",
+    default: "bg-white text-primary border-[1px] border-primary",
     primary: "bg-primary text-white",
     gray200: "bg-gray-200 text-gray-400",
     gray600: "bg-gray-600 text-gray-400",
