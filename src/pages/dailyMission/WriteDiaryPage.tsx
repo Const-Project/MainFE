@@ -7,7 +7,7 @@ import DiaryFooter from "@/components/dailyMission/writeDiary/DiaryFooter";
 const WriteDiaryPage = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [image, setImage] = useState<File | null>(null);
+  const [imageUrl, setImageUrl] = useState<File | null>(null);
   const [isPublic, setIsPublic] = useState(false);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,7 +20,7 @@ const WriteDiaryPage = () => {
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setImage(e.target.files[0]);
+      setImageUrl(e.target.files[0]);
     }
   };
 
@@ -29,7 +29,7 @@ const WriteDiaryPage = () => {
   };
 
   const handleSubmit = () => {
-    console.log({ title, content, image, isPublic });
+    console.log({ title, content, image: imageUrl, isPublic });
   };
 
   return (
@@ -41,7 +41,7 @@ const WriteDiaryPage = () => {
           content={content}
           onTitleChange={handleTitleChange}
           onContentChange={handleContentChange}
-          image={image}
+          image={imageUrl}
           handleImageChange={handleImageChange}
         />
       </main>

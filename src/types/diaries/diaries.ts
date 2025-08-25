@@ -14,7 +14,7 @@ export interface postDiaryResponse {
     title: string;
     content: string;
     imageUrl: string;
-    likeCount: number; // 이건 필요 없을 듯 ㅋ_ㅋ
+    likeCount: number;
     createdAt: string;
     updatedAt: string;
     public: boolean;
