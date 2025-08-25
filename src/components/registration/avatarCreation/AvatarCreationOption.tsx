@@ -2,7 +2,7 @@
  * @file AvatarCreationOption.tsx
  * @description 아바타 생성 페이지의 옵션 컴포넌트
  */
-import React from "react";
+import React, { useRef } from "react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -13,6 +13,7 @@ const AvatarCreationOption: React.FC = () => {
   const navigate = useNavigate();
   const { pickCreationAvatar, pickCreation, activeOption, actions } =
     useAvatarCreationStore();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleContainerClick = () => {
     if (!pickCreation) return;
@@ -26,7 +27,19 @@ const AvatarCreationOption: React.FC = () => {
 
   const handleButtonClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    navigate("/registration/creation-detail");
+    fileInputRef.current?.click();
+  };
+
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      // const imageDataUrl = reader.result as string;
+      navigate("/registration/creation-detail");
+    };
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -34,6 +47,13 @@ const AvatarCreationOption: React.FC = () => {
       className={`flex items-center h-full border-b ${pickCreation ? (activeOption === "creation" ? "bg-primary-varient border-none cursor-pointer" : "border-1 border-gray-200 cursor-pointer") : "border-1 border-gray-200 pointer-none"} `}
       onClick={handleContainerClick}
     >
+      <input
+        type="file"
+        accept="image/*"
+        ref={fileInputRef}
+        onChange={handleFileSelect}
+        style={{ display: "none" }}
+      />
       <div className="flex flex-col justify-between pl-5 h-full">
         <div className="flex flex-col gap-3 w-auto text-left pt-8">
           <h2 className="text-heading2">나만의 아바타</h2>
