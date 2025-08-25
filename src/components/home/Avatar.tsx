@@ -5,10 +5,13 @@ import { useState, useEffect } from "react";
 import Modal from "./Modal";
 import BirdModal from "./BirdModal";
 
-const Avatar = () => {
+import Watering from "@/assets/images/background/watering.png";
+
+const Avatar = ({ isWater }: { isWater: boolean }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [isChecked, setIsChecked] = useState<number>(0);
   const [isOpenBird, setIsOpenBird] = useState(false);
+
   useEffect(() => {
     if (isChecked === 1 || isChecked === 2 || isChecked === 3) {
       const timer = setTimeout(() => {
@@ -21,10 +24,20 @@ const Avatar = () => {
   }, [isChecked]);
 
   return (
-    <div className="flex-1 flex items-center justify-center relative w-full">
+    <div className="flex-1 flex items-center justify-center relative w-full max-w-md mx-auto">
       {/* Plant + Bird 묶음 */}
       <div className="relative pt-14 w-full flex flex-col items-center justify-center">
         <img src={Plant} alt="plant" className="w-64 h-auto" />
+        <img
+          src={Watering}
+          alt="watering"
+          className="w-30 h-auto absolute top-30 left-10"
+          style={{
+            opacity: isWater ? 1 : 0,
+            transform: isWater ? "translateY(-10px)" : "translateY(0)",
+            transition: "opacity 0.3s ease-in-out, transform 0.3s ease-in-out",
+          }}
+        />
         <img
           src={Bird}
           alt="bird"
