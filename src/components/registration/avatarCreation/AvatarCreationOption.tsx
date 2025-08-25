@@ -20,7 +20,7 @@ const AvatarCreationOption: React.FC = () => {
     actions.setPickAvatar({
       description: pickCreationAvatar.description,
       img: pickCreationAvatar.img,
-      activeIndex: pickCreationAvatar.activeIndex,
+      id: pickCreationAvatar.id,
     });
     actions.setActiveOption("creation");
   };
@@ -44,7 +44,7 @@ const AvatarCreationOption: React.FC = () => {
 
   return (
     <div
-      className={`flex items-center h-full border-b ${pickCreation ? (activeOption === "creation" ? "bg-primary-varient border-none cursor-pointer" : "border-1 border-gray-200 cursor-pointer") : "border-1 border-gray-200 pointer-none"} `}
+      className={`flex items-center h-full ${pickCreation ? (activeOption === "creation" ? "bg-primary-varient border-none cursor-pointer" : " cursor-pointer") : "pointer-none"} `}
       onClick={handleContainerClick}
     >
       <input
@@ -65,7 +65,7 @@ const AvatarCreationOption: React.FC = () => {
             <span>만들 수 있어요</span>
           </p>
         </div>
-        <div className="pb-10.25 font-semibold">
+        <div className="pb-10.25 text-body1">
           <Button
             variant={pickCreation ? "gray200" : "primary"}
             size="xsCreation"

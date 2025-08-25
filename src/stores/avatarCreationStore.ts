@@ -15,9 +15,9 @@ import { create } from "zustand";
  * @property {number} activeIndex - 현재 활성화된 Swiper 슬라이드의 인덱스
  */
 interface Avatar {
+  id: number | null;
   description: string | null;
   img: string | null;
-  activeIndex: number;
 }
 
 /**
@@ -46,19 +46,19 @@ const initialState: Omit<AvatarCreationState, "actions"> = {
   pickCreation: false,
   pickSelection: false,
   pickSelectionAvatar: {
+    id: null,
     description: null,
     img: null,
-    activeIndex: 0,
   },
   pickCreationAvatar: {
+    id: null,
     description: null,
     img: null,
-    activeIndex: 0,
   },
   pickAvatar: {
+    id: null,
     description: null,
     img: null,
-    activeIndex: 0,
   },
   avatarName: "",
   activeOption: "none",

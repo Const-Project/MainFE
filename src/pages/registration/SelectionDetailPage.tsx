@@ -1,39 +1,51 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/common/Button";
 import RegistrationHeader from "@/components/registration/common/RegistrationHeader";
 import SelectionDetail from "@/components/registration/selectionFlow/SelectionDetail";
+import { useGetSelectAvatar } from "@/hooks/avatars/useGetSelectAvatarApi";
 import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
+import { AvatarType } from "@/types/avatars/masters";
 
 const SelectionDetailPage = () => {
   const navigate = useNavigate();
   const { actions } = useAvatarCreationStore();
-  const [activeIndex, setActiveIndex] = useState(0);
+  const { data, isLoading, isError } = useGetSelectAvatar();
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
-  const descriptions = [
-    "산세베리아",
-    "스킨답서스",
-    "몬스테라",
-    "고무나무",
-    "행운목",
-    "다육",
-    "난",
-    "파키라",
-    "군자란",
-    "백량금",
-  ];
+  useEffect(() => {
+    if (data?.result && data.result.length > 0 && selectedId === null) {
+      setSelectedId(data.result[0].id);
+    }
+  }, [data, selectedId]);
 
   const handleNextClick = () => {
-    actions.setPickSelectionAvatar({
-      description: descriptions[activeIndex],
-      img: `image_${activeIndex + 1}`,
-      activeIndex: activeIndex,
-    });
-    actions.completeSelection();
-    navigate("/registration/avatar");
+    if (selectedId === null || !data?.result) return;
+
+    const selectedAvatar = data.result.find(
+      (avatar: AvatarType) => avatar.id === selectedId
+    );
+
+    if (selectedAvatar) {
+      actions.setPickSelectionAvatar({
+        id: selectedAvatar.id,
+        description: selectedAvatar.description,
+        img: selectedAvatar.defaultImageUrl,
+      });
+      actions.completeSelection();
+      navigate("/registration/avatar");
+    }
   };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error fetching avatars.</div>;
+  }
 
   return (
     <div className="flex flex-col h-screen md:h-[852px]">
@@ -42,11 +54,13 @@ const SelectionDetailPage = () => {
         원하는 아바타를 선택해주세요.
       </div>
       <main className="flex-1 ">
-        <SelectionDetail
-          descriptions={descriptions}
-          activeIndex={activeIndex}
-          onActiveIndexChange={setActiveIndex}
-        />
+        {data?.result && selectedId !== null && (
+          <SelectionDetail
+            avatars={data.result}
+            selectedId={selectedId}
+            onSelect={setSelectedId}
+          />
+        )}
       </main>
       <footer className="flex items-center justify-center pb-8.75 px-5 text-heading2">
         <Button variant="primary" size="lg" onClick={handleNextClick}>

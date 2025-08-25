@@ -1,22 +1,31 @@
+import type { Swiper as SwiperType } from "swiper";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+
+import { AvatarType } from "@/types/avatars/masters";
 
 import "swiper/css";
 import "swiper/css/pagination";
 
 interface SelectionDetailProps {
-  descriptions: string[];
-  activeIndex: number;
-  onActiveIndexChange: (index: number) => void;
+  avatars: AvatarType[];
+  selectedId: number | null;
+  onSelect: (id: number) => void;
 }
 
 const SelectionDetail = ({
-  descriptions,
-  activeIndex,
-  onActiveIndexChange,
+  avatars,
+  selectedId,
+  onSelect,
 }: SelectionDetailProps) => {
-  const handleSlideClick = (index: number) => {
-    onActiveIndexChange(index);
+  const selectedIndex = avatars.findIndex(avatar => avatar.id === selectedId);
+  const selectedAvatar = selectedIndex > -1 ? avatars[selectedIndex] : null;
+
+  const handleSlideChange = (swiper: SwiperType) => {
+    const newId = avatars[swiper.activeIndex]?.id;
+    if (newId !== undefined) {
+      onSelect(newId);
+    }
   };
 
   return (
@@ -29,28 +38,30 @@ const SelectionDetail = ({
           spaceBetween={16}
           pagination={{ el: ".custom-pagination", clickable: true }}
           className="w-full h-75.75"
-          initialSlide={activeIndex}
-          onSlideChange={swiper => handleSlideClick(swiper.activeIndex)}
+          initialSlide={selectedIndex > -1 ? selectedIndex : 0}
+          onSlideChange={handleSlideChange}
         >
-          {[...Array(10)].map((_, index) => (
+          {avatars.map(avatar => (
             <SwiperSlide
-              key={index}
-              onClick={() => handleSlideClick(index)}
+              key={avatar.id}
+              onClick={() => onSelect(avatar.id)}
               className="flex items-center justify-center"
             >
               <div
                 className="w-full h-75.75 flex items-center justify-center rounded-[12px] border-2 border-primary"
                 style={{
                   backgroundColor:
-                    activeIndex === index
+                    selectedId === avatar.id
                       ? "var(--color-primary-varient)"
                       : "white",
                 }}
               >
                 <div className="w-full h-full flex items-center justify-center">
-                  <span className="text-xl text-gray-400">
-                    이미지 {index + 1}
-                  </span>
+                  <img
+                    src={avatar.defaultImageUrl}
+                    alt={avatar.description}
+                    className="w-full h-full object-cover rounded-[12px]"
+                  />
                 </div>
               </div>
             </SwiperSlide>
@@ -59,7 +70,7 @@ const SelectionDetail = ({
       </div>
 
       <div className="mt-6 text-heading2">
-        <p>{descriptions[activeIndex]}</p>
+        <p>{selectedAvatar?.description || " "}</p>
       </div>
 
       <div className="custom-pagination mt-6 flex justify-center gap-3"></div>

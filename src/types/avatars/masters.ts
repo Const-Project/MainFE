@@ -1,6 +1,5 @@
 export interface AvatarType {
   id: number;
-  typeName: string;
   defaultImageUrl: string;
   description: string;
 }
