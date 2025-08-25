@@ -14,7 +14,7 @@ const CreationDetailPage = () => {
 
   const handleNextClick = () => {
     actions.completeCreation();
-    navigate("/registration/plant-nickname");
+    navigate("/registration/avatar");
   };
 
   return (

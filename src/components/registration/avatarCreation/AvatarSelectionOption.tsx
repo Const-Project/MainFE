@@ -12,7 +12,7 @@ import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
 const AvatarSelectionOption: React.FC = () => {
   const navigate = useNavigate();
-  const { pickSelectionAvatar, pickSelection, actions } =
+  const { pickSelectionAvatar, pickSelection, activeOption, actions } =
     useAvatarCreationStore();
 
   const handleContainerClick = () => {
@@ -22,6 +22,7 @@ const AvatarSelectionOption: React.FC = () => {
       img: pickSelectionAvatar.img,
       activeIndex: pickSelectionAvatar.activeIndex,
     });
+    actions.setActiveOption("selection");
   };
 
   const handleButtonClick = (e: React.MouseEvent) => {
@@ -31,12 +32,8 @@ const AvatarSelectionOption: React.FC = () => {
 
   return (
     <div
-      className={`flex items-center justify-between h-full border-b-1  border-gray-200 ${
-        pickSelection
-          ? "bg-primary-varient border-none cuusor-pointer"
-          : "border-1 border-gray-200 pointer-none"
-      } `}
-      onClick={handleContainerClick}
+      className={`flex items-center justify-between h-full border-b-1  ${pickSelection ? (activeOption === "selection" ? "bg-primary-varient border-none cursor-pointer" : "border-1 border-gray-200 cursor-pointer") : "border-1 border-gray-200 pointer-none"} `}
+      onClick={pickSelection ? handleContainerClick : undefined}
     >
       <div className="flex flex-col justify-between pl-5 h-full">
         <div className="flex flex-col gap-3 w-38.75 text-left pt-8">

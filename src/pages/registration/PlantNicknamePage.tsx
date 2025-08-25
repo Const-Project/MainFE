@@ -21,9 +21,8 @@ const PlantNicknamePage = () => {
   };
 
   const handleNext = () => {
-    navigate("/registration/avatar");
+    navigate("/");
     actions.setAvatarName(avatarNameTemp);
-    actions.completeSelection();
   };
 
   const isInvalid = avatarNameTemp.length > 6;

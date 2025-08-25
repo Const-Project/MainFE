@@ -11,16 +11,8 @@ import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
 const AvatarCreationOption: React.FC = () => {
   const navigate = useNavigate();
-  const { pickCreationAvatar, pickAvatar, pickCreation, actions } =
+  const { pickCreationAvatar, pickCreation, activeOption, actions } =
     useAvatarCreationStore();
-  console.log(
-    "pickCreationAvatar",
-    pickCreation,
-    "pickAvatar",
-    pickAvatar,
-    "pickCreation",
-    pickCreationAvatar
-  );
 
   const handleContainerClick = () => {
     if (!pickCreation) return;
@@ -29,6 +21,7 @@ const AvatarCreationOption: React.FC = () => {
       img: pickCreationAvatar.img,
       activeIndex: pickCreationAvatar.activeIndex,
     });
+    actions.setActiveOption("creation");
   };
 
   const handleButtonClick = (e: React.MouseEvent) => {
@@ -38,11 +31,7 @@ const AvatarCreationOption: React.FC = () => {
 
   return (
     <div
-      className={`flex items-center h-full border-b border-gray-200 ${
-        pickCreation
-          ? "bg-primary-varient border-none cuusor-pointer"
-          : "border-1 border-gray-200 pointer-none"
-      } `}
+      className={`flex items-center h-full border-b ${pickCreation ? (activeOption === "creation" ? "bg-primary-varient border-none cursor-pointer" : "border-1 border-gray-200 cursor-pointer") : "border-1 border-gray-200 pointer-none"} `}
       onClick={handleContainerClick}
     >
       <div className="flex flex-col justify-between pl-5 h-full">
@@ -58,11 +47,11 @@ const AvatarCreationOption: React.FC = () => {
         </div>
         <div className="pb-10.25 font-semibold">
           <Button
-            variant={pickCreationAvatar ? "primary" : "gray200"}
+            variant={pickCreation ? "gray200" : "primary"}
             size="xsCreation"
             onClick={handleButtonClick}
           >
-            {pickCreationAvatar ? "만들러 가기" : "다시 만들기"}
+            {pickCreation ? "다시 만들기" : "만들러 가기"}
           </Button>
         </div>
       </div>

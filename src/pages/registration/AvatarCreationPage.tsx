@@ -11,12 +11,18 @@ import Button from "@/components/common/Button";
 import AvatarCreationOption from "@/components/registration/avatarCreation/AvatarCreationOption";
 import AvatarSelectionOption from "@/components/registration/avatarCreation/AvatarSelectionOption";
 import RegistrationHeader from "@/components/registration/common/RegistrationHeader";
+import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
 const AvatarCreationPage = () => {
   const navigate = useNavigate();
+  const { activeOption } = useAvatarCreationStore();
 
   const handleNextClick = () => {
-    navigate("/registration/plant-nickname");
+    if (activeOption === "none") {
+      navigate("/");
+    } else {
+      navigate("/registration/plant-nickname");
+    }
   };
 
   return (
@@ -33,8 +39,12 @@ const AvatarCreationPage = () => {
       </main>
 
       <footer className="flex items-center justify-center pb-8.75 px-5 text-heading2">
-        <Button variant="default" size="lg" onClick={handleNextClick}>
-          나중에 만들기
+        <Button
+          variant={activeOption !== "none" ? "primary" : "default"}
+          size="lg"
+          onClick={handleNextClick}
+        >
+          {activeOption !== "none" ? "다음" : "나중에 만들기"}
         </Button>
       </footer>
     </div>
