@@ -41,8 +41,8 @@ const PlantNicknamePage = () => {
               type="text"
               value={avatarNameTemp}
               placeholder="별명을 지어주세요"
-              className={`border rounded-md w-full h-full pl-4 pr-16 placeholder:text-body2 placeholder:text-gray-400
-                ${isInvalid ? "border-danger" : "border-gray-400"}`}
+              className={`border rounded-md w-full h-full pl-4 pr-16 placeholder:text-body2 placeholder:text-gray-400 focus:outline-none
+                ${isInvalid ? "border-danger focus:border-danger" : "border-gray-400 focus:border-black"}`}
               onChange={handleChange}
             />
             {avatarNameTemp === "" && (
