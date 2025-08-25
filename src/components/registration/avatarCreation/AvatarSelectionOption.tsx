@@ -58,7 +58,7 @@ const AvatarSelectionOption: React.FC = () => {
           <img
             src={pickSelectionAvatar.img}
             alt="선택된 아바타"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
           />
         )}
       </div>

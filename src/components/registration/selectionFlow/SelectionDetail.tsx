@@ -60,7 +60,7 @@ const SelectionDetail = ({
                   <img
                     src={avatar.defaultImageUrl}
                     alt={avatar.description}
-                    className="w-full h-full object-cover rounded-[12px]"
+                    className="w-full h-full object-contain"
                   />
                 </div>
               </div>

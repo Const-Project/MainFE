@@ -1,12 +1,18 @@
 import React from "react";
 
+import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
+
 const AvatarDisplayArea: React.FC = () => {
+  const { pickAvatar } = useAvatarCreationStore();
+
   return (
     <div className="relative w-64.5 h-73 bg-primary-varient border-2 border-primary rounded-lg ">
       {/* TODO: 아바타 이미지 추가 필요 */}
-      {/* <button className="absolute bottom-2 right-2 w-8 h-8 rounded-full flex items-center justify-center">
-        <img src={Edit} alt="편집" className="w-5 h-5" />
-      </button> */}
+      <img
+        src={pickAvatar.img || "/images/defaultAvatar.png"}
+        alt="Picked Avatar"
+        className="w-full h-full object-contain"
+      />
     </div>
   );
 };

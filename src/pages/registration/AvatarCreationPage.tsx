@@ -29,11 +29,11 @@ const AvatarCreationPage = () => {
     <div className="flex flex-col h-screen md:h-[852px]">
       <RegistrationHeader />
       <main className="flex-grow flex flex-col min-h-0">
-        <div className="flex-1">
+        <div className="h-1/2">
           <AvatarSelectionOption />
         </div>
 
-        <div className="flex-1">
+        <div className="h-1/2">
           <AvatarCreationOption />
         </div>
       </main>
