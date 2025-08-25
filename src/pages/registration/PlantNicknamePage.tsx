@@ -46,18 +46,14 @@ const PlantNicknamePage = () => {
               onChange={handleChange}
             />
             {avatarNameTemp === "" && (
-              <span
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600 text-body-sb
-
-"
-              >
+              <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-600 text-body-sb">
                 최대 6자
               </span>
             )}
           </div>
           {/* 에러 문구 */}
           {isInvalid && (
-            <p className="text-gray-600 text-[16px] w-88.25 text-left pl-4.25">
+            <p className="text-gray-600 text-body-sb w-88.25 text-left pl-4.25">
               최대 6자 입력해주세요
             </p>
           )}
