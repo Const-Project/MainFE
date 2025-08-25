@@ -50,7 +50,7 @@ const AvatarSelectionOption: React.FC = () => {
           </Button>
         </div>
       </div>
-      <div className="w-1/2 h-full "></div>
+      <div className="w-1/2 h-full "> </div>
     </div>
   );
 };
