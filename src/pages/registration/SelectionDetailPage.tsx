@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/common/Button";
+import Loading from "@/components/loading/loading";
 import RegistrationHeader from "@/components/registration/common/RegistrationHeader";
 import SelectionDetail from "@/components/registration/selectionFlow/SelectionDetail";
 import { useGetSelectAvatar } from "@/hooks/avatars/useGetSelectAvatarApi";
@@ -47,7 +48,7 @@ const SelectionDetailPage = () => {
   };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (isError) {

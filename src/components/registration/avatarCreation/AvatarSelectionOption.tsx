@@ -32,18 +32,18 @@ const AvatarSelectionOption: React.FC = () => {
 
   return (
     <div
-      className={`flex items-center h-full border-b-1 border-gray-200  ${pickSelection ? (activeOption === "selection" ? "bg-primary-varient border-none cursor-pointer" : " cursor-pointer") : "border-b border-gray-200 pointer-none"} `}
+      className={`flex py-8 items-center h-full border-b-1 border-gray-200  ${pickSelection ? (activeOption === "selection" ? "bg-primary-varient border-none cursor-pointer" : " cursor-pointer") : "border-b border-gray-200 pointer-none"} `}
       onClick={pickSelection ? handleContainerClick : undefined}
     >
       <div className="flex flex-col justify-between pl-5 h-full">
-        <div className="flex flex-col gap-3 w-38.75 text-left pt-8">
+        <div className="flex flex-col gap-3 w-38.75 text-left">
           <h2 className="text-heading2 ">아바타 선택</h2>
           <p className="text-body2 ">
             00종의 아바타 중에서
             <br /> 선택할 수 있어요
           </p>
         </div>
-        <div className="pb-8 text-body1">
+        <div className=" text-body1">
           <Button
             variant={pickSelection ? "gray200" : "primary"}
             size="xsSelect"

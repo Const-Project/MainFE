@@ -12,6 +12,11 @@ export interface SelectAvatarResponse {
   result: AvatarType[];
 }
 
+// 아바타 생성하기 응답 타입
+export interface CreateAvatarResponse {
+  imageUrl: string;
+}
+
 // 아바타 최종 선택하기 API 요청 및 응답 타입
 export interface FinalChoiceAvatarRequest {
   nickname: string;

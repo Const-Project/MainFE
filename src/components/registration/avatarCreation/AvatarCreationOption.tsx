@@ -7,6 +7,7 @@ import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/common/Button";
+import { usePostCreationAvatar } from "@/hooks/avatars/usePostCreationAvatarApi";
 import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
 const AvatarCreationOption: React.FC = () => {
@@ -14,6 +15,7 @@ const AvatarCreationOption: React.FC = () => {
   const { pickCreationAvatar, pickCreation, activeOption, actions } =
     useAvatarCreationStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { mutate: uploadAvatar } = usePostCreationAvatar();
 
   const handleContainerClick = () => {
     if (!pickCreation) return;
@@ -34,12 +36,23 @@ const AvatarCreationOption: React.FC = () => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      // const imageDataUrl = reader.result as string;
-      navigate("/registration/creation-detail");
-    };
-    reader.readAsDataURL(file);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    uploadAvatar(formData, {
+      onSuccess: res => {
+        actions.setPickCreationAvatar({
+          id: null,
+          description: "생성된 아바타",
+          img: res.imageUrl,
+        });
+        navigate("/registration/creation-detail");
+      },
+      onError: err => {
+        console.error(err);
+        alert("아바타 업로드에 실패했습니다.");
+      },
+    });
   };
 
   return (

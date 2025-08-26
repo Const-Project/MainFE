@@ -1,4 +1,5 @@
 import {
+  CreateAvatarResponse,
   FinalChoiceAvatarRequest,
   FinalChoiceAvatarResponse,
 } from "@/types/avatars/masters";
@@ -12,6 +13,22 @@ export const getSelectionAvatarApi = async () => {
   } catch (error) {
     alert("회원가입에 실패했습니다.");
     console.log(error);
+  }
+};
+
+export const postCrationAvatarApi = async (
+  formData: FormData
+): Promise<CreateAvatarResponse> => {
+  try {
+    const response = await axios.post("/api/v1/register/upload", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("error :", error);
+    throw error;
   }
 };
 
