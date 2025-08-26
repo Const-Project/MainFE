@@ -5,7 +5,7 @@ export interface dailyMissions {
   completed: boolean;
 }
 
-export interface wisgTress {
+export interface wishTress {
   currentStage: string;
   currentPoints: number;
   requiredPointsForNextStage: number;
