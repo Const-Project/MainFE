@@ -24,6 +24,7 @@ const PlantNicknamePage = () => {
   };
 
   const handleNext = () => {
+    console.log(pickAvatar);
     if (!pickAvatar.id || !pickAvatar.img) return;
 
     selectFinalAvatar(

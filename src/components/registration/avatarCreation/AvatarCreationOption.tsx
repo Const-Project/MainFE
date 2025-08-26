@@ -90,7 +90,6 @@ const AvatarCreationOption: React.FC = () => {
             variant={pickCreation ? "default" : "primary"}
             size="xsCreation"
             onClick={handleButtonClick}
-            className={pickCreation ? "border-none" : ""}
           >
             {pickCreation ? "다시 만들기" : "만들러 가기"}
           </Button>

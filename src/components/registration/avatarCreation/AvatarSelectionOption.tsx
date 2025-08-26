@@ -49,7 +49,6 @@ const AvatarSelectionOption: React.FC = () => {
             variant={pickSelection ? "default" : "primary"}
             size="xsSelect"
             onClick={handleButtonClick}
-            className={pickSelection ? "border-none" : ""}
           >
             {pickSelection ? "다시 선택하기" : "선택하러 가기"}
           </Button>

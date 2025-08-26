@@ -1,19 +1,20 @@
 import React from "react";
 
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 import Button from "@/components/common/Button";
 import RegistrationHeader from "@/components/registration/common/RegistrationHeader";
 import CreationDetail from "@/components/registration/creationFlow/CreationDetail";
-// import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
+import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
 const CreationDetailPage = () => {
-  // const navigate = useNavigate();
-  // const { actions } = useAvatarCreationStore();
+  const navigate = useNavigate();
+  const { actions } = useAvatarCreationStore();
   const userName = "000";
 
   const handleNextClick = () => {
-    // actions.completeCreation();
-    // navigate("/registration/avatar");
+    actions.completeCreation();
+    navigate("/registration/avatar");
   };
 
   return (
