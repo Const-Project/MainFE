@@ -61,7 +61,7 @@ const TakePhotoPage = () => {
 
   return (
     <div className="flex flex-col h-full">
-      <DiaryHeader showSubmit={false} />
+      <DiaryHeader showSubmit={false} context="사진 찍기" />
       <TakePhotoEditor image={image} handleImageChange={handleImageChange} />
       <TakePhotoFooter image={image} onSubmit={handleSubmit} />
     </div>

@@ -1,8 +1,6 @@
 //라우터
 import { Route, Routes, useLocation } from "react-router-dom";
 
-import TakePhotoPage from "@/pages/dailyMission/TakePhotoPage";
-import WriteDiaryPage from "@/pages/dailyMission/WriteDiaryPage";
 import HomePage from "@/pages/home/Homepage";
 import LogDetailPage from "@/pages/log/LogDetailPage";
 import LogPage from "@/pages/log/LogPage";
@@ -17,6 +15,8 @@ import Design from "@/components/common/Design";
 import Layout from "@/components/layout/Layout";
 //네비게이션
 import Navbar from "@/components/layout/Navbar";
+
+import DailyMissionRoutes from "./routes/dailyMissionRoutes";
 
 const App = () => {
   const location = useLocation();
@@ -34,16 +34,9 @@ const App = () => {
         <Route path="/option" element={<OptionPage />} />
         <Route path="/onboarding" element={<OnBoardingPage />} />
         <Route path="/design" element={<Design />} />
-        <Route
-          path="/dailyMission/writeDiary/:userDailyMissionId"
-          element={<WriteDiaryPage />}
-        />
-        <Route
-          path="/dailyMission/takePhoto/:userDailyMissionId"
-          element={<TakePhotoPage />}
-        />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/log/:id" element={<LogDetailPage />} />
+        {DailyMissionRoutes}
       </Route>
     </Routes>
   );

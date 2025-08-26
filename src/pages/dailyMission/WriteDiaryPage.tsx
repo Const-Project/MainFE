@@ -65,7 +65,11 @@ const WriteDiaryPage = () => {
 
   return (
     <div className="flex flex-col h-full">
-      <DiaryHeader onSubmit={handleSubmit} showSubmit={true} />
+      <DiaryHeader
+        onSubmit={handleSubmit}
+        showSubmit={true}
+        context="일기 쓰기"
+      />
       <main className="flex pb-12.5 flex-1 overflow-y-auto">
         <DiaryEditor
           title={title}

@@ -8,11 +8,13 @@ import React from "react";
 interface CheckoutCheckboxProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  strokeWidth?: number;
 }
 
 const Checkbox: React.FC<CheckoutCheckboxProps> = ({
   label,
   className = "",
+  strokeWidth = 3,
   ...props
 }) => {
   return (
@@ -20,22 +22,23 @@ const Checkbox: React.FC<CheckoutCheckboxProps> = ({
       <input
         type="checkbox"
         className={`
-          peer w-4 h-4 rounded-full border-2 appearance-none
+          peer rounded-full border-2 appearance-none
           checked:bg-[var(--color-primary)] checked:border-none
           bg-white border-gray-400
-          ${className}
+          w-4 h-4 ${className}
         `}
         {...props}
       />
       {/* 체크 아이콘 (항상 보임) */}
       <svg
         className={`
-          pointer-events-none absolute w-4 h-3 justify-center
+          pointer-events-none absolute justify-center
           peer-checked:text-white text-gray-400
+          w-4 h-3 ${className}
         `}
         fill="none"
         stroke="currentColor"
-        strokeWidth="3"
+        strokeWidth={strokeWidth}
         viewBox="0 0 24 24"
       >
         <path d="M5 13l4 4L19 7" />
