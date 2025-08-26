@@ -7,7 +7,6 @@
  */
 
 import { create } from "zustand";
-
 /**
  * @description 선택된 아바타의 상세 정보
  * @property {string | null} description - 아바타에 대한 설명

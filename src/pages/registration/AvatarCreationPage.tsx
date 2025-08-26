@@ -24,7 +24,7 @@ const AvatarCreationPage = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen md:h-[852px]">
+    <div className="flex flex-col h-screen md:h-[852px] pb-6">
       <RegistrationHeader />
       <main className="flex-grow flex flex-col min-h-0">
         <div className="h-1/2">
@@ -36,7 +36,7 @@ const AvatarCreationPage = () => {
         </div>
       </main>
 
-      <footer className="flex items-center justify-center pb-8.75 px-5 text-heading2">
+      <footer className="flex items-center justify-center px-5 pt-2.25 text-heading2">
         <Button
           disabled={activeOption === "none"}
           variant={activeOption !== "none" ? "primary" : "gray200"}

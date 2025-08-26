@@ -48,15 +48,15 @@ const SelectionDetail = ({
               className="flex items-center justify-center"
             >
               <div
-                className="w-full h-75.75 flex items-center justify-center rounded-[12px] border-2 border-primary"
-                style={{
-                  backgroundColor:
-                    selectedId === avatar.id
-                      ? "var(--color-primary-varient)"
-                      : "white",
-                }}
+                className={`w-full h-75.75 flex items-center justify-center  ${
+                  selectedId === avatar.id ? "bg-primary-varient" : "bg-white"
+                }`}
               >
-                <div className="w-full h-full flex items-center justify-center">
+                <div
+                  className={`w-full h-full flex items-center justify-center rounded-[12px] border-2 border-primary ${
+                    selectedId === avatar.id ? "" : "opacity-50"
+                  }`}
+                >
                   <img
                     src={avatar.defaultImageUrl}
                     alt={avatar.description}

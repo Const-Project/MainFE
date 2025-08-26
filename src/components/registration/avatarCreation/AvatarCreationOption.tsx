@@ -6,6 +6,7 @@ import React, { useRef } from "react";
 
 import { useNavigate } from "react-router-dom";
 
+import CreationDefaultImg from "@/assets/images/creationAvatar/CreationDefultImg.png";
 import Button from "@/components/common/Button";
 import { usePostCreationAvatar } from "@/hooks/avatars/usePostCreationAvatarApi";
 import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
@@ -57,8 +58,8 @@ const AvatarCreationOption: React.FC = () => {
 
   return (
     <div
-      className={`flex items-center h-full ${pickCreation ? (activeOption === "creation" ? "bg-primary-varient border-none cursor-pointer" : " cursor-pointer") : "pointer-none"} `}
-      onClick={handleContainerClick}
+      className={`flex py-8 items-center pl-5  h-full ${pickCreation ? (activeOption === "creation" ? "bg-primary-varient border-none cursor-pointer" : " cursor-pointer") : "pointer-none"} `}
+      onClick={pickCreation ? handleContainerClick : undefined}
     >
       <input
         type="file"
@@ -67,9 +68,9 @@ const AvatarCreationOption: React.FC = () => {
         onChange={handleFileSelect}
         style={{ display: "none" }}
       />
-      <div className="flex flex-col justify-between pl-5 h-full">
-        <div className="flex flex-col gap-3 w-auto text-left pt-8">
-          <h2 className="text-heading2">나만의 아바타</h2>
+      <div className="flex flex-col justify-between h-full">
+        <div className="flex flex-col gap-3 w-auto text-left">
+          <h2 className="text-heading1">나만의 아바타</h2>
           <p className="text-body2">
             <span>내 식물의 생김새를</span>
             <br />
@@ -78,17 +79,34 @@ const AvatarCreationOption: React.FC = () => {
             <span>만들 수 있어요</span>
           </p>
         </div>
-        <div className="pb-10.25 text-body1">
+        <div className="text-body1">
           <Button
-            variant={pickCreation ? "gray200" : "primary"}
+            variant={pickCreation ? "default" : "primary"}
             size="xsCreation"
             onClick={handleButtonClick}
+            className={pickCreation ? "border-none" : ""}
           >
             {pickCreation ? "다시 만들기" : "만들러 가기"}
           </Button>
         </div>
       </div>
-      <div className="flex flex-1 h-full"></div>
+      {pickCreationAvatar.img === null ? (
+        <div className="flex flex-1 flex-col h-42 items-end justify-end">
+          <img
+            src={CreationDefaultImg}
+            alt="선택된 아바타"
+            className="w-full h-full object-contain"
+          />
+        </div>
+      ) : (
+        <div className="flex flex-1 h-57 justify-center">
+          <img
+            src={pickCreationAvatar.img}
+            alt="선택된 아바타 디폴트"
+            className="w-full h-full object-contain"
+          />
+        </div>
+      )}
     </div>
   );
 };
