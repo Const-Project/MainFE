@@ -8,11 +8,7 @@ import type { FeedResponse } from "@/types/feed";
 
 import { createMockFeedResponse } from "@/mocks/feed/feed";
 
-type Props = {
-  onSelectPost?: (postId: number, postType: string) => void;
-};
-
-const FeedPage = ({ onSelectPost }: Props) => {
+const FeedPage = () => {
   const navigate = useNavigate();
   const [feedData, setFeedData] = useState<FeedResponse>({ result: [] });
 
@@ -24,6 +20,15 @@ const FeedPage = ({ onSelectPost }: Props) => {
 
   const handleUserPlusClick = () => {
     navigate("/follow");
+  };
+
+  const handleSelectPost = (postId: number, postType: string) => {
+    // 상위에서 핸들러가 내려온 경우 우선 사용
+    if (postType === "DIARY") {
+      navigate(`/feed/diary/${postId}`);
+    } else {
+      navigate(`/feed/avatar/${postId}`);
+    }
   };
 
   return (
@@ -40,7 +45,7 @@ const FeedPage = ({ onSelectPost }: Props) => {
       {/* 둘러보기 사진 블록 */}
       <FeedList
         feedData={feedData}
-        onSelectPost={onSelectPost}
+        onSelectPost={handleSelectPost}
         isLoading={false}
         error={null}
       />

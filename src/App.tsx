@@ -1,5 +1,7 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 
+import FeedAvatarPage from "@/pages/feed/FeedAvatarPage";
+import FeedDiaryPage from "@/pages/feed/FeedDiaryPage";
 import FeedPage from "@/pages/feed/FeedPage";
 import FollowPage from "@/pages/follow/FollowPage";
 import HomePage from "@/pages/home/Homepage";
@@ -25,6 +27,8 @@ const App = () => {
         <Route path="/log" element={<LogPage />} />
         <Route path="/feed" element={<FeedPage />} />
         <Route path="/follow" element={<FollowPage />} />
+        <Route path="/feed/diary/:postId" element={<FeedDiaryPage />} />
+        <Route path="/feed/avatar/:postId" element={<FeedAvatarPage />} />
         <Route path="/option" element={<OptionPage />} />
         <Route path="/splash" element={<SplashPage />} />
         <Route path="/design" element={<Design />} />
