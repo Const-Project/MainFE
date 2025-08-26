@@ -5,12 +5,15 @@ import { useNavigate } from "react-router-dom";
 import Button from "@/components/common/Button";
 import AvatarDisplayArea from "@/components/registration/common/AvatarDisplayArea";
 import RegistrationHeader from "@/components/registration/common/RegistrationHeader";
+import { useFinalChoiceAvatar } from "@/hooks/avatars/useFinalChoiceAvatarApi";
 import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
 const PlantNicknamePage = () => {
   const [avatarNameTemp, setAvatarNameTemp] = useState("");
-  const { actions } = useAvatarCreationStore();
+  const { pickAvatar, actions } = useAvatarCreationStore();
   const navigate = useNavigate();
+
+  const { mutate: selectFinalAvatar } = useFinalChoiceAvatar();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let value = e.target.value;
@@ -21,8 +24,25 @@ const PlantNicknamePage = () => {
   };
 
   const handleNext = () => {
-    navigate("/");
-    actions.setAvatarName(avatarNameTemp);
+    if (!pickAvatar.id || !pickAvatar.img) return;
+
+    selectFinalAvatar(
+      {
+        nickname: avatarNameTemp,
+        imageUrl: pickAvatar.img,
+        masterId: pickAvatar.id,
+      },
+      {
+        onSuccess: () => {
+          actions.setAvatarName(avatarNameTemp);
+          navigate("/");
+        },
+        onError: error => {
+          console.error(error);
+          alert("아바타 최종 선택에 실패했습니다.");
+        },
+      }
+    );
   };
 
   const isInvalid = avatarNameTemp.length > 6;
