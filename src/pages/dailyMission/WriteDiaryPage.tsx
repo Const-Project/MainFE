@@ -1,14 +1,29 @@
 import React, { useState } from "react";
 
+import { useParams } from "react-router-dom";
+
 import DiaryHeader from "@/components/dailyMission/common/DiaryHeader";
 import DiaryEditor from "@/components/dailyMission/writeDiary/DiaryEditor";
 import DiaryFooter from "@/components/dailyMission/writeDiary/DiaryFooter";
+import { useWriteDiaryImageUploadApi } from "@/hooks/mission/useWriteDiaryApi";
 
 const WriteDiaryPage = () => {
+  const { userDailyMissionId } = useParams<{ userDailyMissionId: string }>();
+  if (!userDailyMissionId) {
+    throw new Error("userDailyMissionId 가 없습니다. 다시 시도해주세요.");
+  }
+  const numericMissionId = Number(userDailyMissionId);
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState<File | null>(null);
   const [isPublic, setIsPublic] = useState(false);
+
+  const uploadMutation = useWriteDiaryImageUploadApi();
+
+  // API 수정 되면 활용
+  // const [image, setImage] = useState<File | null>(null);
+  // const [imageUrl, setImageUrl] = useState<string>("");
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -19,8 +34,24 @@ const WriteDiaryPage = () => {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setImageUrl(e.target.files[0]);
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      setImageUrl(file);
+
+      const formData = new FormData();
+      formData.append("image", file);
+
+      uploadMutation.mutate(
+        { userDailyMissionId: numericMissionId, formData },
+        {
+          onSuccess: () => {
+            console.log("이미지 업로드 성공");
+          },
+          onError: () => {
+            // setIsUploaded(false);
+          },
+        }
+      );
     }
   };
 

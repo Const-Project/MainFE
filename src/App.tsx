@@ -34,7 +34,10 @@ const App = () => {
         <Route path="/option" element={<OptionPage />} />
         <Route path="/onboarding" element={<OnBoardingPage />} />
         <Route path="/design" element={<Design />} />
-        <Route path="/dailyMission/writeDiary" element={<WriteDiaryPage />} />
+        <Route
+          path="/dailyMission/writeDiary/:userDailyMissionId"
+          element={<WriteDiaryPage />}
+        />
         <Route
           path="/dailyMission/takePhoto/:userDailyMissionId"
           element={<TakePhotoPage />}

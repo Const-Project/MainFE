@@ -36,7 +36,7 @@ const ImageUploader = ({ image, handleImageChange }: ImageUploaderProps) => {
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="flex flex-col gap-2.5 items-center justify-center">
+          <div className="flex flex-col gap-2.5 items-center justify-center object-contain">
             <img src={Camera} alt="Camera" className="w-6 h-5" />
             <div className="text-[var(--color-gray-600)]">
               식물의 사진을 선택하세요
