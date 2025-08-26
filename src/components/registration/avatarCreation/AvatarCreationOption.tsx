@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 import CreationDefaultImg from "@/assets/images/creationAvatar/CreationDefultImg.png";
 import Button from "@/components/common/Button";
+import Pending from "@/components/registration/creationFlow/Pending";
 import { usePostCreationAvatar } from "@/hooks/avatars/usePostCreationAvatarApi";
 import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
@@ -16,7 +17,7 @@ const AvatarCreationOption: React.FC = () => {
   const { pickCreationAvatar, pickCreation, activeOption, actions } =
     useAvatarCreationStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const { mutate: uploadAvatar } = usePostCreationAvatar();
+  const { mutate: uploadAvatar, isPending } = usePostCreationAvatar();
 
   const handleContainerClick = () => {
     if (!pickCreation) return;
@@ -38,7 +39,7 @@ const AvatarCreationOption: React.FC = () => {
     if (!file) return;
 
     const formData = new FormData();
-    formData.append("file", file);
+    formData.append("image", file);
 
     uploadAvatar(formData, {
       onSuccess: res => {
@@ -47,14 +48,19 @@ const AvatarCreationOption: React.FC = () => {
           description: "생성된 아바타",
           img: res.imageUrl,
         });
+        console.log("AvatarCreationOption.tss 에서 성공");
         navigate("/registration/creation-detail");
       },
       onError: err => {
         console.error(err);
-        alert("아바타 업로드에 실패했습니다.");
+        alert("AvatarCreationOption.tss 에서 아바타 업로드에 실패했습니다.");
       },
     });
   };
+
+  if (isPending) {
+    return <Pending />;
+  }
 
   return (
     <div
