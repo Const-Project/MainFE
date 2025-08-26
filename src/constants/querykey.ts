@@ -1,3 +1,9 @@
 export const QUERY_KEYS = {
-  SELECTION_AVATAR: "selectionAvatar",
+  AVATAR: {
+    SELECTION: "selectionAvatar",
+    CREATION: "creationAvatar",
+  },
+  QUIZ: {
+    REAL: "realQuiz",
+  },
 };

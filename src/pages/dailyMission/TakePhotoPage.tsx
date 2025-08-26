@@ -29,7 +29,7 @@ const TakePhotoPage = () => {
       setImage(file);
 
       const formData = new FormData();
-      formData.append("image", file);
+      formData.append("file", file);
 
       uploadMutation.mutate(
         { userDailyMissionId: numericMissionId, formData },
