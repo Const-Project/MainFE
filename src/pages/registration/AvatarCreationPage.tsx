@@ -18,9 +18,7 @@ const AvatarCreationPage = () => {
   const { activeOption } = useAvatarCreationStore();
 
   const handleNextClick = () => {
-    if (activeOption === "none") {
-      navigate("/");
-    } else {
+    if (activeOption !== "none") {
       navigate("/registration/plant-nickname");
     }
   };
@@ -40,11 +38,12 @@ const AvatarCreationPage = () => {
 
       <footer className="flex items-center justify-center pb-8.75 px-5 text-heading2">
         <Button
-          variant={activeOption !== "none" ? "primary" : "default"}
+          disabled={activeOption === "none"}
+          variant={activeOption !== "none" ? "primary" : "gray200"}
           size="lg"
           onClick={handleNextClick}
         >
-          {activeOption !== "none" ? "다음" : "나중에 만들기"}
+          {activeOption !== "none" ? "다음" : "다음"}
         </Button>
       </footer>
     </div>

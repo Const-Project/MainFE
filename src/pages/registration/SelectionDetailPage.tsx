@@ -34,7 +34,14 @@ const SelectionDetailPage = () => {
         description: selectedAvatar.description,
         img: selectedAvatar.defaultImageUrl,
       });
+      actions.setPickAvatar({
+        id: selectedAvatar.id,
+        description: selectedAvatar.description,
+        img: selectedAvatar.defaultImageUrl,
+      });
+      actions.setActiveOption("selection");
       actions.completeSelection();
+
       navigate("/registration/avatar");
     }
   };
