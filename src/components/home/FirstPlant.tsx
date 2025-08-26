@@ -25,6 +25,7 @@ const FirstPlant = () => {
     if (isSunLight) return;
 
     setIsSunLight(true);
+    setIsWater(false);
 
     // 기존 타이머 클리어
     if (timerRef.current) {
@@ -51,7 +52,7 @@ const FirstPlant = () => {
     if (isWater) return;
 
     setIsWater(true);
-
+    setIsSunLight(false);
     // 기존 타이머 클리어
     if (timerRef.current) {
       clearTimeout(timerRef.current);

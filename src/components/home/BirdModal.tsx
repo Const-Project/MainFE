@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Modal from "../common/Modal";
+import Bird from "@/assets/images/bird.png";
 
 type Props = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -10,11 +11,16 @@ const BirdModal = ({ setIsOpen }: Props) => {
 
   return (
     <Modal setIsOpen={setIsOpen}>
+      <img
+        className="w-12 h-auto absolute bottom-32 left-0"
+        src={Bird}
+        alt="bird"
+      />
       알림
       <div className="flex gap-2 w-full items-center justify-center">
         <div
           className={`text-body1 text-center whitespace-nowrap text-black border-b-2 flex-1  ${
-            isRecord ? "border-primary" : "border-transparent"
+            isRecord ? "border-primary" : "border-transparent text-gray-400"
           }`}
           onClick={() => setIsRecord(true)}
         >
@@ -22,7 +28,7 @@ const BirdModal = ({ setIsOpen }: Props) => {
         </div>
         <div
           className={`text-body1 text-center whitespace-nowrap text-black border-b-2 flex-1 ${
-            isRecord ? "border-transparent" : "border-primary"
+            isRecord ? "border-transparent text-gray-400" : "border-primary"
           }`}
           onClick={() => setIsRecord(false)}
         >
