@@ -8,6 +8,7 @@ const RegisterPage = () => {
 
   const [nickname, setNickname] = useState("");
 
+  // useRegister 훅으로 분리
   const { register } = useRegister();
 
   const handleWrapperClick = () => {
