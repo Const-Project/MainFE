@@ -27,7 +27,7 @@ export const takePhotoUploadApi = async (
 ): Promise<takePhotoUploadResponse> => {
   try {
     const response = await axios.post(
-      `/api/v1/mission/daily/${userDailyMissionId}/upload`,
+      `/api/v1/mission/photo/${userDailyMissionId}/upload`,
       formData,
       {
         headers: {
