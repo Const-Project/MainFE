@@ -9,10 +9,8 @@ const TakePhotoFooter: React.FC<TakePhotoFooterProps> = ({
   image,
   onSubmit,
 }) => {
-  const buttonEnabledClasses =
-    "bg-[var(--color-primary)] text-[var(--color-white)]";
-  const buttonDisabledClasses =
-    "bg-[var(--color-gray-200)] text-[var(--color-gray-400)]";
+  const buttonEnabledClasses = "bg-primary text-white";
+  const buttonDisabledClasses = "bg-gray-200 text-gray-400 cursor-not-allowed";
 
   return (
     <footer>
