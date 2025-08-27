@@ -21,7 +21,7 @@ const OX_Quiz: React.FC<OXQuizProps> = ({
   answerNumber,
 }) => {
   const baseBoxClass =
-    "flex justify-center items-center aspect-140/123 border-1 border-gray-200 rounded-[8px] text-6xl font-bold cursor-pointer select-none";
+    "flex justify-center items-center aspect-140/123 border-1  rounded-[8px] text-6xl font-bold cursor-pointer select-none";
 
   const getBoxClass = (value: number) => {
     console.log("OX_Quiz props", {
