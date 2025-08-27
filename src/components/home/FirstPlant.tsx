@@ -13,6 +13,7 @@ import Plant from "@/assets/images/plant.png";
 
 import Toast from "@/components/common/Toast";
 import { GardenSummary } from "@/types/home/garden";
+import axios from "@/apis/instance";
 
 const FirstPlant = ({
   setIsModalOpen,
@@ -23,16 +24,30 @@ const FirstPlant = ({
   isOpen: boolean;
   garden: GardenSummary;
 }) => {
-  const [isSunLight, setIsSunLight] = useState(garden.ownerSunlightAble);
-  const [isWater, setIsWater] = useState(garden.ownerWateringAble);
-  const timerRef = useRef<number | null>(null);
-  const [isToastOpen, setIsToastOpen] = useState(false);
+  const [isAbleSunLight, setIsAbleSunLight] = useState(
+    garden.ownerSunlightAble
+  );
+  const [isAbleWater, setIsAbleWater] = useState(garden.ownerWateringAble);
 
-  const handleSunLight = () => {
+  const [isSunLight, setIsSunLight] = useState(false);
+  const [isWater, setIsWater] = useState(false);
+  const timerRef = useRef<number | null>(null);
+
+  const [isToastOpen, setIsToastOpen] = useState(false);
+  const [isToastOpen2, setIsToastOpen2] = useState(false);
+
+  const handleSunLight = async () => {
     // 이미 애니메이션 중이면 무시
     if (isSunLight) return;
+    if (!isAbleSunLight) {
+      setIsToastOpen2(true);
+      return;
+    }
 
+    const res = await axios.post(`/api/v1/gardens/${garden.gardenId}/sunlight`);
+    console.log(res);
     setIsSunLight(true);
+    setIsAbleSunLight(false);
     setIsWater(false);
 
     // 기존 타이머 클리어
@@ -55,10 +70,17 @@ const FirstPlant = ({
     };
   }, []);
 
-  const handleWater = () => {
+  const handleWater = async () => {
     // 이미 애니메이션 중이면 무시
     if (isWater) return;
+    if (!isAbleWater) {
+      setIsToastOpen2(true);
+      return;
+    }
 
+    const res = await axios.post(`/api/v1/gardens/${garden.gardenId}/mywater`);
+    console.log(res);
+    setIsAbleWater(false);
     setIsWater(true);
     setIsSunLight(false);
     // 기존 타이머 클리어
@@ -126,6 +148,12 @@ const FirstPlant = ({
         <Toast
           message="마음 체크를 먼저 완료해주세요!"
           onClose={() => setIsToastOpen(false)}
+        />
+      )}
+      {isToastOpen2 && (
+        <Toast
+          message="물 주기(오전 12시) 햇빛 주기(오전 6시)에 초기화 됩니다."
+          onClose={() => setIsToastOpen2(false)}
         />
       )}
     </div>
