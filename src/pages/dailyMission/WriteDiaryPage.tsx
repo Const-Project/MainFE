@@ -17,9 +17,10 @@ const WriteDiaryPage = () => {
   const imageUploadMutation = useWriteDiaryImageUploadApi();
   const submitDiaryMutation = useWriteDiarySubmitApi();
 
-  // API 수정 되면 활용
-  // const [image, setImage] = useState<File | null>(null);
-  // const [imageUrl, setImageUrl] = useState<string>("");
+  const [uploadedImage, setUploadedImage] = useState<{
+    imageId: number;
+    imageUrl: string;
+  } | null>(null);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -40,8 +41,9 @@ const WriteDiaryPage = () => {
       imageUploadMutation.mutate(
         { formData },
         {
-          onSuccess: () => {
+          onSuccess: res => {
             console.log("이미지 업로드 성공");
+            setUploadedImage(res.result);
           },
           onError: () => {
             console.error("이미지 업로드 실패");
@@ -56,19 +58,17 @@ const WriteDiaryPage = () => {
   };
 
   const handleSubmit = () => {
-    if (!imageUploadMutation.data) {
-      // 여기 이미지 없->업로드 누를 때 뭐가 나올지 고민해야할듯.
+    if (!uploadedImage) {
       alert("먼저 이미지를 업로드하세요!");
       return;
     }
-    const { imageId, url: imageUrl } = imageUploadMutation.data.result;
 
     submitDiaryMutation.mutate({
       title,
       content,
       isPublic,
-      imageId,
-      imageUrl,
+      imageId: uploadedImage.imageId,
+      imageUrl: uploadedImage.imageUrl,
     });
   };
 

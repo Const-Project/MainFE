@@ -41,7 +41,7 @@ export const useWriteDiarySubmitApi = () => {
     Error, // 에러 타입
     writeDiarySubmitRequest // 요청 타입
   >({
-    mutationFn: params => writeDiarySubmitApi(params),
+    mutationFn: body => writeDiarySubmitApi(body),
     onSuccess: data => {
       console.log("일기 작성 성공:", data);
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.DIARIES] });

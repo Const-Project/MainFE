@@ -4,7 +4,7 @@ export interface writeDiaryImageUploadResponse {
   message: string;
   result: {
     imageId: number;
-    url: string;
+    imageUrl: string;
   };
 }
 
