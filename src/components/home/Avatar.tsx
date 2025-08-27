@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
 import Watering from "@/assets/images/background/watering.png";
-import Bird from "@/assets/images/bird.png";
-import Char2 from "@/assets/images/char2.png";
+import Bird from "@/assets/images/bird.webp";
+import Char2 from "@/assets/images/char2.webp";
 import { useHomeSummaryStore } from "@/stores/useGardenStore";
 
 import Toast from "../common/Toast";
@@ -145,7 +145,6 @@ const Avatar = ({
         <Modal
           setIsOpen={setIsModalOpen}
           setIsChecked={setIsChecked}
-          isChecked={isChecked}
           setIsAnswered={setIsAnswered}
           isAnswered={isAnswered}
         />
