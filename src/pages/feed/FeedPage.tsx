@@ -4,6 +4,8 @@ import { UserPlus } from "@/assets/icons/common";
 import FeedList from "@/components/feed/FeedList";
 import { useFeed } from "@/hooks/feed/useFeedApi";
 
+import { createMockFeedResponse } from "@/mocks/feed/feed";
+
 const FeedPage = () => {
   const navigate = useNavigate();
   const { data: result, isLoading, error } = useFeed();
@@ -20,6 +22,10 @@ const FeedPage = () => {
     }
   };
 
+  // API 결과가 null/빈 배열이면 기존 목데이터로 대체
+  const fallback = createMockFeedResponse().result;
+  const dataForRender = result && result.length > 0 ? result : fallback;
+
   return (
     <section className="w-full pt-3">
       {/* 헤더 */}
@@ -33,7 +39,7 @@ const FeedPage = () => {
 
       {/* 둘러보기 사진 블록 */}
       <FeedList
-        feedData={{ result: result ?? [] }}
+        feedData={{ result: dataForRender }}
         onSelectPost={handleSelectPost}
         isLoading={isLoading}
         error={error ? "피드를 불러오지 못했습니다." : null}
