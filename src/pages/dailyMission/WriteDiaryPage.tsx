@@ -89,7 +89,7 @@ const WriteDiaryPage = () => {
           handleImageChange={handleImageChange}
         />
       </main>
-      <footer className="sticky bottom-0 w-full bg-white pt-3.75 pb-[21px] border-t border-[var(--color-gray-200)]">
+      <footer className="sticky bottom-0 w-full bg-white pt-3.75 border-t border-gray-200">
         <DiaryFooter
           isPublic={isPublic}
           onVisibilityChange={handleVisibilityChange}

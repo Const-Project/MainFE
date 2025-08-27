@@ -26,14 +26,14 @@ const DiaryEditor = ({
 
   return (
     <div className="flex-grow px-5 pt-8 pb-12.5">
-      <div className="border-b-1 border-[var(--color-gray-200)] mb-8">
+      <div className="border-b-1 border-gray-200 mb-8">
         <div className="text-body2 w-full h-7.25 mb-2">
           {`${year}년 ${month}월 ${day}일`}
         </div>
         <input
           type="text"
           placeholder="제목을 입력하세요"
-          className="w-full h-9.5 mb-6 text-title1 font-semibold placeholder:text-title1 placeholder:font-semibold placeholder:text-[var] focus:outline-none"
+          className="w-full h-9.5 mb-6 text-title1 font-semibold placeholder:text-title1 placeholder:font-semibold  focus:outline-none"
           value={title}
           onChange={onTitleChange}
         />

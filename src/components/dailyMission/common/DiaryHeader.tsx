@@ -8,7 +8,7 @@ interface DiaryHeaderProps {
 
 const DiaryHeader = ({ onSubmit, showSubmit, context }: DiaryHeaderProps) => {
   return (
-    <header className="w-full h-14 flex items-center justify-between p-4 border-b border-[var(--color-gray-200)]">
+    <header className="w-full h-14 flex items-center justify-between p-4 border-b border-gray-200">
       <button>
         <img src={XIcon} alt="Close" className="w-4 h-4" />
       </button>

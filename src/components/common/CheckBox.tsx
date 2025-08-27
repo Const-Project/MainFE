@@ -23,7 +23,7 @@ const Checkbox: React.FC<CheckoutCheckboxProps> = ({
         type="checkbox"
         className={`
           peer rounded-full border-2 appearance-none
-          checked:bg-[var(--color-primary)] checked:border-none
+          checked:bg-primary checked:border-none
           bg-white border-gray-400
           w-4 h-4 ${className}
         `}
