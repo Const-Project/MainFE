@@ -21,6 +21,7 @@ import Layout from "@/components/layout/Layout";
 //네비게이션
 import Navbar from "@/components/layout/Navbar";
 
+import CompletePage from "./pages/delivery/CompletePage";
 import DailyMissionRoutes from "./routes/dailyMissionRoutes";
 
 import "swiper/css";
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="/profile/:id" element={<ProfilePage />} />
         <Route path="unlock-garden" element={<UnlockGardenPlotPage />} />
         <Route path="delivery" element={<DeliveryPage />} />
+        <Route path="delivery/complete" element={<CompletePage />} />
       </Route>
     </Routes>
   );
