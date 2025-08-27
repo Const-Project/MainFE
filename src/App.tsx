@@ -19,6 +19,9 @@ import Layout from "@/components/layout/Layout";
 //네비게이션
 import Navbar from "@/components/layout/Navbar";
 
+
+import DailyMissionRoutes from "./routes/dailyMissionRoutes";
+
 import "swiper/css";
 import "swiper/css/pagination";
 import RegistrationRoutes from "@/routes/registrationRoutes";
@@ -41,6 +44,7 @@ const App = () => {
         <Route path="design" element={<Design />} />
         {RegistrationRoutes}
         <Route path="/log/:id" element={<LogDetailPage />} />
+        {DailyMissionRoutes}
         <Route path="/option" element={<OptionPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/onboarding" element={<OnboardingPage />} />
