@@ -24,7 +24,7 @@ import RegistrationRoutes from "@/routes/registrationRoutes";
 const App = () => {
   const location = useLocation();
 
-  const navbarPaths = ["/", "/log", "/follow", "/option"];
+  const navbarPaths = ["/", "/log", "/follow", "/option", "/feed"];
   const showNavbar = navbarPaths.includes(location.pathname);
 
   return (
