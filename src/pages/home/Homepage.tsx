@@ -16,7 +16,6 @@ import useTokenStore from "@/stores/useTokenStore";
 
 import "@/styles/swiper.css";
 
-
 const HomePage = () => {
   const navigate = useNavigate();
   const [isOnboarding, setIsOnboarding] = useState(true);
@@ -70,7 +69,7 @@ const HomePage = () => {
           <FirstPlant
             setIsModalOpen={setIsModalOpen}
             isOpen={isModalOpen}
-            garden={gardens[0]}
+            garden={gardens[0] || null}
           />
         </SwiperSlide>
         <SwiperSlide>
