@@ -38,7 +38,7 @@ const UnlockGardenPlotPage: React.FC = () => {
         <ProgressBar currentStep={2} totalSteps={3} />
       </div>
 
-      <div className="flex flex-1 flex-col px-5 gap-8 pt-8">
+      <div className="flex flex-1 flex-col px-5 gap-8 pb-6 pt-8">
         <h1 className="mt-4 text-2xl font-bold">배송 정보를 입력해주세요</h1>
 
         <div>

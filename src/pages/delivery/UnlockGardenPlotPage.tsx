@@ -69,7 +69,7 @@ const UnlockGardenPlotPage: React.FC = () => {
                 centeredSlides={true}
                 spaceBetween={16}
                 pagination={{ el: ".custom-pagination", clickable: true }}
-                className="w-full h-75.75"
+                className="w-full h-75.75 rounded-2xl"
                 initialSlide={logs.findIndex(log => log.id === selectedId)}
                 onSlideChange={handleSlideChange}
               >
@@ -80,8 +80,8 @@ const UnlockGardenPlotPage: React.FC = () => {
                     className="flex items-center justify-center"
                   >
                     <div
-                      className={`w-full h-70 flex items-center justify-center rounded-[12px]  ${
-                        selectedId === log.id ? "" : " bg-white opacity-50"
+                      className={`w-full h-70 flex items-center justify-center ${
+                        selectedId === log.id ? "" : "bg-white opacity-50"
                       }`}
                     >
                       <log.Icon className="w-full h-full rounded-[12px]" />
