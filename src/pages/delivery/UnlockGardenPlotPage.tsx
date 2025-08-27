@@ -91,14 +91,12 @@ const UnlockGardenPlotPage: React.FC = () => {
 
             <div className="custom-pagination mt-6 flex justify-center gap-3"></div>
           </div>
-
-          {/* 버튼 */}
-          <div className="px-4 flex gap-3 justify-center">
-            <Button className="text-heading2">나중에 받기</Button>
-            <Button variant="primary" size="sm" className="text-heading2">
-              다음
-            </Button>
-          </div>
+        </div>
+        <div className="px-4 flex gap-3 justify-center">
+          <Button className="text-heading2">나중에 받기</Button>
+          <Button variant="primary" size="sm" className="text-heading2">
+            다음
+          </Button>
         </div>
       </div>
     </div>

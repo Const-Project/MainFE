@@ -1,0 +1,44 @@
+import Button from "@/components/common/Button";
+import ProgressBar from "@/components/common/ProgressBar";
+import DeliveryAddressForm from "@/components/delivery/DeliveryAddressForm";
+import DeilveryRequestForm from "@/components/delivery/DeliveryRequestForom";
+import UserInfo from "@/components/delivery/UserInfoForm";
+import HomeHeader from "@/components/home/HomeHeader";
+
+import "swiper/css";
+import "swiper/css/pagination";
+
+const UnlockGardenPlotPage: React.FC = () => {
+  return (
+    <div className="flex flex-col h-full pb-6">
+      <HomeHeader context="텃밭 해금하기" />
+
+      <div className="p-4">
+        <ProgressBar currentStep={2} totalSteps={3} />
+      </div>
+
+      <div className="flex flex-1 flex-col px-5 gap-8 pt-8">
+        <h1 className="mt-4 text-2xl font-bold">배송 정보를 입력해주세요</h1>
+
+        <div>
+          <UserInfo />
+        </div>
+        <div>
+          <DeliveryAddressForm />
+        </div>
+        <div>
+          <DeilveryRequestForm />
+        </div>
+
+        <div className="px-4 flex gap-3 justify-center">
+          <Button className="text-heading2">나중에 받기</Button>
+          <Button variant="gray600" size="sm" className="text-heading2">
+            다음
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default UnlockGardenPlotPage;

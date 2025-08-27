@@ -1,12 +1,13 @@
 //라우터
 import { Route, Routes, useLocation } from "react-router-dom";
 
+import DeliveryPage from "@/pages/delivery/DeliveryPage";
+import UnlockGardenPlotPage from "@/pages/delivery/UnlockGardenPlotPage";
 import FeedAvatarPage from "@/pages/feed/FeedAvatarPage";
 import FeedDiaryPage from "@/pages/feed/FeedDiaryPage";
 import FeedPage from "@/pages/feed/FeedPage";
 import FollowPage from "@/pages/follow/FollowPage";
 import HomePage from "@/pages/home/Homepage";
-import UnlockGardenPlotPage from "@/pages/home/UnlockGardenPlotPage";
 import LogDetailPage from "@/pages/log/LogDetailPage";
 import LogPage from "@/pages/log/LogPage";
 import OptionPage from "@/pages/option/OptionPage";
@@ -50,6 +51,7 @@ const App = () => {
         <Route path="/onboarding" element={<OnboardingPage />} />
         <Route path="/profile/:id" element={<ProfilePage />} />
         <Route path="unlock-garden" element={<UnlockGardenPlotPage />} />
+        <Route path="delivery" element={<DeliveryPage />} />
       </Route>
     </Routes>
   );
