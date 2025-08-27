@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import Button from "@/components/common/Button";
 import ProgressBar from "@/components/common/ProgressBar";
 import DeliveryAddressForm from "@/components/delivery/DeliveryAddressForm";
@@ -9,6 +11,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const UnlockGardenPlotPage: React.FC = () => {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [zipcode, setZipcode] = useState("");
+
   return (
     <div className="flex flex-col h-full pb-6">
       <HomeHeader context="텃밭 해금하기" />
@@ -21,10 +27,20 @@ const UnlockGardenPlotPage: React.FC = () => {
         <h1 className="mt-4 text-2xl font-bold">배송 정보를 입력해주세요</h1>
 
         <div>
-          <UserInfo />
+          <UserInfo
+            name={name}
+            setName={setName}
+            phone={phone}
+            setPhone={setPhone}
+          />
         </div>
         <div>
-          <DeliveryAddressForm />
+          <DeliveryAddressForm
+            zipcode={zipcode}
+            setZipcode={setZipcode}
+            detailAddress={detailAddress}
+            setDetailAddress={setDetailAddress}
+          />
         </div>
         <div>
           <DeilveryRequestForm />
