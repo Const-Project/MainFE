@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 import deliveryComplete from "@/assets/images/deilveryComplete.png";
 import Button from "@/components/common/Button";
 import ProgressBar from "@/components/common/ProgressBar";
@@ -7,6 +9,10 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const CompletePage: React.FC = () => {
+  const navigate = useNavigate();
+  const goNext = () => {
+    navigate("/");
+  };
   return (
     <div className="flex flex-col h-full pb-6">
       <HomeHeader context="텃밭 해금하기" />
@@ -28,7 +34,12 @@ const CompletePage: React.FC = () => {
         <img src={deliveryComplete} alt="deliveryComplete" className="w-full" />
       </div>
       <div className="px-4 flex gap-3 justify-center">
-        <Button variant="primary" size="lg" className="text-heading2">
+        <Button
+          variant="primary"
+          size="lg"
+          className="text-heading2"
+          onClick={goNext}
+        >
           다음
         </Button>
       </div>

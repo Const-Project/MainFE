@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
 import type { Swiper as SwiperType } from "swiper";
 import { Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -18,6 +19,11 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const UnlockGardenPlotPage: React.FC = () => {
+  const navigagte = useNavigate();
+  const goDelivery = () => {
+    navigagte("/delivery");
+  };
+
   const logs = [
     { id: 1, name: "통나무 1", Icon: Log1 },
     { id: 2, name: "통나무 2", Icon: Log2 },
@@ -94,7 +100,12 @@ const UnlockGardenPlotPage: React.FC = () => {
         </div>
         <div className="px-4 flex gap-3 justify-center">
           <Button className="text-heading2">나중에 받기</Button>
-          <Button variant="primary" size="sm" className="text-heading2">
+          <Button
+            variant="primary"
+            size="sm"
+            className="text-heading2"
+            onClick={goDelivery}
+          >
             다음
           </Button>
         </div>

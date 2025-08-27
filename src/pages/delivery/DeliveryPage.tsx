@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import Button from "@/components/common/Button";
 import ProgressBar from "@/components/common/ProgressBar";
 import DeliveryAddressForm from "@/components/delivery/DeliveryAddressForm";
@@ -11,10 +13,22 @@ import "swiper/css";
 import "swiper/css/pagination";
 
 const UnlockGardenPlotPage: React.FC = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [zipcode, setZipcode] = useState("");
   const [detailAddress, setDetailAddress] = useState("");
+  const isFormValid =
+    name.trim() !== "" &&
+    phone.trim() !== "" &&
+    zipcode.trim() !== "" &&
+    detailAddress.trim() !== "";
+
+  const handleNextClick = () => {
+    if (isFormValid) {
+      navigate("/delivery/complete");
+    }
+  };
 
   return (
     <div className="flex flex-col h-full pb-6">
@@ -49,7 +63,13 @@ const UnlockGardenPlotPage: React.FC = () => {
 
         <div className="px-4 flex gap-3 justify-center">
           <Button className="text-heading2">나중에 받기</Button>
-          <Button variant="gray600" size="sm" className="text-heading2">
+          <Button
+            variant={isFormValid ? "primary" : "gray200"}
+            size="sm"
+            className="text-heading2"
+            onClick={handleNextClick}
+            disabled={!isFormValid}
+          >
             다음
           </Button>
         </div>
