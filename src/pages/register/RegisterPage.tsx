@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import Edit from "@/assets/icons/common/edit.svg?react";
 import useRegister from "@/hooks/register/useRegister";
 
@@ -7,6 +9,7 @@ const RegisterPage = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [nickname, setNickname] = useState("");
+  const navigate = useNavigate();
 
   // useRegister 훅으로 분리
   const { register } = useRegister();
@@ -17,7 +20,13 @@ const RegisterPage = () => {
   };
 
   const handleRegister = async () => {
-    await register(nickname);
+    try {
+      await register(nickname);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      navigate("/registration/avatar");
+    }
   };
 
   return (

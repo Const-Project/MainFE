@@ -7,6 +7,7 @@ import LogPage from "@/pages/log/LogPage";
 import OptionPage from "@/pages/option/OptionPage";
 import RegisterPage from "@/pages/register/RegisterPage";
 import SearchPage from "@/pages/search/SearchPage";
+import OnboardingPage from "@/pages/splash/OnBoardingPage";
 //디자인 페이지
 import Design from "@/components/common/Design";
 //레이아웃
@@ -37,9 +38,10 @@ const App = () => {
         <Route path="splash" element={<SplashPage />} />
         <Route path="design" element={<Design />} />
         {RegistrationRoutes}
-        <Route path="/register" element={<RegisterPage />} />
         <Route path="/log/:id" element={<LogDetailPage />} />
         {DailyMissionRoutes}
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/onboarding" element={<OnboardingPage />} />
       </Route>
     </Routes>
   );
