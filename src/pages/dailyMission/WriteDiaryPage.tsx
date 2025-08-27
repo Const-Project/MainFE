@@ -1,19 +1,11 @@
 import React, { useState } from "react";
 
-import { useParams } from "react-router-dom";
-
 import DiaryHeader from "@/components/dailyMission/common/DiaryHeader";
 import DiaryEditor from "@/components/dailyMission/writeDiary/DiaryEditor";
 import DiaryFooter from "@/components/dailyMission/writeDiary/DiaryFooter";
 import { useWriteDiaryImageUploadApi } from "@/hooks/mission/useWriteDiaryApi";
 
 const WriteDiaryPage = () => {
-  const { userDailyMissionId } = useParams<{ userDailyMissionId: string }>();
-  if (!userDailyMissionId) {
-    throw new Error("userDailyMissionId 가 없습니다. 다시 시도해주세요.");
-  }
-  const numericMissionId = Number(userDailyMissionId);
-
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState<File | null>(null);
@@ -39,10 +31,10 @@ const WriteDiaryPage = () => {
       setImageUrl(file);
 
       const formData = new FormData();
-      formData.append("image", file);
+      formData.append("file", file);
 
       uploadMutation.mutate(
-        { userDailyMissionId: numericMissionId, formData },
+        { formData },
         {
           onSuccess: () => {
             console.log("이미지 업로드 성공");

@@ -12,10 +12,9 @@ export const useWriteDiaryImageUploadApi = () => {
   return useMutation<
     writeDiaryImageUploadResponse,
     Error,
-    { userDailyMissionId: number; formData: FormData }
+    { formData: FormData }
   >({
-    mutationFn: ({ userDailyMissionId, formData }) =>
-      takePhotoUploadApi(userDailyMissionId, formData),
+    mutationFn: ({ formData }) => takePhotoUploadApi(formData),
     onSuccess: data => {
       console.log("일기 사진 업로드 성공:", data);
       queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.DIARIES] });

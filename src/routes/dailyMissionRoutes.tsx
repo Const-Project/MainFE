@@ -6,10 +6,7 @@ import WriteDiaryPage from "@/pages/dailyMission/WriteDiaryPage";
 
 const DailyMissionRoutes = (
   <>
-    <Route
-      path="/dailyMission/writeDiary/:userDailyMissionId"
-      element={<WriteDiaryPage />}
-    />
+    <Route path="/dailyMission/writeDiary" element={<WriteDiaryPage />} />
     <Route
       path="/dailyMission/takePhoto/:userDailyMissionId"
       element={<TakePhotoPage />}
