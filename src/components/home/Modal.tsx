@@ -61,7 +61,7 @@ const HomeModal = ({
     <Modal setIsOpen={setIsOpen}>
       마음 건강 체크
       <div className="flex items-center justify-center w-full text-body2 flex-col gap-4">
-        <img src={Character} alt="character" />
+        <img src={Character} alt="character" className="w-20 h-full" />
         {!isAnswered && (
           <>
             {survey?.question}
