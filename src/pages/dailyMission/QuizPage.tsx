@@ -17,7 +17,7 @@ const QuizPage = () => {
   const { data, isLoading, isError } = useGetQuiz({ quizType: "OX" });
 
   // 정답 제출 훅
-  const { mutate: submitAnswer, isLoading: isSubmitting } = useAnswerQuiz();
+  const { mutate: submitAnswer } = useAnswerQuiz();
 
   if (isLoading) return <p>퀴즈 불러오는 중...</p>;
   if (isError || !data?.result) return <p>퀴즈 불러오기 실패</p>;
@@ -84,9 +84,9 @@ const QuizPage = () => {
           variant={selected ? "primary" : "gray200"}
           size="lg"
           onClick={handleSubmit}
-          disabled={isSubmitting}
+          // disabled={isSubmitting}
         >
-          {isSubmitting ? "제출 중..." : "정답 확인하기"}
+          {"정답 확인하기"}
         </Button>
       </footer>
     </div>

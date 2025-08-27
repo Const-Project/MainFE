@@ -7,7 +7,7 @@ import { getQuizApi } from "@/apis/missions/QuizApi";
 
 export const useGetQuiz = (params: getQuizRequest) => {
   return useQuery<getQuizResponse>({
-    queryKey: [QUERY_KEYS.QUIZ.REAL, params], // 캐시 키
+    queryKey: [QUERY_KEYS.QUIZ, params],
     queryFn: () => getQuizApi(params),
   });
 };
