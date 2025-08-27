@@ -1,27 +1,39 @@
 import { useEffect, useState } from "react";
 
 import Watering from "@/assets/images/background/watering.png";
-import Bird from "@/assets/images/bird.png";
-import Char2 from "@/assets/images/char2.png";
+import Bird from "@/assets/images/bird.webp";
+import Char2 from "@/assets/images/char2.webp";
 
 import BirdModal from "./BirdModal";
 import Modal from "./Modal";
 
+import Toast from "../common/Toast";
+import { useHomeSummaryStore } from "@/stores/useGardenStore";
+
 const Avatar = ({
   isWater,
   avatarUri,
+  setIsModalOpen,
+  isOpen,
 }: {
   isWater: boolean;
   avatarUri: string;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen: boolean;
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { missions } = useHomeSummaryStore();
+
   const [isChecked, setIsChecked] = useState<number>(0);
   const [isOpenBird, setIsOpenBird] = useState(false);
+  const [isToastOpen, setIsToastOpen] = useState(false);
+  const [isToastOpen2, setIsToastOpen2] = useState(false);
+
+  const [isAnswered, setIsAnswered] = useState(missions[2].completed);
 
   useEffect(() => {
     if (isChecked === 1 || isChecked === 2 || isChecked === 3) {
       const timer = setTimeout(() => {
-        setIsChecked(4);
+        setIsAnswered(true);
       }, 2000); // 3초
 
       // cleanup: 상태가 바뀌거나 컴포넌트 언마운트 시 타이머 해제
@@ -29,8 +41,19 @@ const Avatar = ({
     }
   }, [isChecked]);
 
+  const handleClick = () => {
+    if (isAnswered === false) {
+      setIsToastOpen(true);
+    }
+  };
+
   return (
-    <div className="flex-1 flex items-center justify-center relative w-full max-w-md mx-auto">
+    <div
+      className={`flex-1 flex items-center justify-center relative w-full max-w-md ${
+        isAnswered ? "z-10" : "z-40"
+      }`}
+      onClick={handleClick}
+    >
       {/* Plant + Bird 묶음 */}
       <div className="absolute bottom-[16vh] w-full flex flex-col items-center justify-center">
         <img
@@ -52,32 +75,54 @@ const Avatar = ({
           src={Bird}
           alt="bird"
           className="absolute bottom-0 right-20 w-24 h-auto"
-          onClick={() => setIsOpenBird(true)}
+          onClick={() => {
+            if (isAnswered === false) {
+              setIsToastOpen(true);
+            } else {
+              setIsOpenBird(true);
+            }
+          }}
         />
-        <div className="balloon-wrapper text-body-sb">
+        <div className="balloon-wrapper text-body-sb z-45">
           <>
             <div
-              className={`balloon balloon-center text-body-sb text-black gap-4 flex flex-col py-5 px-6 min-w-50 ${
-                isChecked === 4
-                  ? "bg-transparent after:border-transparent"
-                  : "bg-white after:border-l-transparent after:border-b-transparent after:border-r-transparent after:border-t-white"
+              className={`balloon balloon-center text-body-sb gap-4 flex flex-col py-5 px-6 min-w-50 ${
+                isAnswered
+                  ? "bg-transparent after:border-transparent text-transparent"
+                  : "text-black bg-white after:border-l-transparent after:border-b-transparent after:border-r-transparent after:border-t-white"
               }`}
+              onClick={e => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
+              onTouchStart={e => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
             >
-              {isChecked === 0 && (
+              {!isAnswered && (
                 <>
-                  <div>
-                    오늘도 만나서 정말 반가워요!
-                    <br />
-                    괜찮으시다면 오늘 하루는 어떠셨는지
-                    <br />
-                    살짝 알려주시겠어요?
-                  </div>
-                  <button
-                    onClick={() => setIsOpen(true)}
-                    className="button-primary"
+                  <div
+                    className={`${
+                      isChecked > 0 ? "hidden" : "block"
+                    } text-black `}
                   >
-                    마음 건강 체크
-                  </button>
+                    <div className="pb-4">
+                      오늘도 만나서 정말 반가워요!
+                      <br />
+                      괜찮으시다면 오늘 하루는 어떠셨는지
+                      <br />
+                      살짝 알려주시겠어요?
+                    </div>
+                    <button
+                      onClick={() => {
+                        setIsModalOpen(true);
+                      }}
+                      className="button-primary"
+                    >
+                      마음 건강 체크
+                    </button>
+                  </div>
                 </>
               )}
               {isChecked === 1 && <>좋은 기분으로 오늘 하루 계속 이어가요!</>}
@@ -90,18 +135,34 @@ const Avatar = ({
             src={Char2}
             alt="char2"
             className="char"
-            onClick={() => setIsOpen(true)}
+            onClick={() => {
+              setIsModalOpen(true);
+            }}
           />
         </div>
       </div>
+      {isOpenBird && <BirdModal setIsOpen={setIsOpenBird} />}
       {isOpen && (
         <Modal
-          setIsOpen={setIsOpen}
+          setIsOpen={setIsModalOpen}
           setIsChecked={setIsChecked}
           isChecked={isChecked}
+          setIsAnswered={setIsAnswered}
+          isAnswered={isAnswered}
         />
       )}
-      {isOpenBird && <BirdModal setIsOpen={setIsOpenBird} />}
+      {isToastOpen && (
+        <Toast
+          message="마음 체크를 먼저 완료해주세요!"
+          onClose={isClose => setIsToastOpen(isClose)}
+        />
+      )}
+      {isToastOpen2 && (
+        <Toast
+          message="물(오전 12시) 햇빛(오전 6시)에 초기화 됩니다."
+          onClose={isClose => setIsToastOpen2(isClose)}
+        />
+      )}
     </div>
   );
 };
