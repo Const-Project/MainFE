@@ -7,15 +7,22 @@ interface OXQuizProps {
   quizQuestion: string;
   selected: "O" | "X" | null;
   setSelected: (value: "O" | "X") => void;
+  disabled?: boolean;
 }
 
 const OX_Quiz: React.FC<OXQuizProps> = ({
   quizQuestion,
   selected,
   setSelected,
+  disabled = false,
 }) => {
   const baseBoxClass =
     "flex justify-center items-center aspect-140/123 border-1 rounded-[8px] text-6xl font-bold cursor-pointer transition-transform duration-200 select-none";
+
+  const handleClick = (value: "O" | "X") => {
+    if (disabled) return;
+    setSelected(value);
+  };
 
   return (
     <div className="flex flex-col flex-1 w-full gap-8">
@@ -27,7 +34,7 @@ const OX_Quiz: React.FC<OXQuizProps> = ({
               ? "border-gray-400 bg-gray-200"
               : "border-gray-200 bg-white"
           }`}
-          onClick={() => setSelected("O")}
+          onClick={() => handleClick("O")}
         >
           <OX_O
             width={32}
@@ -41,7 +48,7 @@ const OX_Quiz: React.FC<OXQuizProps> = ({
               ? "border-gray-400 bg-gray-200"
               : "border-gray-200 bg-white"
           }`}
-          onClick={() => setSelected("X")}
+          onClick={() => handleClick("X")}
         >
           <OX_X
             width={32}

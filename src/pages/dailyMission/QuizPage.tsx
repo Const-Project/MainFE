@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import Button from "@/components/common/Button";
 import DiaryHeader from "@/components/dailyMission/common/DiaryHeader";
 import OX_Quiz from "@/components/dailyMission/quiz/OXQuiz";
@@ -7,6 +9,7 @@ import { useGetQuiz } from "@/hooks/mission/useGetQuizApi";
 import { useAnswerQuiz } from "@/hooks/mission/usePostAnswerQuiz";
 
 const QuizPage = () => {
+  const navigate = useNavigate();
   const [selected, setSelected] = useState<"O" | "X" | null>(null);
   const [answerResult, setAnswerResult] = useState<{
     isCorrect: boolean;
@@ -14,13 +17,17 @@ const QuizPage = () => {
   } | null>(null);
 
   // 오늘의 OX 퀴즈 가져오기
-  const { data, isLoading, isError } = useGetQuiz({ quizType: "OX" });
+  const {
+    data,
+    isLoading: getQuizLoading,
+    isError: getQuizError,
+  } = useGetQuiz({ quizType: "OX" });
 
   // 정답 제출 훅
   const { mutate: submitAnswer } = useAnswerQuiz();
 
-  if (isLoading) return <p>퀴즈 불러오는 중...</p>;
-  if (isError || !data?.result) return <p>퀴즈 불러오기 실패</p>;
+  if (getQuizLoading) return <p>퀴즈 불러오는 중...</p>;
+  if (getQuizError || !data?.result) return <p>퀴즈 불러오기 실패</p>;
 
   const { quizId, quizQuestion } = data.result;
 
@@ -30,7 +37,7 @@ const QuizPage = () => {
       return;
     }
 
-    const selectedOptionOrder = selected === "O" ? 1 : 2;
+    const selectedOptionOrder = selected === "O" ? 0 : 1;
 
     submitAnswer(
       { quizId, selectedOptionOrder },
@@ -41,6 +48,7 @@ const QuizPage = () => {
             isCorrect,
             description: answerDescription,
           });
+          console.log("정답 제출 성공:", res);
         },
         onError: () => {
           alert("정답 제출 실패");
@@ -59,6 +67,7 @@ const QuizPage = () => {
             quizQuestion={quizQuestion}
             selected={selected}
             setSelected={setSelected}
+            disabled={!!answerResult}
           />
 
           {answerResult && (
@@ -67,11 +76,7 @@ const QuizPage = () => {
                 answerResult.isCorrect ? "text-primary" : "text-danger"
               }`}
             >
-              <p
-                className={`text-body1 ${
-                  answerResult.isCorrect ? "text-green-600" : "text-red-600"
-                }`}
-              >
+              <p className="text-body1">
                 {answerResult.isCorrect ? "정답!" : "오답!"}
               </p>
               <p className="text-body-sb">{answerResult.description}</p>
@@ -80,14 +85,19 @@ const QuizPage = () => {
         </div>
       </main>
       <footer className="flex items-center justify-center px-5 pt-2.25 text-heading2">
-        <Button
-          variant={selected ? "primary" : "gray200"}
-          size="lg"
-          onClick={handleSubmit}
-          // disabled={isSubmitting}
-        >
-          {"정답 확인하기"}
-        </Button>
+        {answerResult ? (
+          <Button variant="default" size="lg" onClick={() => navigate("/")}>
+            {"다음"}
+          </Button>
+        ) : (
+          <Button
+            variant={selected ? "primary" : "gray200"}
+            size="lg"
+            onClick={handleSubmit}
+          >
+            {"정답 확인하기"}
+          </Button>
+        )}
       </footer>
     </div>
   );
