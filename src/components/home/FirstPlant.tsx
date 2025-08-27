@@ -11,14 +11,22 @@ import Water from "@/assets/icons/water.svg?react";
 
 import Plant from "@/assets/images/plant.png";
 
-import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
+import Toast from "@/components/common/Toast";
+import { GardenSummary } from "@/types/home/garden";
 
-const FirstPlant = () => {
-  const [isSunLight, setIsSunLight] = useState(false);
-  const [isWater, setIsWater] = useState(false);
+const FirstPlant = ({
+  setIsModalOpen,
+  isOpen,
+  garden,
+}: {
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen: boolean;
+  garden: GardenSummary;
+}) => {
+  const [isSunLight, setIsSunLight] = useState(garden.ownerSunlightAble);
+  const [isWater, setIsWater] = useState(garden.ownerWateringAble);
   const timerRef = useRef<number | null>(null);
-
-  const { pickAvatar } = useAvatarCreationStore();
+  const [isToastOpen, setIsToastOpen] = useState(false);
 
   const handleSunLight = () => {
     // 이미 애니메이션 중이면 무시
@@ -83,7 +91,7 @@ const FirstPlant = () => {
       <div className="relative z-20 flex h-full w-full flex-col items-center justify-center">
         <header className="relative flex w-full items-center justify-between p-4 text-heading1 text-white">
           <Map isNumber={3} />
-          몽순몽순
+          {garden.avatar.avatarName}
           <div className="h-12 w-12" />
         </header>
 
@@ -107,8 +115,19 @@ const FirstPlant = () => {
           </button>
         </div>
 
-        <Avatar isWater={isWater} avatarUri={pickAvatar.img || Plant} />
+        <Avatar
+          isWater={isWater}
+          avatarUri={garden.avatar.avatarImageUrl || Plant}
+          setIsModalOpen={setIsModalOpen}
+          isOpen={isOpen}
+        />
       </div>
+      {isToastOpen && (
+        <Toast
+          message="마음 체크를 먼저 완료해주세요!"
+          onClose={() => setIsToastOpen(false)}
+        />
+      )}
     </div>
   );
 };

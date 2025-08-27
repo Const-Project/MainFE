@@ -1,4 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import Plant from "@/assets/icons/bottom-sheet/plant.svg?react";
 import Check from "@/assets/icons/common/check.svg?react";
@@ -11,8 +12,13 @@ import Four from "@/assets/images/bottom-sheet/four.svg?react";
 import One from "@/assets/images/bottom-sheet/one.svg?react";
 import Three from "@/assets/images/bottom-sheet/three.svg?react";
 import Two from "@/assets/images/bottom-sheet/two.svg?react";
+import Right from "@/assets/icons/common/right.svg?react";
 
-const BottomSheet: React.FC = () => {
+const BottomSheet: React.FC<{ setIsModalOpen: (isOpen: boolean) => void }> = ({
+  setIsModalOpen,
+}) => {
+  const navigate = useNavigate();
+
   // ===== 표시용 상태 =====
   const [isChecked] = useState(true);
   const [isChecked2] = useState(false);
@@ -223,24 +229,39 @@ const BottomSheet: React.FC = () => {
 
             <div className="mt-6 flex flex-col gap-3">
               {[
-                { label: "일기 쓰기", on: isChecked },
-                { label: "식물 사진 찍기", on: isChecked2 },
-                { label: "퀴즈 풀기", on: isChecked3 },
-              ].map(({ label, on }, i) => (
+                {
+                  label: "마음 건강 체크",
+                  on: isChecked,
+                  action: () => {
+                    setIsModalOpen(true);
+                  },
+                },
+                {
+                  label: "일기 쓰기",
+                  on: isChecked2,
+                  action: () => navigate("/dailyMission/writeDiary"),
+                },
+                {
+                  label: "퀴즈 풀기",
+                  on: isChecked3,
+                  action: () => navigate("/dailyMission/quiz"),
+                },
+              ].map(({ label, on, action }, i) => (
                 <div
                   key={i}
-                  className={`flex w-full justify-between rounded-lg border p-4 transition-colors
+                  className={`flex w-full justify-between rounded-lg border p-4 transition-colors items-center
                     ${
                       on
                         ? "border-transparent bg-primary-varient text-primary-font text-body1"
-                        : "border-gray-200 bg-white text-black text-body2"
+                        : "border-gray-200 bg-white text-gray-600 text-body2"
                     }`}
+                  onClick={action}
                 >
                   {label}
                   {on ? (
                     <Check className="h-8 w-8" />
                   ) : (
-                    <UnCheck className="h-8 w-8" />
+                    <Right className="h-8 w-8 text-gray-400" />
                   )}
                 </div>
               ))}

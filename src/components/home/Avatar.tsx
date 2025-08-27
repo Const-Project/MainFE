@@ -7,17 +7,22 @@ import BirdModal from "./BirdModal";
 import Modal from "./Modal";
 
 import Watering from "@/assets/images/background/watering.png";
+import Toast from "../common/Toast";
 
 const Avatar = ({
   isWater,
   avatarUri,
+  setIsModalOpen,
+  isOpen,
 }: {
   isWater: boolean;
   avatarUri: string;
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen: boolean;
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [isChecked, setIsChecked] = useState<number>(0);
   const [isOpenBird, setIsOpenBird] = useState(false);
+  const [isToastOpen, setIsToastOpen] = useState(false);
 
   useEffect(() => {
     if (isChecked === 1 || isChecked === 2 || isChecked === 3) {
@@ -30,8 +35,19 @@ const Avatar = ({
     }
   }, [isChecked]);
 
+  const handleClick = () => {
+    if (isChecked === 0) {
+      setIsToastOpen(true);
+    }
+  };
+
   return (
-    <div className="flex-1 flex items-center justify-center relative w-full max-w-md mx-auto">
+    <div
+      className={`flex-1 flex items-center justify-center relative w-full max-w-md ${
+        isChecked === 0 ? "z-40" : "z-10"
+      }`}
+      onClick={handleClick}
+    >
       {/* Plant + Bird 묶음 */}
       <div className="absolute bottom-[16vh] w-full flex flex-col items-center justify-center">
         <img
@@ -53,9 +69,15 @@ const Avatar = ({
           src={Bird}
           alt="bird"
           className="absolute bottom-0 right-20 w-24 h-auto"
-          onClick={() => setIsOpenBird(true)}
+          onClick={() => {
+            if (isChecked === 0) {
+              setIsToastOpen(true);
+            } else {
+              setIsOpenBird(true);
+            }
+          }}
         />
-        <div className="balloon-wrapper text-body-sb">
+        <div className="balloon-wrapper text-body-sb z-45">
           <>
             <div
               className={`balloon balloon-center text-body-sb text-black gap-4 flex flex-col py-5 px-6 min-w-50 ${
@@ -63,6 +85,14 @@ const Avatar = ({
                   ? "bg-transparent after:border-transparent"
                   : "bg-white after:border-l-transparent after:border-b-transparent after:border-r-transparent after:border-t-white"
               }`}
+              onClick={e => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
+              onTouchStart={e => {
+                e.stopPropagation();
+                e.preventDefault();
+              }}
             >
               {isChecked === 0 && (
                 <>
@@ -74,7 +104,9 @@ const Avatar = ({
                     살짝 알려주시겠어요?
                   </div>
                   <button
-                    onClick={() => setIsOpen(true)}
+                    onClick={() => {
+                      setIsModalOpen(true);
+                    }}
                     className="button-primary"
                   >
                     마음 건강 체크
@@ -91,18 +123,26 @@ const Avatar = ({
             src={Char2}
             alt="char2"
             className="char"
-            onClick={() => setIsOpen(true)}
+            onClick={() => {
+              setIsModalOpen(true);
+            }}
           />
         </div>
       </div>
+      {isOpenBird && <BirdModal setIsOpen={setIsOpenBird} />}
       {isOpen && (
         <Modal
-          setIsOpen={setIsOpen}
+          setIsOpen={setIsModalOpen}
           setIsChecked={setIsChecked}
           isChecked={isChecked}
         />
       )}
-      {isOpenBird && <BirdModal setIsOpen={setIsOpenBird} />}
+      {isToastOpen && (
+        <Toast
+          message="마음 체크를 먼저 완료해주세요!"
+          onClose={isClose => setIsToastOpen(isClose)}
+        />
+      )}
     </div>
   );
 };
