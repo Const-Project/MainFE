@@ -47,7 +47,7 @@ const BottomSheet: React.FC<{ setIsModalOpen: (isOpen: boolean) => void }> = ({
   const OVERDRAG = 40;
   const RESISTANCE = 0.35;
 
-  const snapPoints = [140, 560]; // [초기 90, 풀오픈 560]
+  const snapPoints = [100, 560]; // [초기 90, 풀오픈 560]
   const maxSnap = Math.max(...snapPoints);
 
   // 2) 초기 높이를 '90px'로 고정
