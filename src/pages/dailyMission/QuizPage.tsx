@@ -13,7 +13,8 @@ const QuizPage = () => {
   const [selected, setSelected] = useState<"O" | "X" | null>(null);
   const [answerResult, setAnswerResult] = useState<{
     isCorrect: boolean;
-    description: string;
+    answerDescription: string;
+    answerNumber: number;
   } | null>(null);
 
   // 오늘의 OX 퀴즈 가져오기
@@ -43,10 +44,11 @@ const QuizPage = () => {
       { quizId, selectedOptionOrder },
       {
         onSuccess: res => {
-          const { isCorrect, answerDescription } = res.result;
+          const { isCorrect, answerDescription, answerNumber } = res.result;
           setAnswerResult({
-            isCorrect,
-            description: answerDescription,
+            isCorrect: isCorrect,
+            answerDescription: answerDescription,
+            answerNumber: answerNumber,
           });
           console.log("정답 제출 성공:", res);
         },
@@ -68,6 +70,8 @@ const QuizPage = () => {
             selected={selected}
             setSelected={setSelected}
             disabled={!!answerResult}
+            isCorrect={answerResult ? answerResult.isCorrect : undefined}
+            answerNumber={answerResult ? answerResult.answerNumber : undefined}
           />
 
           {answerResult && (
@@ -79,7 +83,7 @@ const QuizPage = () => {
               <p className="text-body1">
                 {answerResult.isCorrect ? "정답!" : "오답!"}
               </p>
-              <p className="text-body-sb">{answerResult.description}</p>
+              <p className="text-body-sb">{answerResult.answerDescription}</p>
             </div>
           )}
         </div>
