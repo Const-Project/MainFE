@@ -1,4 +1,5 @@
-import CheckBox from "@/components/common/CheckBox";
+import Check from "@/assets/icons/common/check.svg?react";
+import UnCheck from "@/assets/icons/common/uncheck.svg?react";
 
 interface MultipleChoiceQuizProps {
   quizQuestion: string;
@@ -8,7 +9,7 @@ interface MultipleChoiceQuizProps {
   disabled?: boolean;
   isCorrect?: boolean;
   answerNumber?: number;
-  answerDescription?: string; // 해설도 prop으로 받기
+  answerDescription?: string;
 }
 
 const MultipleChoiceQuestionQuiz = ({
@@ -53,20 +54,23 @@ const MultipleChoiceQuestionQuiz = ({
         {quizOptions?.map((option, index) => {
           const label = getOptionLabel(index);
           const showExplanation = label === "정답!" && answerDescription;
+
           return (
             <div key={index} className="flex flex-col gap-1">
               <div
-                className={`border rounded-[8px] p-4 flex items-center justify-between cursor-pointer ${getOptionClass(index)}`}
+                className={`border rounded-[8px] p-4 flex items-center justify-between cursor-pointer ${getOptionClass(
+                  index
+                )}`}
                 onClick={() => !disabled && setSelected(index)}
               >
                 <span className="text-body2">{option.optionText}</span>
+
                 {!label ? (
-                  <CheckBox
-                    className="w-[26px] h-[26px]"
-                    strokeWidth={2}
-                    checked={selected === index}
-                    readOnly
-                  />
+                  selected === index ? (
+                    <Check className="w-6.25 h-6.25" />
+                  ) : (
+                    <UnCheck className="w-6.25 h-6.25" />
+                  )
                 ) : (
                   <span
                     className={`font-semibold text-body2 ${
@@ -77,6 +81,7 @@ const MultipleChoiceQuestionQuiz = ({
                   </span>
                 )}
               </div>
+
               {/* 정답 해설 표시 */}
               {showExplanation && (
                 <div className="text-body-sb text-primary">
