@@ -23,6 +23,7 @@ const Avatar = ({
   const [isChecked, setIsChecked] = useState<number>(0);
   const [isOpenBird, setIsOpenBird] = useState(false);
   const [isToastOpen, setIsToastOpen] = useState(false);
+  const [isToastOpen2, setIsToastOpen2] = useState(false);
 
   useEffect(() => {
     if (isChecked === 1 || isChecked === 2 || isChecked === 3) {
@@ -141,6 +142,12 @@ const Avatar = ({
         <Toast
           message="마음 체크를 먼저 완료해주세요!"
           onClose={isClose => setIsToastOpen(isClose)}
+        />
+      )}
+      {isToastOpen2 && (
+        <Toast
+          message="물 주기(오전 12시) 햇빛 주기(오전 6시)에 초기화 됩니다."
+          onClose={isClose => setIsToastOpen2(isClose)}
         />
       )}
     </div>
