@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 
 import Background from "@/assets/images/background/background2.png";
+import Plant from "@/assets/images/plant.png";
 import Map from "@/components/common/Map";
 import Avatar from "@/components/home/Avatar";
 import Lock from "@/components/lock/Lock";
 import UnLock from "@/components/lock/UnLock";
 
-import Plant from "@/assets/images/plant.png";
 import Sun from "@/assets/icons/sun.svg?react";
 import Water from "@/assets/icons/water.svg?react";
 
@@ -179,7 +179,7 @@ const SecondPlant = ({
           <div className="w-full h-full flex flex-col relative items-center justify-center">
             <header className="relative flex items-center justify-between w-full text-heading1 text-white p-4">
               <Map isNumber={4} />
-              {garden?.avatar.avatarName || "몽순몽순"}
+              {garden?.avatar?.avatarName || "몽순몽순"}
               <div className="justify-self-end w-12 h-12" />
             </header>
             <div className="absolute bottom-[180px] z-40 right-3 flex flex-col items-center justify-center gap-2">
@@ -202,7 +202,7 @@ const SecondPlant = ({
             </div>
             <Avatar
               isWater={false}
-              avatarUri={Plant}
+              avatarUri={garden?.avatar?.avatarImageUrl || Plant}
               setIsModalOpen={setIsModalOpen}
               isOpen={isOpen}
             />

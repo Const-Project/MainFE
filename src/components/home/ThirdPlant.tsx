@@ -179,7 +179,7 @@ const ThirdPlant = ({
           <div className="w-full h-full flex flex-col relative items-center justify-center">
             <header className="relative flex items-center justify-between w-full text-heading1 text-white p-4">
               <Map isNumber={4} />
-              {garden?.avatar.avatarName || "몽순몽순"}
+              {garden?.avatar?.avatarName || "몽순몽순"}
               <div className="justify-self-end w-12 h-12" />
             </header>
             <div className="absolute bottom-[180px] z-40 right-3 flex flex-col items-center justify-center gap-2">

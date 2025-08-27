@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
 
 import Character from "@/assets/images/char.webp";
-
-import axios from "@/apis/instance";
-
-import Modal from "../common/Modal";
 import useSurvey from "@/hooks/survey/useSurvey";
 import { PostSurveyResponse } from "@/types/apis/survey";
+
+import Modal from "../common/Modal";
+
+import axios from "@/apis/instance";
 
 type Props = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   setIsChecked: React.Dispatch<React.SetStateAction<number>>;
-  isChecked: number;
   isAnswered: boolean;
   setIsAnswered: React.Dispatch<React.SetStateAction<boolean>>;
 };

@@ -7,7 +7,7 @@ export interface Avatar {
 export interface GardenSummary {
   gardenId: number;
   gardenSlotNumber: number;
-  avatar: Avatar;
+  avatar?: Avatar | null;
   locked: boolean;
   unlockable: boolean;
   ownerWateringAble: boolean | null;

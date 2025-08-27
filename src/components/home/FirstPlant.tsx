@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
+import { AxiosError } from "axios";
+
 import Sun from "@/assets/icons/sun.svg?react";
 import Water from "@/assets/icons/water.svg?react";
 import Background from "@/assets/images/background/background1.webp";
@@ -12,7 +14,6 @@ import Map from "../common/Map";
 import Avatar from "./Avatar";
 
 import axios from "@/apis/instance";
-import { AxiosError } from "axios";
 
 const FirstPlant = ({
   setIsModalOpen,
@@ -144,7 +145,7 @@ const FirstPlant = ({
       <div className="relative z-20 flex h-full w-full flex-col items-center justify-center ">
         <header className="relative flex w-full items-center justify-between p-4 text-heading1 text-white">
           <Map isNumber={1} />
-          {garden?.avatar.avatarName}
+          {garden?.avatar?.avatarName || Plant}
           <div className="h-12 w-12" />
         </header>
 
@@ -170,7 +171,7 @@ const FirstPlant = ({
 
         <Avatar
           isWater={isWater}
-          avatarUri={garden?.avatar.avatarImageUrl || Plant}
+          avatarUri={garden?.avatar?.avatarImageUrl || Plant}
           setIsModalOpen={setIsModalOpen}
           isOpen={isOpen}
         />
