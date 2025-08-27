@@ -9,6 +9,7 @@ import HomePage from "@/pages/home/Homepage";
 import LogDetailPage from "@/pages/log/LogDetailPage";
 import LogPage from "@/pages/log/LogPage";
 import OptionPage from "@/pages/option/OptionPage";
+import ProfilePage from "@/pages/profile/ProfilePage";
 import RegisterPage from "@/pages/register/RegisterPage";
 import OnboardingPage from "@/pages/splash/OnBoardingPage";
 //디자인 페이지
@@ -46,6 +47,7 @@ const App = () => {
         <Route path="/option" element={<OptionPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/onboarding" element={<OnboardingPage />} />
+        <Route path="/profile/:id" element={<ProfilePage />} />
       </Route>
     </Routes>
   );

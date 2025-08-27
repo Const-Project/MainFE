@@ -8,6 +8,8 @@ export const getQuizApi = async (
 ): Promise<getQuizResponse> => {
   try {
     const response = await axios.get("/api/v1/realQuiz", { params });
+
+
     return response.data;
   } catch (error) {
     console.error("Error get MissionPanel:", error);

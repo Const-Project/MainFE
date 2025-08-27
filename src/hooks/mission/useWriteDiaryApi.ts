@@ -23,7 +23,9 @@ export const useWriteDiaryImageUploadApi = () => {
     mutationFn: ({ formData }) => takePhotoUploadApi(formData),
     onSuccess: data => {
       console.log("일기 사진 업로드 성공:", data);
+
       queryClient.invalidateQueries({ queryKey: ["diaries"] });
+
     },
 
     onError: error => {
@@ -43,7 +45,9 @@ export const useWriteDiarySubmitApi = () => {
     mutationFn: body => writeDiarySubmitApi(body),
     onSuccess: data => {
       console.log("일기 작성 성공:", data);
+
       queryClient.invalidateQueries({ queryKey: ["diaries"] });
+
     },
     onError: error => {
       console.error("일기 작성 실패:", error);
