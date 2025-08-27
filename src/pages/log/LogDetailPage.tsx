@@ -70,7 +70,7 @@ const LogDetailPage = () => {
           <input
             type="text"
             placeholder="댓글을 입력해주세요."
-            className="flex-1 px-4 py-2 bg-gray-200 rounded-full focus:bg-gray-400 focus:outline-none transition-colors"
+            className="flex-1 px-4 py-2 bg-gray-200 rounded-full focus:outline-none transition-colors"
           />
           <Send className="w-8 h-8 cursor-pointer" />
         </div>
