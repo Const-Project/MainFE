@@ -20,11 +20,7 @@ export const postCrationAvatarApi = async (
   formData: FormData
 ): Promise<CreateAvatarResponse> => {
   try {
-    const response = await axios.post("/api/v1/register/upload", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    const response = await axios.post("/api/v1/register/upload", formData);
     return response.data;
   } catch (error) {
     console.error("error :", error);

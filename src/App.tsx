@@ -6,6 +6,7 @@ import FeedDiaryPage from "@/pages/feed/FeedDiaryPage";
 import FeedPage from "@/pages/feed/FeedPage";
 import FollowPage from "@/pages/follow/FollowPage";
 import HomePage from "@/pages/home/Homepage";
+import UnlockGardenPlotPage from "@/pages/home/UnlockGardenPlotPage";
 import LogDetailPage from "@/pages/log/LogDetailPage";
 import LogPage from "@/pages/log/LogPage";
 import OptionPage from "@/pages/option/OptionPage";
@@ -48,6 +49,7 @@ const App = () => {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/onboarding" element={<OnboardingPage />} />
         <Route path="/profile/:id" element={<ProfilePage />} />
+        <Route path="unlock-garden" element={<UnlockGardenPlotPage />} />
       </Route>
     </Routes>
   );
