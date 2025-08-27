@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import DiaryHeader from "@/components/dailyMission/common/DiaryHeader";
 import DiaryEditor from "@/components/dailyMission/writeDiary/DiaryEditor";
 import DiaryFooter from "@/components/dailyMission/writeDiary/DiaryFooter";
@@ -9,6 +11,7 @@ import {
 } from "@/hooks/mission/useWriteDiaryApi";
 
 const WriteDiaryPage = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState<File | null>(null);
@@ -70,6 +73,8 @@ const WriteDiaryPage = () => {
       imageId: uploadedImage.imageId,
       imageUrl: uploadedImage.imageUrl,
     });
+
+    navigate("/");
   };
 
   return (
