@@ -14,14 +14,25 @@ const BottomSheet: React.FC<{ setIsModalOpen: (isOpen: boolean) => void }> = ({
   const { data } = usePanelApi();
   console.log(data);
   // ===== 표시용 상태 =====
-  const [isChecked] = useState(data?.isCheckingCompleted);
-  const [isChecked2] = useState(data?.isDairyCompleted);
-  const [isChecked3] = useState(data?.isQuizCompleted);
-  const [percent] = useState(data?.wishTree.progressPercent);
+  const [isChecked, setIsChecked] = useState(data?.isCheckingCompleted);
+  const [isChecked2, setIsChecked2] = useState(data?.isDairyCompleted);
+  const [isChecked3, setIsChecked3] = useState(data?.isQuizCompleted);
+  const [percent, setPercent] = useState(data?.wishTree.progressPercent);
+  const randomNum = (Math.floor(Math.random() * 3) + 1) % 2;
+  const path =
+    randomNum === 1
+      ? "/dailyMission/quiz/multipleChoice"
+      : "/dailyMission/quiz/ox";
 
   // ===== 스냅/드래그 파라미터 =====
 
   // 스냅 완료 상태를 보관(초기엔 닫힘 위치로 시작)
+  useEffect(() => {
+    setIsChecked(data?.isCheckingCompleted);
+    setIsChecked2(data?.isDairyCompleted);
+    setIsChecked3(data?.isQuizCompleted);
+    setPercent(data?.wishTree.progressPercent);
+  }, [data]);
 
   // ===== DOM/드래그 제어용 ref =====
   const rafId = useRef<number | null>(null);
@@ -36,7 +47,7 @@ const BottomSheet: React.FC<{ setIsModalOpen: (isOpen: boolean) => void }> = ({
   const OVERDRAG = 40;
   const RESISTANCE = 0.35;
 
-  const snapPoints = [140, 560]; // [초기 90, 풀오픈 560]
+  const snapPoints = [100, 560]; // [초기 90, 풀오픈 560]
   const maxSnap = Math.max(...snapPoints);
 
   // 2) 초기 높이를 '90px'로 고정
@@ -238,7 +249,7 @@ const BottomSheet: React.FC<{ setIsModalOpen: (isOpen: boolean) => void }> = ({
                 {
                   label: "퀴즈 풀기",
                   on: isChecked3,
-                  action: () => navigate("/dailyMission/quiz"),
+                  action: () => navigate(path),
                 },
               ].map(({ label, on, action }, i) => (
                 <div
@@ -269,7 +280,7 @@ const BottomSheet: React.FC<{ setIsModalOpen: (isOpen: boolean) => void }> = ({
                 소망 나무
               </div>
               <p>
-                {percent && percent > 3 ? (
+                {percent && percent > 100 ? (
                   <span>
                     지금 바로{" "}
                     <span className="text-primary-font">새로운 텃밭</span>을 열
@@ -287,9 +298,17 @@ const BottomSheet: React.FC<{ setIsModalOpen: (isOpen: boolean) => void }> = ({
                 )}
               </p>
             </div>
+            <div className="flex justify-between mt-4">
+              <div className="text-body-sb text-primary-font">
+                {data?.wishTree.currentStage}
+              </div>
+              <div className="text-body-sb text-black">
+                {data?.wishTree.nextStage}
+              </div>
+            </div>
             <div className="flex flex-col mt-4 h-2 w-full rounded-lg gap-1 text-body-sb bg-gray-200 text-black relative">
               <div
-                className="absolute top-0 left-0 h-full bg-primary-font rounded-l-lg"
+                className="absolute top-0 left-0 h-full bg-primary-font rounded-lg"
                 style={{ width: `${percent}%` }}
               />
             </div>
