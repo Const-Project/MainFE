@@ -64,7 +64,7 @@ const AvatarCreationOption: React.FC = () => {
 
   return (
     <div
-      className={`flex py-8 items-center pl-5  h-full ${pickCreation ? (activeOption === "creation" ? "bg-primary-varient border-none cursor-pointer" : " cursor-pointer") : "pointer-none"} `}
+      className={`flex py-8 items-center pl-5  h-full ${activeOption ? (activeOption === "creation" ? "bg-primary-varient border-none cursor-pointer" : " cursor-pointer") : "pointer-none"} `}
       onClick={pickCreation ? handleContainerClick : undefined}
     >
       <input
