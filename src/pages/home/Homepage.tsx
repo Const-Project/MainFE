@@ -10,9 +10,9 @@ import FourthPlant from "@/components/home/FourthPlant";
 import SecondPlant from "@/components/home/SecondPlant";
 import ThirdPlant from "@/components/home/ThirdPlant";
 import LoadingDots from "@/components/loading/loading";
-import useTokenStore from "@/stores/useTokenStore";
 import useHomeApi from "@/hooks/home/useHomeApi";
 import { useHomeSummaryStore } from "@/stores/useGardenStore";
+import useTokenStore from "@/stores/useTokenStore";
 
 import "@/styles/swiper.css";
 
@@ -62,7 +62,7 @@ const HomePage = () => {
         modules={[Pagination]} // Pagination 모듈 추가
         slidesPerView={1} // 한 번에 보이는 슬라이드 개수
         pagination={{ clickable: false }} // 동그라미 활성화 + 클릭 이동 가능
-        loop={true} // 마지막 슬라이드에서 종료되는 것 방지
+        loop={false} // 마지막 슬라이드에서 종료되는 것 방지
         className="home-swiper w-full flex-1 relative" // 아래 여백을 조금 주기 (점 안 잘리게)
       >
         <SwiperSlide>
