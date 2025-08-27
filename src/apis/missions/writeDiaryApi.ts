@@ -1,4 +1,8 @@
-import { writeDiaryImageUploadResponse } from "@/types/mission/writeDiary";
+import {
+  writeDiaryImageUploadResponse,
+  writeDiarySubmitRequest,
+  writeDiarySubmitResponse,
+} from "@/types/mission/writeDiary";
 
 import axios from "@/apis/instance";
 
@@ -11,6 +15,18 @@ export const takePhotoUploadApi = async (
     return response.data;
   } catch (error) {
     console.error("Error post TakePhotoUpload:", error);
+    throw error;
+  }
+};
+
+export const writeDiarySubmitApi = async (
+  params: writeDiarySubmitRequest
+): Promise<writeDiarySubmitResponse> => {
+  try {
+    const response = await axios.post("/api/v1/diaries", { params });
+    return response.data;
+  } catch (error) {
+    console.error("Error post WriteDiarySubmit:", error);
     throw error;
   }
 };

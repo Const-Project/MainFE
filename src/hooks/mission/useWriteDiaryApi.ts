@@ -2,9 +2,16 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { QUERY_KEYS } from "@/constants/querykey";
-import { writeDiaryImageUploadResponse } from "@/types/mission/writeDiary";
+import {
+  writeDiaryImageUploadResponse,
+  writeDiarySubmitRequest,
+  writeDiarySubmitResponse,
+} from "@/types/mission/writeDiary";
 
-import { takePhotoUploadApi } from "@/apis/missions/writeDiaryApi"; // API 파일 따로 분리 권장
+import {
+  takePhotoUploadApi,
+  writeDiarySubmitApi,
+} from "@/apis/missions/writeDiaryApi";
 
 export const useWriteDiaryImageUploadApi = () => {
   const queryClient = useQueryClient();
@@ -22,6 +29,25 @@ export const useWriteDiaryImageUploadApi = () => {
 
     onError: error => {
       console.error("일기 사진 업로드 실패:", error);
+    },
+  });
+};
+
+export const useWriteDiarySubmitApi = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<
+    writeDiarySubmitResponse, // 성공 응답 타입
+    Error, // 에러 타입
+    writeDiarySubmitRequest // 요청 타입
+  >({
+    mutationFn: params => writeDiarySubmitApi(params),
+    onSuccess: data => {
+      console.log("일기 작성 성공:", data);
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.DIARIES] });
+    },
+    onError: error => {
+      console.error("일기 작성 실패:", error);
     },
   });
 };

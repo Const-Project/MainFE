@@ -9,7 +9,7 @@ export const getQuizApi = async (
 ): Promise<getQuizResponse> => {
   try {
     const response = await axios.get("/api/v1/realQuiz", { params });
-    console.log("QUERY_KEYS.QUIZ.REAL는 다음과 같다.", QUERY_KEYS.QUIZ.REAL);
+    console.log("QUERY_KEYS.QUIZ.REAL는 다음과 같다.", QUERY_KEYS.REAL);
     return response.data;
   } catch (error) {
     console.error("Error get MissionPanel:", error);

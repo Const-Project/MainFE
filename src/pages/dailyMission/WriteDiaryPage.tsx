@@ -3,7 +3,10 @@ import React, { useState } from "react";
 import DiaryHeader from "@/components/dailyMission/common/DiaryHeader";
 import DiaryEditor from "@/components/dailyMission/writeDiary/DiaryEditor";
 import DiaryFooter from "@/components/dailyMission/writeDiary/DiaryFooter";
-import { useWriteDiaryImageUploadApi } from "@/hooks/mission/useWriteDiaryApi";
+import {
+  useWriteDiaryImageUploadApi,
+  useWriteDiarySubmitApi,
+} from "@/hooks/mission/useWriteDiaryApi";
 
 const WriteDiaryPage = () => {
   const [title, setTitle] = useState("");
@@ -11,7 +14,8 @@ const WriteDiaryPage = () => {
   const [imageUrl, setImageUrl] = useState<File | null>(null);
   const [isPublic, setIsPublic] = useState(false);
 
-  const uploadMutation = useWriteDiaryImageUploadApi();
+  const imageUploadMutation = useWriteDiaryImageUploadApi();
+  const submitDiaryMutation = useWriteDiarySubmitApi();
 
   // API 수정 되면 활용
   // const [image, setImage] = useState<File | null>(null);
@@ -33,14 +37,14 @@ const WriteDiaryPage = () => {
       const formData = new FormData();
       formData.append("file", file);
 
-      uploadMutation.mutate(
+      imageUploadMutation.mutate(
         { formData },
         {
           onSuccess: () => {
             console.log("이미지 업로드 성공");
           },
           onError: () => {
-            // setIsUploaded(false);
+            console.error("이미지 업로드 실패");
           },
         }
       );
@@ -52,11 +56,24 @@ const WriteDiaryPage = () => {
   };
 
   const handleSubmit = () => {
-    console.log({ title, content, image: imageUrl, isPublic });
+    if (!imageUploadMutation.data) {
+      // 여기 이미지 없->업로드 누를 때 뭐가 나올지 고민해야할듯.
+      alert("먼저 이미지를 업로드하세요!");
+      return;
+    }
+    const { imageId, url: imageUrl } = imageUploadMutation.data.result;
+
+    submitDiaryMutation.mutate({
+      title,
+      content,
+      isPublic,
+      imageId,
+      imageUrl,
+    });
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full pb-5">
       <DiaryHeader
         onSubmit={handleSubmit}
         showSubmit={true}
@@ -78,7 +95,6 @@ const WriteDiaryPage = () => {
           onVisibilityChange={handleVisibilityChange}
         />
       </footer>
-      <div className="h-5"></div>
     </div>
   );
 };
