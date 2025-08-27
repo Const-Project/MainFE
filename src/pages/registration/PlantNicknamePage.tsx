@@ -10,7 +10,8 @@ import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
 const PlantNicknamePage = () => {
   const [avatarNameTemp, setAvatarNameTemp] = useState("");
-  const { pickAvatar, actions } = useAvatarCreationStore();
+  const { pickAvatar, actions, pickSelectionAvatar, pickCreationAvatar } =
+    useAvatarCreationStore();
   const navigate = useNavigate();
 
   const { mutate: selectFinalAvatar } = useFinalChoiceAvatar();
@@ -24,8 +25,8 @@ const PlantNicknamePage = () => {
   };
 
   const handleNext = () => {
-    console.log(pickAvatar);
-    if (!pickAvatar.id || !pickAvatar.img) return;
+    console.log(pickAvatar.id, pickAvatar.img, pickAvatar.description);
+    if (!pickAvatar.img) return;
 
     selectFinalAvatar(
       {
@@ -35,7 +36,10 @@ const PlantNicknamePage = () => {
       },
       {
         onSuccess: () => {
-          actions.setAvatarName(avatarNameTemp);
+          actions.setCreationAvatarReset();
+          actions.setSelectionAvatarReset();
+          actions.setPickAvatarReset();
+          console.log(pickAvatar, pickCreationAvatar, pickSelectionAvatar);
           navigate("/");
         },
         onError: error => {

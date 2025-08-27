@@ -21,7 +21,7 @@ export interface CreateAvatarResponse {
 export interface FinalChoiceAvatarRequest {
   nickname: string;
   imageUrl: string;
-  masterId: number;
+  masterId: number | null;
 }
 
 export interface FinalChoiceAvatarResponse {

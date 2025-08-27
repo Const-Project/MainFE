@@ -36,6 +36,9 @@ interface AvatarCreationState {
     setPickSelectionAvatar: (avatar: Avatar) => void;
     setPickCreationAvatar: (avatar: Avatar) => void;
     setPickAvatar: (avatar: Avatar) => void;
+    setSelectionAvatarReset: () => void;
+    setCreationAvatarReset: () => void;
+    setPickAvatarReset: () => void;
     setAvatarName: (avatar: string) => void;
     setActiveOption: (option: "selection" | "creation" | "none") => void;
   };
@@ -78,6 +81,27 @@ export const useAvatarCreationStore = create<AvatarCreationState>(set => ({
       set({ pickCreationAvatar: avatar }),
 
     setPickAvatar: (avatar: Avatar) => set({ pickAvatar: avatar }),
+
+    setSelectionAvatarReset: () =>
+      set({
+        pickSelection: false,
+        pickSelectionAvatar: { id: null, description: null, img: null },
+        activeOption: "none",
+      }),
+
+    setCreationAvatarReset: () =>
+      set({
+        pickCreation: false,
+        pickCreationAvatar: { id: null, description: null, img: null },
+        activeOption: "none",
+      }),
+
+    setPickAvatarReset: () =>
+      set({
+        pickAvatar: { id: null, description: null, img: null },
+        avatarName: "",
+        activeOption: "none",
+      }),
 
     setAvatarName: (avatar: string) => set({ avatarName: avatar }),
     setActiveOption: option => set({ activeOption: option }),

@@ -9,11 +9,16 @@ import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
 const CreationDetailPage = () => {
   const navigate = useNavigate();
-  const { actions } = useAvatarCreationStore();
+  const { actions, pickCreationAvatar } = useAvatarCreationStore();
   const userName = "000";
 
   const handleNextClick = () => {
     actions.completeCreation();
+    actions.setPickAvatar({
+      id: pickCreationAvatar.id,
+      description: pickCreationAvatar.description,
+      img: pickCreationAvatar.img,
+    });
     navigate("/registration/avatar");
   };
 
