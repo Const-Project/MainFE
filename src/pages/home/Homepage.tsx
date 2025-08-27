@@ -74,13 +74,25 @@ const HomePage = () => {
           />
         </SwiperSlide>
         <SwiperSlide>
-          <SecondPlant />
+          <SecondPlant
+            setIsModalOpen={setIsModalOpen}
+            isOpen={isModalOpen}
+            garden={gardens[1] || null}
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <ThirdPlant />
+          <ThirdPlant
+            setIsModalOpen={setIsModalOpen}
+            isOpen={isModalOpen}
+            garden={gardens[2] || null}
+          />
         </SwiperSlide>
         <SwiperSlide>
-          <FourthPlant />
+          <FourthPlant
+            setIsModalOpen={setIsModalOpen}
+            isOpen={isModalOpen}
+            garden={gardens[3] || null}
+          />
         </SwiperSlide>
       </Swiper>
       <BottomSheet setIsModalOpen={setIsModalOpen} />
