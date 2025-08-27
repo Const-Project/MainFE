@@ -1,5 +1,6 @@
-import Check from "@/assets/icons/common/check.svg?react";
-import UnCheck from "@/assets/icons/common/uncheck.svg?react";
+
+import { Check, UnCheck } from "@/assets/icons/common";
+
 
 interface DiaryFooterProps {
   isPublic: boolean;
