@@ -1,17 +1,17 @@
 import { Route } from "react-router-dom";
 
-import QuizPage from "@/pages/dailyMission/QuizPage";
-import TakePhotoPage from "@/pages/dailyMission/TakePhotoPage";
+import MultipleChoiceQuestionQuizPage from "@/pages/dailyMission/MultipleChoiceQuestionQuizPage";
+import OxQuizPage from "@/pages/dailyMission/OxQuizPage";
 import WriteDiaryPage from "@/pages/dailyMission/WriteDiaryPage";
 
 const DailyMissionRoutes = (
   <>
     <Route path="/dailyMission/writeDiary" element={<WriteDiaryPage />} />
     <Route
-      path="/dailyMission/takePhoto/:userDailyMissionId"
-      element={<TakePhotoPage />}
+      path="/dailyMission/quiz/multipleChoice"
+      element={<MultipleChoiceQuestionQuizPage />}
     />
-    <Route path="/dailyMission/quiz" element={<QuizPage />} />
+    <Route path="/dailyMission/quiz/ox" element={<OxQuizPage />} />
   </>
 );
 

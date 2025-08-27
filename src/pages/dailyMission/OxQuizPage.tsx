@@ -4,12 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/common/Button";
 import DiaryHeader from "@/components/dailyMission/common/DiaryHeader";
-import MultipleChoiceQuestionQuiz from "@/components/dailyMission/quiz/MultipleChoiceQuestionQuiz";
 import OX_Quiz from "@/components/dailyMission/quiz/OXQuiz";
 import { useGetQuiz } from "@/hooks/mission/useGetQuizApi";
 import { useAnswerQuiz } from "@/hooks/mission/usePostAnswerQuiz";
 
-const QuizPage = () => {
+const OxQuizPage = () => {
   const navigate = useNavigate();
   const [selected, setSelected] = useState<number | null>(null);
 
@@ -19,24 +18,18 @@ const QuizPage = () => {
     answerNumber: number;
   } | null>(null);
 
-  const quizTypes: ("OX" | "MULTI_CHOICE")[] = ["OX", "MULTI_CHOICE"];
-  const randomQuizType =
-    quizTypes[Math.floor(Math.random() * quizTypes.length)];
-
-  // 랜덤으로 퀴즈 가져오기
   const {
     data,
     isLoading: getQuizLoading,
     isError: getQuizError,
-  } = useGetQuiz({ quizType: "MULTI_CHOICE" });
+  } = useGetQuiz({ quizType: "OX" });
 
-  // 정답 제출 훅
   const { mutate: submitAnswer } = useAnswerQuiz();
 
   if (getQuizLoading) return <p>퀴즈 불러오는 중...</p>;
   if (getQuizError || !data?.result) return <p>퀴즈 불러오기 실패</p>;
 
-  const { quizId, quizQuestion, quizOptions } = data.result;
+  const { quizId, quizQuestion } = data.result;
 
   const handleSubmit = () => {
     if (!quizId || selected === null) {
@@ -70,43 +63,25 @@ const QuizPage = () => {
       <main className="flex-grow flex flex-col px-5 pt-8 gap-2">
         <div className="text-heading1">오늘의 퀴즈 !</div>
         <div className="w-full max-w-md">
-          {randomQuizType === "OX" ? (
-            <>
-              <OX_Quiz
-                quizQuestion={quizQuestion}
-                selected={selected}
-                setSelected={setSelected}
-                disabled={!!answerResult}
-                isCorrect={answerResult?.isCorrect}
-                answerNumber={answerResult?.answerNumber}
-              />
-              {answerResult && (
-                <div
-                  className={`pt-6.5 flex flex-col gap-2 rounded-lg ${
-                    answerResult.isCorrect ? "text-primary" : "text-danger"
-                  }`}
-                >
-                  <p className="text-body1">
-                    {answerResult.isCorrect ? "정답!" : "오답!"}
-                  </p>
-                  <p className="text-body-sb">
-                    {answerResult.answerDescription}
-                  </p>
-                </div>
-              )}
-            </>
-          ) : (
-            <>
-              <MultipleChoiceQuestionQuiz
-                quizQuestion={quizQuestion}
-                quizOptions={quizOptions}
-                selected={selected}
-                setSelected={setSelected}
-                disabled={!!answerResult}
-                isCorrect={answerResult?.isCorrect}
-                answerNumber={answerResult?.answerNumber}
-              />
-            </>
+          <OX_Quiz
+            quizQuestion={quizQuestion}
+            selected={selected}
+            setSelected={setSelected}
+            disabled={!!answerResult}
+            isCorrect={answerResult?.isCorrect}
+            answerNumber={answerResult?.answerNumber}
+          />
+          {answerResult && (
+            <div
+              className={`pt-6.5 flex flex-col gap-2 rounded-lg ${
+                answerResult.isCorrect ? "text-primary" : "text-danger"
+              }`}
+            >
+              <p className="text-body1">
+                {answerResult.isCorrect ? "정답!" : "오답!"}
+              </p>
+              <p className="text-body-sb">{answerResult.answerDescription}</p>
+            </div>
           )}
         </div>
       </main>
@@ -129,4 +104,4 @@ const QuizPage = () => {
   );
 };
 
-export default QuizPage;
+export default OxQuizPage;
