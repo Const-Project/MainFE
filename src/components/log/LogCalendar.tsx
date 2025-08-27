@@ -97,6 +97,7 @@ export default function LogCalendar({ onSelectDate }: Props) {
     return ["일", "월", "화", "수", "목", "금", "토"][date.getDay()];
   };
 
+  // 현재 달과 비교하여 다음 달로 이동 가능한지 확인
   const canGoToNextMonth = () => {
     const currentMonth = new Date();
     const nextMonth = new Date(activeStartDate);
