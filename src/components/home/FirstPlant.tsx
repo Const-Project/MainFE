@@ -5,19 +5,20 @@ import SunLight from "@/assets/images/background/sunlight.png";
 
 import Map from "@/components/common/Map";
 import Avatar from "@/components/home/Avatar";
-import Lock from "@/components/lock/Lock";
-import UnLock from "@/components/lock/UnLock";
 
 import Sun from "@/assets/icons/sun.svg?react";
 import Water from "@/assets/icons/water.svg?react";
 
-type BottomSheetType = "lock" | "unlock" | "clear";
+import Plant from "@/assets/images/plant.png";
+
+import { useAvatarCreationStore } from "@/stores/avatarCreationStore";
 
 const FirstPlant = () => {
-  const [isUnlocked, setIsUnlocked] = useState<BottomSheetType>("lock");
   const [isSunLight, setIsSunLight] = useState(false);
   const [isWater, setIsWater] = useState(false);
   const timerRef = useRef<number | null>(null);
+
+  const { pickAvatar } = useAvatarCreationStore();
 
   const handleSunLight = () => {
     // 이미 애니메이션 중이면 무시
@@ -79,59 +80,35 @@ const FirstPlant = () => {
         }}
       />
 
-      {isUnlocked !== "clear" && (
-        <div className="z-20 flex w-full flex-1 items-center justify-center">
-          {isUnlocked === "unlock" ? (
-            <UnLock>
-              <button
-                onClick={() => setIsUnlocked("clear")}
-                className="m-4 rounded-lg bg-primary p-3 text-body2 text-white"
-              >
-                씨앗 받고 해금하기!
-              </button>
-            </UnLock>
-          ) : (
-            <Lock>
-              <button
-                onClick={() => setIsUnlocked("unlock")}
-                className="m-4 rounded-lg bg-gray-400 p-3 text-body2 text-white"
-              >
-                충분하지 않아요
-              </button>
-            </Lock>
-          )}
+      <div className="relative z-20 flex h-full w-full flex-col items-center justify-center">
+        <header className="relative flex w-full items-center justify-between p-4 text-heading1 text-white">
+          <Map isNumber={3} />
+          몽순몽순
+          <div className="h-12 w-12" />
+        </header>
+
+        {/* 툴 버튼: 임의값 유틸로 위치 보정 (bottom-45 대신) */}
+        <div className="absolute bottom-[180px] z-40 right-3 flex flex-col items-center justify-center gap-2">
+          <button
+            aria-label="햇빛 주기"
+            onClick={handleSunLight}
+            className="cursor-pointer disabled:cursor-not-allowed"
+            disabled={isSunLight}
+          >
+            <Sun className="h-16 w-16" opacity={isSunLight ? 0.5 : 1} />
+          </button>
+          <button
+            aria-label="물 주기"
+            onClick={handleWater}
+            className="cursor-pointer disabled:cursor-not-allowed"
+            disabled={isWater}
+          >
+            <Water className="h-16 w-16" opacity={isWater ? 0.5 : 1} />
+          </button>
         </div>
-      )}
 
-      {isUnlocked === "clear" && (
-        <div className="relative z-20 flex h-full w-full flex-col items-center justify-center">
-          <header className="relative flex w-full items-center justify-between p-4 text-heading1 text-white">
-            <Map isNumber={3} />
-            몽순몽순
-            <div className="h-12 w-12" />
-          </header>
-
-          {/* 툴 버튼: 임의값 유틸로 위치 보정 (bottom-45 대신) */}
-          <div className="absolute bottom-[180px] z-40 right-3 flex flex-col items-center justify-center gap-2">
-            <button
-              aria-label="햇빛 주기"
-              onClick={handleSunLight}
-              className="cursor-pointer"
-            >
-              <Sun className="h-16 w-16" />
-            </button>
-            <button
-              aria-label="물 주기"
-              onClick={handleWater}
-              className="cursor-pointer"
-            >
-              <Water className="h-16 w-16" />
-            </button>
-          </div>
-
-          <Avatar isWater={isWater} />
-        </div>
-      )}
+        <Avatar isWater={isWater} avatarUri={pickAvatar.img || Plant} />
+      </div>
     </div>
   );
 };

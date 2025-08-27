@@ -1,5 +1,5 @@
 .home-swiper .swiper-pagination {
-  bottom: 110px;
+  bottom: 13vh !important;
   z-index: 10;
 }
 .home-swiper .swiper-pagination-bullet {
