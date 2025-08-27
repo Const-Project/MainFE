@@ -15,7 +15,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
         <div
           key={index}
           className={`flex-1 mx-0.5 rounded-full ${
-            index < currentStep ? "bg-blue-500" : "bg-gray-300"
+            index < currentStep ? "bg-primary" : "bg-gray-200"
           }`}
         />
       ))}
