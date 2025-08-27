@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
+import { AxiosError } from "axios";
+
 import Sun from "@/assets/icons/sun.svg?react";
 import Water from "@/assets/icons/water.svg?react";
 import Background from "@/assets/images/background/background1.png";
@@ -36,6 +38,8 @@ const FirstPlant = ({
   const [isToastOpen, setIsToastOpen] = useState(false);
   const [isToastOpen2, setIsToastOpen2] = useState(false);
 
+  const [message, setMessage] = useState("");
+
   const handleSunLight = async () => {
     // 이미 애니메이션 중이면 무시
     if (isSunLight) return;
@@ -43,26 +47,31 @@ const FirstPlant = ({
       setIsToastOpen2(true);
       return;
     }
+    try {
+      const res = await axios.post(
+        `/api/v1/gardens/${garden?.gardenId}/sunlight`
+      );
+      console.log(res);
+      setIsSunLight(true);
+      setIsAbleSunLight(false);
+      setIsWater(false);
 
-    const res = await axios.post(
-      `/api/v1/gardens/${garden?.gardenId}/sunlight`
-    );
-    console.log(res);
-    setIsSunLight(true);
-    setIsAbleSunLight(false);
-    setIsWater(false);
+      // 기존 타이머 클리어
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
 
-    // 기존 타이머 클리어
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
+      // 1초 후 꺼지게
+      timerRef.current = window.setTimeout(() => {
+        setIsSunLight(false);
+        timerRef.current = null;
+      }, 1000);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        setMessage(error.response?.data.message);
+      }
     }
-
-    // 1초 후 꺼지게
-    timerRef.current = window.setTimeout(() => {
-      setIsSunLight(false);
-      timerRef.current = null;
-    }, 1000);
   };
 
   // 언마운트/재렌더 시 타이머 정리
@@ -79,23 +88,30 @@ const FirstPlant = ({
       setIsToastOpen2(true);
       return;
     }
+    try {
+      const res = await axios.post(
+        `/api/v1/gardens/${garden?.gardenId}/mywater`
+      );
+      console.log(res);
+      setIsAbleWater(false);
+      setIsWater(true);
+      setIsSunLight(false);
+      // 기존 타이머 클리어
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
 
-    const res = await axios.post(`/api/v1/gardens/${garden?.gardenId}/mywater`);
-    console.log(res);
-    setIsAbleWater(false);
-    setIsWater(true);
-    setIsSunLight(false);
-    // 기존 타이머 클리어
-    if (timerRef.current) {
-      clearTimeout(timerRef.current);
-      timerRef.current = null;
+      // 1초 후 꺼지게
+      timerRef.current = window.setTimeout(() => {
+        setIsWater(false);
+        timerRef.current = null;
+      }, 1000);
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        setMessage(error.response?.data.message);
+      }
     }
-
-    // 1초 후 꺼지게
-    timerRef.current = window.setTimeout(() => {
-      setIsWater(false);
-      timerRef.current = null;
-    }, 1000);
   };
 
   return (
@@ -158,6 +174,7 @@ const FirstPlant = ({
           onClose={() => setIsToastOpen2(false)}
         />
       )}
+      {message && <Toast message={message} onClose={() => setMessage("")} />}
     </div>
   );
 };
