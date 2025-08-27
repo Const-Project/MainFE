@@ -1,6 +1,8 @@
-import useSurveyApi from "./useSurveyApi";
 import axios from "axios";
+
 import { ErrorResponse } from "@/types/common/apiResponse.type";
+
+import useSurveyApi from "./useSurveyApi";
 
 const useSurvey = () => {
   const { getSurveyMutation } = useSurveyApi();

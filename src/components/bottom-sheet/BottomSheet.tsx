@@ -2,6 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import Plant from "@/assets/icons/bottom-sheet/plant.svg?react";
+
 import Check from "@/assets/icons/common/check.svg?react";
 import UnCheck from "@/assets/icons/common/uncheck.svg?react";
 import Right from "@/assets/icons/common/right.svg?react";

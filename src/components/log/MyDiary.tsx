@@ -1,18 +1,7 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
 import { Left, Right } from "@/assets/icons/common";
-
-//import type { DiaryResponse } from "@/types/log/diary";
-import { createMockDiaryResponse } from "@/mocks/log/diary";
-
-// API 요청 함수 (백엔드 완성 후 사용)
-// const fetchDiaryData = async (year: number, month: number): Promise<DiaryResponse> => {
-//   const response = await fetch(`/api/v1/diaries?year=${year}&month=${month}`);
-//   if (!response.ok) {
-//     throw new Error('Failed to fetch diary data');
-//   }
-//   return response.json();
-// };
+import { useDiaries } from "@/hooks/log/useDiariesApi";
 
 type Props = {
   onSelectDiary?: (diaryId: number) => void;
@@ -20,41 +9,31 @@ type Props = {
 
 export default function MyDiary({ onSelectDiary }: Props) {
   const [activeStartDate, setActiveStartDate] = useState(new Date());
-  // const [diaryData, setDiaryData] = useState<DiaryResponse>({ data: [] });
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [error, setError] = useState<string | null>(null);
 
-  // API 요청 로직 (백엔드 완성 후 주석 해제)
-  // useEffect(() => {
-  //   const loadDiaryData = async () => {
-  //     setIsLoading(true);
-  //     setError(null);
-  //     try {
-  //       const data = await fetchDiaryData(
-  //         activeStartDate.getFullYear(),
-  //         activeStartDate.getMonth() + 1
-  //       );
-  //       setDiaryData(data);
-  //     } catch (err) {
-  //       setError(err instanceof Error ? err.message : 'Failed to load diary data');
-  //       console.error('Error loading diary data:', err);
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   };
+  const { data: diaries } = useDiaries(
+    activeStartDate.getFullYear(),
+    activeStartDate.getMonth() + 1
+  );
 
-  //   loadDiaryData();
-  // }, [activeStartDate]);
+  // 현재 달과 비교하여 다음 달로 이동 가능한지 확인
+  const canGoToNextMonth = () => {
+    const currentMonth = new Date();
+    const nextMonth = new Date(activeStartDate);
+    nextMonth.setMonth(activeStartDate.getMonth() + 1);
 
-  // Mock 데이터 사용 (백엔드 완성 후 제거)
-  const diaryData = useMemo(() => {
-    return createMockDiaryResponse(
-      activeStartDate.getFullYear(),
-      activeStartDate.getMonth() + 1
+    return (
+      nextMonth.getFullYear() < currentMonth.getFullYear() ||
+      (nextMonth.getFullYear() === currentMonth.getFullYear() &&
+        nextMonth.getMonth() <= currentMonth.getMonth())
     );
-  }, [activeStartDate]);
+  };
 
   const goMonth = (diff: number) => {
+    // 다음 달로 이동하려고 하는데 현재 달보다 이후라면 이동하지 않음
+    if (diff > 0 && !canGoToNextMonth()) {
+      return;
+    }
+
     const next = new Date(activeStartDate);
     next.setMonth(activeStartDate.getMonth() + diff);
     setActiveStartDate(next);
@@ -75,38 +54,27 @@ export default function MyDiary({ onSelectDiary }: Props) {
             {activeStartDate.getFullYear()}년 {activeStartDate.getMonth() + 1}월
           </span>
           <button
-            className="grid h-6 w-6 place-items-center cursor-pointer"
-            onClick={() => goMonth(1)}
+            className={`grid h-6 w-6 place-items-center ${
+              canGoToNextMonth()
+                ? "cursor-pointer"
+                : "cursor-not-allowed opacity-50"
+            }`}
+            onClick={() => canGoToNextMonth() && goMonth(1)}
             aria-label="next"
+            disabled={!canGoToNextMonth()}
           >
             <Right />
           </button>
         </div>
       </div>
 
-      {/* TODO : Left, Right 버튼 클릭시 요청 보내기 */}
-
-      {/* 로딩 상태 (백엔드 완성 후 주석 해제) */}
-      {/* {isLoading && (
-        <div className="flex justify-center items-center py-8">
-          <div className="text-gray-500">로딩 중...</div>
-        </div>
-      )} */}
-
-      {/* 에러 상태 (백엔드 완성 후 주석 해제) */}
-      {/* {error && (
-        <div className="flex justify-center items-center py-8">
-          <div className="text-red-500">에러: {error}</div>
-        </div>
-      )} */}
-
       {/* 일기 사진 블록 - 3열 그리드 */}
       <div className="grid grid-cols-3">
-        {diaryData.data.map(diary => (
+        {(diaries ?? []).map(diary => (
           <div
-            key={diary.id}
+            key={diary.diaryId}
             className="aspect-square w-full cursor-pointer overflow-hidden bg-gray-100"
-            onClick={() => onSelectDiary?.(diary.id)}
+            onClick={() => onSelectDiary?.(diary.diaryId)}
           >
             <img
               src={diary.imageUrl}

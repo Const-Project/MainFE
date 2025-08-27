@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 import Character from "@/assets/images/character.png";
+import axios from "@/apis/instance";
 
 import Modal from "../common/Modal";
-import axios from "@/apis/instance";
 import useSurvey from "@/hooks/survey/useSurvey";
 import { PostSurveyResponse } from "@/types/apis/survey";
 

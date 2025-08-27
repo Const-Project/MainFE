@@ -10,7 +10,6 @@ import FourthPlant from "@/components/home/FourthPlant";
 import SecondPlant from "@/components/home/SecondPlant";
 import ThirdPlant from "@/components/home/ThirdPlant";
 import LoadingDots from "@/components/loading/loading";
-import Toast from "@/components/common/Toast";
 import useTokenStore from "@/stores/useTokenStore";
 import useHomeApi from "@/hooks/home/useHomeApi";
 import { useHomeSummaryStore } from "@/stores/useGardenStore";
@@ -22,7 +21,7 @@ const HomePage = () => {
   const [isOnboarding, setIsOnboarding] = useState(true);
   const [isLoading, setIsLoading] = useState(true); // 스플래시 표시용
   const { accessToken } = useTokenStore();
-  const { updateGarden, updateMissions, setUser, gardens, setGardens } =
+  const { updateMissions, setUser, gardens, setGardens } =
     useHomeSummaryStore();
   const { data } = useHomeApi();
 

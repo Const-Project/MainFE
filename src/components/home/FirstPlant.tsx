@@ -1,19 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 
-import Background from "@/assets/images/background/background1.png";
-import SunLight from "@/assets/images/background/sunlight.png";
-
-import Map from "@/components/common/Map";
-import Avatar from "@/components/home/Avatar";
-
 import Sun from "@/assets/icons/sun.svg?react";
 import Water from "@/assets/icons/water.svg?react";
-
+import Background from "@/assets/images/background/background1.png";
+import SunLight from "@/assets/images/background/sunlight.png";
 import Plant from "@/assets/images/plant.png";
 
 import Toast from "@/components/common/Toast";
 import { GardenSummary } from "@/types/home/garden";
 import axios from "@/apis/instance";
+import Map from "../common/Map";
+import Avatar from "./Avatar";
 
 const FirstPlant = ({
   setIsModalOpen,
