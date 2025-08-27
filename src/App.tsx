@@ -17,6 +17,7 @@ import Layout from "@/components/layout/Layout";
 //네비게이션
 import Navbar from "@/components/layout/Navbar";
 
+import OnboardingPage from "@/pages/splash/OnBoardingPage";
 import "swiper/css";
 import "swiper/css/pagination";
 import RegistrationRoutes from "@/routes/registrationRoutes";
@@ -38,9 +39,10 @@ const App = () => {
         <Route path="/feed/avatar/:postId" element={<FeedAvatarPage />} />
         <Route path="design" element={<Design />} />
         {RegistrationRoutes}
-        <Route path="/register" element={<RegisterPage />} />
         <Route path="/log/:id" element={<LogDetailPage />} />
         <Route path="/option" element={<OptionPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/onboarding" element={<OnboardingPage />} />
       </Route>
     </Routes>
   );
