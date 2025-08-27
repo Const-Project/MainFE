@@ -14,6 +14,7 @@ const UnlockGardenPlotPage: React.FC = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [zipcode, setZipcode] = useState("");
+  const [detailAddress, setDetailAddress] = useState("");
 
   return (
     <div className="flex flex-col h-full pb-6">
