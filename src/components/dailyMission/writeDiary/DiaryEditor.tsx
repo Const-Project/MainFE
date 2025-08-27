@@ -33,7 +33,7 @@ const DiaryEditor = ({
         <input
           type="text"
           placeholder="제목을 입력하세요"
-          className="w-full h-9.5 mb-6 text-title1 font-semibold placeholder:text-title1 placeholder:font-semibold  focus:outline-none"
+          className="w-full h-9.5 mb-6 text-title1 font-semibold placeholder:text-title1 placeholder:text-gray-400 placeholder:font-semibold  focus:outline-none"
           value={title}
           onChange={onTitleChange}
         />
