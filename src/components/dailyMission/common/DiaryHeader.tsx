@@ -10,7 +10,7 @@ const DiaryHeader = ({ onSubmit, showSubmit, context }: DiaryHeaderProps) => {
   return (
     <header className="w-full h-14 flex items-center justify-between p-4 border-b border-gray-200">
       <button>
-        <img src={XIcon} alt="Close" className="w-4 h-4" />
+        <img src={XIcon} alt="Close" className="w-3.5 h-3.5" />
       </button>
       <h1 className="text-heading2">{context}</h1>
       {showSubmit ? (
@@ -18,7 +18,7 @@ const DiaryHeader = ({ onSubmit, showSubmit, context }: DiaryHeaderProps) => {
           완료
         </button>
       ) : (
-        <div className="w-9 h-full" /> // Placeholder to maintain layout
+        <div className="w-9 h-full" />
       )}
     </header>
   );

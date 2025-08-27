@@ -1,6 +1,6 @@
 import type { ChangeEvent } from "react";
 
-import ImageUploader from "../common/ImageUploader";
+import ImageUploader from "@/components/dailyMission/common/ImageUploader";
 
 interface DiaryEditorProps {
   title: string;
