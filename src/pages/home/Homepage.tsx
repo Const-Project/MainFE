@@ -15,6 +15,7 @@ import { useHomeSummaryStore } from "@/stores/useGardenStore";
 import useTokenStore from "@/stores/useTokenStore";
 
 import "@/styles/swiper.css";
+import TrackingModal from "@/components/home/tracking/Modal";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -24,6 +25,7 @@ const HomePage = () => {
   const { updateMissions, setUser, gardens, setGardens } =
     useHomeSummaryStore();
   const { data, refetch } = useHomeApi();
+  const [isTrackingModalOpen, setIsTrackingModalOpen] = useState(true);
 
   useEffect(() => {
     if (data) {
@@ -99,6 +101,12 @@ const HomePage = () => {
         </SwiperSlide>
       </Swiper>
       <BottomSheet setIsModalOpen={setIsModalOpen} />
+      {isTrackingModalOpen && (
+        <TrackingModal
+          setIsOpen={setIsTrackingModalOpen}
+          isOpen={isTrackingModalOpen}
+        />
+      )}
     </div>
   );
 };
