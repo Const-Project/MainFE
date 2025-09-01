@@ -19,11 +19,4 @@ export const writeDiarySubmitApi = async (
   params: writeDiarySubmitRequest
 ): ApiResponse<writeDiarySubmitResponse> => {
   return axios.post("api/v1/diaries", params).then(res => res.data);
-  // try {
-  //   const response = await axios.post("/api/v1/diaries", params);
-  //   return response.data;
-  // } catch (error) {
-  //   console.error("Error post WriteDiarySubmit:", error);
-  //   throw error;
-  // }
 };
