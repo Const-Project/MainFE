@@ -17,15 +17,15 @@ const SelectionDetailPage = () => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
   useEffect(() => {
-    if (data?.result && data.result.length > 0 && selectedId === null) {
-      setSelectedId(data.result[0].id);
+    if (data && data.length > 0 && selectedId === null) {
+      setSelectedId(data[0].id);
     }
   }, [data, selectedId]);
 
   const handleNextClick = () => {
-    if (selectedId === null || !data?.result) return;
+    if (selectedId === null || !data) return;
 
-    const selectedAvatar = data.result.find(
+    const selectedAvatar = data.find(
       (avatar: AvatarType) => avatar.id === selectedId
     );
 
@@ -61,10 +61,10 @@ const SelectionDetailPage = () => {
       <div className="text-heading1 pt-8 pl-6.25">
         원하는 아바타를 선택해주세요.
       </div>
-      <main className="flex-1 ">
-        {data?.result && selectedId !== null && (
+      <main className="flex-1">
+        {data && selectedId !== null && (
           <SelectionDetail
-            avatars={data.result}
+            avatars={data}
             selectedId={selectedId}
             onSelect={setSelectedId}
           />

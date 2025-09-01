@@ -5,42 +5,37 @@ import {
   FinalChoiceAvatarRequest,
   FinalChoiceAvatarResponse,
 } from "@/types/avatars/masters";
+import { AvatarType } from "@/types/avatars/masters";
+import { ApiResponse, GlobalResponse } from "@/types/common/apiResponse.type";
 
 import axios from "@/apis/instance";
 
-export const getSelectionAvatarApi = async () => {
-  try {
-    const response = await axios.get("/api/v1/avatars/masters");
-    return response.data;
-  } catch (error) {
-    alert("회원가입에 실패했습니다.");
-    console.log(error);
-  }
+export const getSelectionAvatarApi = async (): ApiResponse<AvatarType> => {
+  return axios.get("/api/v1/avatars/masters").then(res => res.data);
 };
 
 export const postCrationAvatarApi = async (
   formData: FormData
-): Promise<CreateAvatarResponse> => {
+): ApiResponse<CreateAvatarResponse> => {
   try {
-    const response = await Axios.post(
+    const response = await Axios.post<GlobalResponse<CreateAvatarResponse>>(
       "http://43.200.84.255:8000/process-image",
       formData
     );
     return response.data;
   } catch (error) {
-    console.error("error :", error);
+    console.error("이미지 생성 실패:", error);
     throw error;
   }
 };
 
 export const finalChoiceAvatarApi = async (
   data: FinalChoiceAvatarRequest
-): Promise<FinalChoiceAvatarResponse> => {
+): ApiResponse<FinalChoiceAvatarResponse> => {
   try {
-    const response = await axios.post<FinalChoiceAvatarResponse>(
-      "/api/v1/avatars",
-      data
-    );
+    const response = await axios.post<
+      GlobalResponse<FinalChoiceAvatarResponse>
+    >("/api/v1/avatars", data);
     return response.data;
   } catch (error) {
     console.error("아바타 선택 실패:", error);

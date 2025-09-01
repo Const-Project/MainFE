@@ -1,7 +1,10 @@
 // src/hooks/mission/useWriteDiaryApi.ts
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 
+import { ErrorResponse, GlobalResponse } from "@/types/common/apiResponse.type";
 import {
+  WriteDiaryImageUploadRequest,
   writeDiaryImageUploadResponse,
   writeDiarySubmitRequest,
   writeDiarySubmitResponse,
@@ -16,20 +19,21 @@ export const useWriteDiaryImageUploadApi = () => {
   const queryClient = useQueryClient();
 
   return useMutation<
-    writeDiaryImageUploadResponse,
-    Error,
-    { formData: FormData }
+    GlobalResponse<writeDiaryImageUploadResponse>,
+    AxiosError<ErrorResponse>,
+    WriteDiaryImageUploadRequest
   >({
     mutationFn: ({ formData }) => takePhotoUploadApi(formData),
-    onSuccess: data => {
-      console.log("일기 사진 업로드 성공:", data);
-
+    onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ["diaries"] });
     },
-
     onError: error => {
-      console.error("일기 사진 업로드 실패:", error);
+      console.error(
+        "이미지 업로드 실패:",
+        error.response?.data || error.message
+      );
     },
+    retry: 1,
   });
 };
 
@@ -37,9 +41,9 @@ export const useWriteDiarySubmitApi = () => {
   const queryClient = useQueryClient();
 
   return useMutation<
-    writeDiarySubmitResponse, // 성공 응답 타입
-    Error, // 에러 타입
-    writeDiarySubmitRequest // 요청 타입
+    GlobalResponse<writeDiarySubmitResponse>,
+    AxiosError<ErrorResponse>,
+    writeDiarySubmitRequest
   >({
     mutationFn: body => writeDiarySubmitApi(body),
     onSuccess: data => {
@@ -48,7 +52,7 @@ export const useWriteDiarySubmitApi = () => {
       queryClient.invalidateQueries({ queryKey: ["diaries"] });
     },
     onError: error => {
-      console.error("일기 작성 실패:", error);
+      console.error("일기 작성 실패:", error.response?.data || error.message);
     },
   });
 };
