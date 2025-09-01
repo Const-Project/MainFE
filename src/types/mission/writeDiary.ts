@@ -1,12 +1,11 @@
-export interface writeDiaryImageUploadResponse {
-  isSuccess: boolean;
-  code: string;
-  message: string;
-  result: {
-    imageId: number;
-    imageUrl: string;
-  };
+export interface WriteDiaryImageUploadRequest {
+  formData: FormData;
 }
+
+export type writeDiaryImageUploadResponse = {
+  imageId: number;
+  imageUrl: string;
+};
 
 export interface writeDiarySubmitRequest {
   title: string;
@@ -17,17 +16,12 @@ export interface writeDiarySubmitRequest {
 }
 
 export interface writeDiarySubmitResponse {
-  isSuccess: boolean;
-  code: string;
-  message: string;
-  result: {
-    diaryId: number;
-    title: string;
-    content: string;
-    imageUrl: string;
-    likeCount: number;
-    createdAt: string;
-    updatedAt: string;
-    public: boolean;
-  };
+  diaryId: number;
+  title: string;
+  content: string;
+  imageUrl: string;
+  likeCount: number;
+  createdAt: string;
+  updatedAt: string;
+  public: boolean;
 }

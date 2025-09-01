@@ -1,3 +1,4 @@
+import { ApiResponse } from "@/types/common/apiResponse.type";
 import {
   writeDiaryImageUploadResponse,
   writeDiarySubmitRequest,
@@ -7,26 +8,22 @@ import {
 import axios from "@/apis/instance";
 
 // 이미지 전송 API
-export const takePhotoUploadApi = async (
+
+export const takePhotoUploadApi = (
   formData: FormData
-): Promise<writeDiaryImageUploadResponse> => {
-  try {
-    const response = await axios.post("/api/v1/diaries/images", formData);
-    return response.data;
-  } catch (error) {
-    console.error("Error post TakePhotoUpload:", error);
-    throw error;
-  }
+): ApiResponse<writeDiaryImageUploadResponse> => {
+  return axios.post("/api/v1/diaries/images", formData).then(res => res.data);
 };
 
 export const writeDiarySubmitApi = async (
   params: writeDiarySubmitRequest
-): Promise<writeDiarySubmitResponse> => {
-  try {
-    const response = await axios.post("/api/v1/diaries", params);
-    return response.data;
-  } catch (error) {
-    console.error("Error post WriteDiarySubmit:", error);
-    throw error;
-  }
+): ApiResponse<writeDiarySubmitResponse> => {
+  return axios.post("api/v1/diaries", params).then(res => res.data);
+  // try {
+  //   const response = await axios.post("/api/v1/diaries", params);
+  //   return response.data;
+  // } catch (error) {
+  //   console.error("Error post WriteDiarySubmit:", error);
+  //   throw error;
+  // }
 };
