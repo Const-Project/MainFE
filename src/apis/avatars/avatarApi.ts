@@ -5,17 +5,13 @@ import {
   FinalChoiceAvatarRequest,
   FinalChoiceAvatarResponse,
 } from "@/types/avatars/masters";
+import { AvatarType } from "@/types/avatars/masters";
+import { ApiResponse, GlobalResponse } from "@/types/common/apiResponse.type";
 
 import axios from "@/apis/instance";
 
-export const getSelectionAvatarApi = async () => {
-  try {
-    const response = await axios.get("/api/v1/avatars/masters");
-    return response.data;
-  } catch (error) {
-    alert("회원가입에 실패했습니다.");
-    console.log(error);
-  }
+export const getSelectionAvatarApi = async (): ApiResponse<AvatarType[]> => {
+  return axios.get("/api/v1/avatars/masters").then(res => res.data);
 };
 
 export const postCrationAvatarApi = async (
@@ -35,12 +31,11 @@ export const postCrationAvatarApi = async (
 
 export const finalChoiceAvatarApi = async (
   data: FinalChoiceAvatarRequest
-): Promise<FinalChoiceAvatarResponse> => {
+): Promise<GlobalResponse<FinalChoiceAvatarResponse>> => {
   try {
-    const response = await axios.post<FinalChoiceAvatarResponse>(
-      "/api/v1/avatars",
-      data
-    );
+    const response = await axios.post<
+      GlobalResponse<FinalChoiceAvatarResponse>
+    >("/api/v1/avatars", data);
     return response.data;
   } catch (error) {
     console.error("아바타 선택 실패:", error);
