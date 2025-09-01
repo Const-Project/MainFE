@@ -10,28 +10,28 @@ import { ApiResponse, GlobalResponse } from "@/types/common/apiResponse.type";
 
 import axios from "@/apis/instance";
 
-export const getSelectionAvatarApi = async (): ApiResponse<AvatarType[]> => {
+export const getSelectionAvatarApi = async (): ApiResponse<AvatarType> => {
   return axios.get("/api/v1/avatars/masters").then(res => res.data);
 };
 
 export const postCrationAvatarApi = async (
   formData: FormData
-): Promise<CreateAvatarResponse> => {
+): ApiResponse<CreateAvatarResponse> => {
   try {
-    const response = await Axios.post(
+    const response = await Axios.post<GlobalResponse<CreateAvatarResponse>>(
       "http://43.200.84.255:8000/process-image",
       formData
     );
     return response.data;
   } catch (error) {
-    console.error("error :", error);
+    console.error("이미지 생성 실패:", error);
     throw error;
   }
 };
 
 export const finalChoiceAvatarApi = async (
   data: FinalChoiceAvatarRequest
-): Promise<GlobalResponse<FinalChoiceAvatarResponse>> => {
+): ApiResponse<FinalChoiceAvatarResponse> => {
   try {
     const response = await axios.post<
       GlobalResponse<FinalChoiceAvatarResponse>
